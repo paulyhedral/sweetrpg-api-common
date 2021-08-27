@@ -1,0 +1,68 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.187.0/containers/swift
+{
+  "name": "SweetRPG API Common",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      // Update the VARIANT arg to pick a Swift version
+      "VARIANT": "5.4",
+      // Options
+      "INSTALL_NODE": "false",
+      "NODE_VERSION": "lts/*",
+      "UPGRADE_PACKAGES": "true"
+    }
+  },
+  "containerEnv": {
+    "DOCKER_BUILDKIT": "1"
+  },
+  "remoteEnv": {
+    "LOCAL_USER_PATH": "${localEnv:HOME}${localEnv:USERPROFILE}"
+  },
+  "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+
+  "mounts": [
+    // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/mnt/ssh/,type=bind",
+    // "source=${localEnv:HOME}${localEnv:USERPROFILE}/,target=/mnt/userdir/,type=bind"
+  ],
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "lldb.adapterType": "bundled",
+    "lldb.executable": "/usr/bin/lldb",
+    "sde.languageservermode": "sourcekite",
+    "swift.path.sourcekite": "/usr/local/bin/sourcekite",
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "vknabel.vscode-swift-development-environment",
+    "pvasek.sourcekit-lsp--dev-unofficial",
+    "vadimcn.vscode-lldb",
+    "steoates.autoimport",
+    "thekalinga.bootstrap4-vscode",
+    "coenraads.bracket-pair-colorizer",
+    "pivotal.vscode-concourse",
+    "rokoroku.vscode-theme-darcula",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "vknabel.swift-coverage",
+    "cgrevisse.swift-project-creation",
+    "vknabel.vscode-swiftlint",
+    "wayou.vscode-todo-highlight",
+    "visualstudioexptteam.vscodeintellicode",
+    "vscode-icons-team.vscode-icons",
+    "redhat.vscode-yaml"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+  ],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "swiftc --version",
+  "initializeCommand": "ssh-add ${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/id_rsa",
+
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode"
+}
