@@ -1,4 +1,4 @@
--r pkg.in
+-r app.in
 pytest
 pytest-cov
 asgiref
