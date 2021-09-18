@@ -14,7 +14,7 @@ flake8:
 	flake8 --ignore=E501,F401,E128,E402,E731,F821 sweetrpg_api_common
 
 coverage:
-	pytest --cov-config .coveragerc --verbose --cov-report term --cov-report xml --cov=BASE_PACKAGE tests
+	pytest --cov-config .coveragerc --verbose --cov-report term --cov-report xml --cov=sweetrpg_api_common tests
 
 publish:
 	pip install 'twine>=1.5.0'
