@@ -1,0 +1,93 @@
+name: CI
+
+on:
+    push:
+        branches: [develop]
+        paths:
+            - "src/**"
+            - "tests/**"
+            - setup.cfg
+            - setup.py
+            - tox.ini
+            - "requirements/**"
+            - "docs/**"
+    pull_request:
+        branches: [develop]
+        paths:
+            - "src/**"
+            - "tests/**"
+            - setup.cfg
+            - setup.py
+            - tox.ini
+            - "requirements/**"
+            - "docs/**"
+
+jobs:
+    tests:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - {
+                          name: Linux,
+                          python: "3.9",
+                          os: ubuntu-latest,
+                          tox: py39,
+                      }
+                    - {
+                          name: Windows,
+                          python: "3.9",
+                          os: windows-latest,
+                          tox: py39,
+                      }
+                    - { name: Mac, python: "3.9", os: macos-latest, tox: py39 }
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python }}
+            - name: update-pip
+              run: |
+                  pip install -U wheel
+                  pip install -U setuptools
+                  python -m pip install -U pip
+            - name: get-pip-cache-dir
+              id: pip-cache
+              run: echo "::set-output name=dir::$(pip cache dir)"
+            - name: cache-pip
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.pip-cache.outputs.dir }}
+                  key: pip|${{ runner.os }}|${{ matrix.python }}|${{ hashFiles('setup.py') }}|${{ hashFiles('requirements/*.txt') }}
+            - name: install-utils
+              run: pip install tox
+            # - name: lint
+            #   run: black --check -t py39 --diff --color src
+            - name: tests
+              run: tox -e ${{ matrix.tox }}
+            # - name: publish-badge
+            #   run: |
+            #     git config user.name "GitHub Actions Bot"
+            #     git config user.email "<>"
+            #     coverage-badge -f -o coverage.svg
+            #     git add coverage.svg && git commit -m "Update code coverage" && git push origin develop
+
+    docs:
+        needs: [tests]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: "3.9"
+            - name: install-deps
+              run: pip install -r requirements/docs.txt
+            - name: make-docs
+              run: cd docs && make html
+            - name: publish-docs
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./docs/_build/html

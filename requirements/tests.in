@@ -1,0 +1,9 @@
+-r pkg.in
+pytest
+pytest-cov
+asgiref
+blinker
+greenlet
+python-dotenv
+tox
+coverage-badge

@@ -24,7 +24,7 @@ fi
 
 # Ensure that login shells get the correct path if the user updated the PATH using ENV.
 rm -f /etc/profile.d/00-restore-env.sh
-echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" >/etc/profile.d/00-restore-env.sh
 chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
@@ -32,7 +32,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
     POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
     for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
-        if id -u ${CURRENT_USER} > /dev/null 2>&1; then
+        if id -u ${CURRENT_USER} >/dev/null 2>&1; then
             USERNAME=${CURRENT_USER}
             break
         fi
@@ -40,7 +40,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     if [ "${USERNAME}" = "" ]; then
         USERNAME=root
     fi
-elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
+elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -51,9 +51,9 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" >> /etc/bash.bashrc
+        echo -e "$1" >>/etc/bash.bashrc
         if [ -f "/etc/zsh/zshrc" ]; then
-            echo -e "$1" >> /etc/zsh/zshrc
+            echo -e "$1" >>/etc/zsh/zshrc
         fi
     fi
 }
@@ -62,7 +62,7 @@ function updaterc() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, apt-transport-https, tar, or gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates tar > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates tar >/dev/null 2>&1 || ! type gpg >/dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
@@ -70,12 +70,12 @@ if ! dpkg -s apt-transport-https curl ca-certificates tar > /dev/null 2>&1 || ! 
 fi
 
 # Install yarn
-if type yarn > /dev/null 2>&1; then
+if type yarn >/dev/null 2>&1; then
     echo "Yarn already installed."
 else
     # Import key safely (new method rather than deprecated apt-key approach) and install
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor > /usr/share/keyrings/yarn-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor >/usr/share/keyrings/yarn-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" >/etc/apt/sources.list.d/yarn.list
     apt-get update
     apt-get -y install --no-install-recommends yarn
 fi
@@ -84,13 +84,13 @@ fi
 if [ -d "${NVM_DIR}" ]; then
     echo "NVM already installed."
     if [ "${NODE_VERSION}" != "" ]; then
-       su ${USERNAME} -c ". $NVM_DIR/nvm.sh && nvm install ${NODE_VERSION} && nvm clear-cache"
+        su ${USERNAME} -c ". $NVM_DIR/nvm.sh && nvm install ${NODE_VERSION} && nvm clear-cache"
     fi
     exit 0
 fi
 
 # Create nvm group, nvm dir, and set sticky bit
-if ! cat /etc/group | grep -e "^nvm:" > /dev/null 2>&1; then
+if ! cat /etc/group | grep -e "^nvm:" >/dev/null 2>&1; then
     groupadd -r nvm
 fi
 umask 0002
@@ -98,27 +98,29 @@ usermod -a -G nvm ${USERNAME}
 mkdir -p ${NVM_DIR}
 chown :nvm ${NVM_DIR}
 chmod g+s ${NVM_DIR}
-su ${USERNAME} -c "$(cat << EOF
+su ${USERNAME} -c "$(
+    cat <<EOF
     set -e
     umask 0002
     # Do not update profile - we'll do this manually
     export PROFILE=/dev/null
-    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash 
+    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash
     source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
         nvm alias default ${NODE_VERSION}
     fi
-    nvm clear-cache 
+    nvm clear-cache
 EOF
 )" 2>&1
 # Update rc files
 if [ "${UPDATE_RC}" = "true" ]; then
-updaterc "$(cat <<EOF
+    updaterc "$(
+        cat <<EOF
 export NVM_DIR="${NVM_DIR}"
 [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
 [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
 EOF
-)"
-fi 
+    )"
+fi
 
 echo "Done!"
