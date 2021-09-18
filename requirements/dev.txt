@@ -68,8 +68,6 @@ jinja2==3.0.1
     #   sphinx
 markupsafe==2.0.1
     # via jinja2
-marshmallow==3.13.0
-    # via sweetrpg-common
 mypy-extensions==0.4.3
     # via black
 networkx==2.6.3
@@ -105,9 +103,7 @@ pygments==2.10.0
     #   sphinx
     #   sphinx-tabs
 pymongo[srv,tls]==3.11.4
-    # via
-    #   snooty-lextudio
-    #   sweetrpg-common
+    # via snooty-lextudio
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5
@@ -165,8 +161,6 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-git+https://github.com/sweetrpg/common.git@develop
-    # via -r ./app.in
 toml==0.10.2
     # via
     #   pytest
