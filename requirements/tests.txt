@@ -27,7 +27,7 @@ filelock==3.0.12
     #   tox
     #   virtualenv
 flask==2.0.1
-    # via -r ./app.in
+    # via -r ./pkg.in
 greenlet==1.1.1
     # via -r ./tests.in
 iniconfig==1.1.1
@@ -35,13 +35,11 @@ iniconfig==1.1.1
 itsdangerous==2.0.1
     # via flask
 jinja2==3.0.1
-    # via
-    #   -r ./app.in
-    #   flask
+    # via flask
 markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
-    # via sweetrpg-common
+    # via sweetrpg-db
 packaging==21.0
     # via
     #   pytest
@@ -57,7 +55,7 @@ py==1.10.0
     #   pytest
     #   tox
 pymongo[srv,tls]==3.12.0
-    # via sweetrpg-common
+    # via sweetrpg-db
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5
@@ -72,8 +70,8 @@ six==1.16.0
     # via
     #   tox
     #   virtualenv
-git+https://github.com/sweetrpg/common.git@develop
-    # via -r ./app.in
+git+https://github.com/sweetrpg/db.git@develop
+    # via -r ./pkg.in
 toml==0.10.2
     # via
     #   pytest
