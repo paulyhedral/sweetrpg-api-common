@@ -3,9 +3,9 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 """
 
-__title__ = 'SweetRPG API Common'
+__title__ = 'SweetRPG API Core'
 __description__ = 'Common code for API microservice applications'
-__url__ = 'https://github.com/sweetrpg/api-common'
+__url__ = 'https://github.com/sweetrpg/api-core'
 __version__ = '0.0.0'
 __build__ = 0x000000
 __author__ = 'Paul Schifferer'

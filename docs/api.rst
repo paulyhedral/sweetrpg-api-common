@@ -1,7 +1,7 @@
 API
 ===
 
-.. module:: sweetrpg_api_common
+.. module:: sweetrpg_api_core
 
 Utilities
 ---------

@@ -16,16 +16,16 @@ import sys
 sys.path.insert(0, os.path.abspath("../src"))
 sys.path.insert(0, os.path.abspath("_themes"))
 
-import sweetrpg_api_common
+import sweetrpg_api_core
 
 
 # -- Project information -----------------------------------------------------
 
-project = "SweetRPG API Common"
+project = "SweetRPG API Core"
 copyright = "2021, Paul Schifferer"
 author = "Paul Schifferer"
-version = sweetrpg_api_common.__version__
-release = sweetrpg_api_common.__version__
+version = sweetrpg_api_core.__version__
+release = sweetrpg_api_core.__version__
 
 # -- General configuration ---------------------------------------------------
 
@@ -86,7 +86,7 @@ html_theme = "alabaster"
 html_theme_options = {
     "show_powered_by": False,
     "github_user": "sweetrpg",
-    "github_repo": "api-common",
+    "github_repo": "api-core",
     "github_banner": True,
     "show_related": False,
     "note_bg": "#FFF59C",
@@ -124,7 +124,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [(master_doc, "SweetRPG-API-Common.tex", u"SweetRPG API Common Documentation", u"Paul Schifferer", "manual")]
+latex_documents = [(master_doc, "SweetRPG-API-Core.tex", u"SweetRPG API Core Documentation", u"Paul Schifferer", "manual")]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -151,7 +151,7 @@ latex_documents = [(master_doc, "SweetRPG-API-Common.tex", u"SweetRPG API Common
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "sweetrpg-api-common", u"SweetRPG API Common Documentation", [author], 1)]
+man_pages = [(master_doc, "sweetrpg-api-core", u"SweetRPG API Core Documentation", [author], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -165,10 +165,10 @@ man_pages = [(master_doc, "sweetrpg-api-common", u"SweetRPG API Common Documenta
 texinfo_documents = [
     (
         master_doc,
-        "SweetRPG API Common",
-        u"SweetRPG API Common Documentation",
+        "SweetRPG API Core",
+        u"SweetRPG API Core Documentation",
         author,
-        "SweetRPG API Common",
+        "SweetRPG API Core",
         "One line description of project.",
         "Miscellaneous",
     )

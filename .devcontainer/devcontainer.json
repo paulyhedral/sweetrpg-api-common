@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.194.0/containers/python-3
 {
-    "name": "SweetRPG API Common",
+    "name": "SweetRPG API Core",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
