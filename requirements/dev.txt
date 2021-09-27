@@ -7,7 +7,7 @@
 alabaster==0.7.12
     # via sphinx
 asgiref==3.4.1
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 attrs==21.2.0
     # via pytest
 babel==2.9.1
@@ -15,9 +15,9 @@ babel==2.9.1
 backports.entry-points-selectable==1.1.0
     # via virtualenv
 black==21.9b0
-    # via -r ./dev.in
+    # via -r requirements/dev.in
 blinker==1.4
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 certifi==2021.5.30
     # via requests
 charset-normalizer==2.0.6
@@ -30,7 +30,7 @@ click==8.0.1
 coverage==5.5
     # via pytest-cov
 coverage-badge==1.0.1
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 distlib==0.3.2
     # via virtualenv
 dnspython==1.16.0
@@ -50,9 +50,9 @@ filelock==3.0.12
     #   tox
     #   virtualenv
 flask==2.0.1
-    # via -r ./pkg.in
+    # via -r requirements/pkg.in
 greenlet==1.1.1
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 idna==3.2
     # via requests
 imagesize==1.2.0
@@ -69,6 +69,8 @@ markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
     # via sweetrpg-db
+mongoengine==0.23.1
+    # via sweetrpg-db
 mypy-extensions==0.4.3
     # via black
 networkx==2.6.3
@@ -80,13 +82,13 @@ packaging==21.0
     #   sphinx
     #   tox
 pallets-sphinx-themes==2.0.1
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 pathspec==0.9.0
     # via black
 pep517==0.11.0
     # via pip-tools
-pip-tools==6.2.0
-    # via -r ./dev.in
+pip-tools==6.3.0
+    # via -r requirements/dev.in
 platformdirs==2.3.0
     # via
     #   black
@@ -105,18 +107,18 @@ pygments==2.10.0
     #   sphinx-tabs
 pymongo[srv,tls]==3.11.4
     # via
+    #   mongoengine
     #   snooty-lextudio
-    #   sweetrpg-db
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5
     # via
-    #   -r ./tests.in
+    #   -r requirements/tests.in
     #   pytest-cov
 pytest-cov==2.12.1
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 python-dotenv==0.19.0
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 python-jsonrpc-server==0.3.4
     # via snooty-lextudio
 pytz==2021.1
@@ -130,26 +132,26 @@ requests==2.26.0
     #   snooty-lextudio
     #   sphinx
 rstcheck==3.3.1
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 six==1.16.0
     # via
     #   tox
     #   virtualenv
 snooty-lextudio==1.11.4.dev0
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 snowballstemmer==2.1.0
     # via sphinx
 sphinx==4.2.0
     # via
-    #   -r ./docs.in
+    #   -r requirements/docs.in
     #   pallets-sphinx-themes
     #   sphinx-issues
     #   sphinx-tabs
     #   sphinxcontrib-log-cabinet
 sphinx-issues==1.2.0
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 sphinx-tabs==3.2.0
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -159,13 +161,13 @@ sphinxcontrib-htmlhelp==2.0.0
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-log-cabinet==1.0.1
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 git+https://github.com/sweetrpg/db.git@develop
-    # via -r ./pkg.in
+    # via -r requirements/pkg.in
 toml==0.10.2
     # via
     #   pytest
@@ -177,7 +179,7 @@ tomli==1.2.1
     #   black
     #   pep517
 tox==3.24.4
-    # via -r ./tests.in
+    # via -r requirements/tests.in
 typing-extensions==3.10.0.2
     # via
     #   black
