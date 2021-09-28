@@ -20,8 +20,6 @@ coverage-badge==1.0.1
     # via -r ./tests.in
 distlib==0.3.2
     # via virtualenv
-dnspython==1.16.0
-    # via pymongo
 filelock==3.0.12
     # via
     #   tox
@@ -40,6 +38,8 @@ markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
     # via sweetrpg-db
+mongoengine==0.23.1
+    # via sweetrpg-db
 packaging==21.0
     # via
     #   pytest
@@ -54,8 +54,8 @@ py==1.10.0
     # via
     #   pytest
     #   tox
-pymongo[srv,tls]==3.12.0
-    # via sweetrpg-db
+pymongo==3.12.0
+    # via mongoengine
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5

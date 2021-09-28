@@ -69,6 +69,8 @@ markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
     # via sweetrpg-db
+mongoengine==0.23.1
+    # via sweetrpg-db
 mypy-extensions==0.4.3
     # via black
 networkx==2.6.3
@@ -85,7 +87,7 @@ pathspec==0.9.0
     # via black
 pep517==0.11.0
     # via pip-tools
-pip-tools==6.2.0
+pip-tools==6.3.0
     # via -r ./dev.in
 platformdirs==2.3.0
     # via
@@ -105,8 +107,8 @@ pygments==2.10.0
     #   sphinx-tabs
 pymongo[srv,tls]==3.11.4
     # via
+    #   mongoengine
     #   snooty-lextudio
-    #   sweetrpg-db
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5

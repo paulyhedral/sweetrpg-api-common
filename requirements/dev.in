@@ -1,5 +1,5 @@
 -r pkg.in
 -r tests.in
 -r docs.in
-pip-tools
+pip-tools==6.3.0
 black
