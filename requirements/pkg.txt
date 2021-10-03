@@ -37,7 +37,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==1.4.25
     # via flask-rest-jsonapi
-sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
+git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 werkzeug==2.0.1
     # via flask

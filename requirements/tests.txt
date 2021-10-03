@@ -86,7 +86,7 @@ six==1.16.0
     #   virtualenv
 sqlalchemy==1.4.25
     # via flask-rest-jsonapi
-sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
+git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 toml==0.10.2
     # via

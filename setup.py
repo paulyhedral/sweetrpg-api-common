@@ -5,7 +5,9 @@ setup(
     name="sweetrpg-api-core",
     install_requires=[
         "Flask>=2.0",
-        "sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop"
+        "sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop",
+        "mongoengine",
+        "Flask-REST-JSONAPI",
     ],
     extras_require={},
 )

@@ -12,28 +12,44 @@ certifi==2021.5.30
     # via requests
 charset-normalizer==2.0.6
     # via requests
-dnspython==1.16.0
-    # via pymongo
-docopt==0.6.2
-    # via snooty-lextudio
+click==8.0.1
+    # via flask
 docutils==0.16
     # via
     #   rstcheck
-    #   snooty-lextudio
     #   sphinx
     #   sphinx-tabs
-fett==0.3.2
-    # via snooty-lextudio
+flask==2.0.1
+    # via
+    #   -r ./pkg.in
+    #   flask-rest-jsonapi
+flask-rest-jsonapi==0.31.2
+    # via -r ./pkg.in
+greenlet==1.1.2
+    # via sqlalchemy
 idna==3.2
     # via requests
 imagesize==1.2.0
     # via sphinx
+itsdangerous==2.0.1
+    # via flask
 jinja2==3.0.1
-    # via sphinx
+    # via
+    #   flask
+    #   sphinx
 markupsafe==2.0.1
     # via jinja2
-networkx==2.6.3
-    # via snooty-lextudio
+marshmallow==3.13.0
+    # via
+    #   flask-rest-jsonapi
+    #   marshmallow-jsonapi
+    #   sweetrpg-db
+marshmallow-jsonapi==0.24.0
+    # via flask-rest-jsonapi
+mongoengine==0.23.1
+    # via
+    #   -r ./pkg.in
+    #   sweetrpg-db
 packaging==21.0
     # via
     #   pallets-sphinx-themes
@@ -44,24 +60,18 @@ pygments==2.10.0
     # via
     #   sphinx
     #   sphinx-tabs
-pymongo[srv,tls]==3.11.4
-    # via snooty-lextudio
+pymongo==3.11.4
+    # via mongoengine
 pyparsing==2.4.7
     # via packaging
-python-jsonrpc-server==0.3.4
-    # via snooty-lextudio
 pytz==2021.1
     # via babel
-pyyaml==5.4.1
-    # via snooty-lextudio
 requests==2.26.0
-    # via
-    #   snooty-lextudio
-    #   sphinx
+    # via sphinx
 rstcheck==3.3.1
     # via -r ./docs.in
-snooty-lextudio==1.11.4.dev0
-    # via -r ./docs.in
+six==1.16.0
+    # via flask-rest-jsonapi
 snowballstemmer==2.1.0
     # via sphinx
 sphinx==4.2.0
@@ -89,16 +99,14 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-toml==0.10.2
-    # via snooty-lextudio
-typing-extensions==3.10.0.2
-    # via snooty-lextudio
-ujson==1.35
-    # via python-jsonrpc-server
+sqlalchemy==1.4.25
+    # via flask-rest-jsonapi
+git+https://github.com/sweetrpg/db.git@develop
+    # via -r ./pkg.in
 urllib3==1.26.6
     # via requests
-watchdog==1.0.2
-    # via snooty-lextudio
+werkzeug==2.0.1
+    # via flask
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
