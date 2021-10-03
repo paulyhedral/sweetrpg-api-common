@@ -7,7 +7,7 @@ from flask_rest_jsonapi.data_layers.base import BaseDataLayer
 from flask_rest_jsonapi.exceptions import ObjectNotFound, JsonApiException
 from sweetrpg_db.mongodb.repo import MongoDataRepository
 from sweetrpg_db.mongodb.options import QueryOptions
-from sweetrpg_db.utils import to_datetime
+from sweetrpg_model_core.convert.date import to_datetime
 from datetime import datetime
 from pymongo.errors import DuplicateKeyError
 from mongoengine import Document
@@ -233,33 +233,33 @@ class APIData(BaseDataLayer):
 
         return obj, updated
 
-    def get_relationship(self, relationship_field, related_type_, related_id_field, view_kwargs):
+    def get_relationship(self, relationship_field, related_type, related_id_field, view_kwargs):
         """Get information about a relationship
         :param str relationship_field: the model attribute used for relationship
-        :param str related_type_: the related resource type
+        :param str related_type: the related resource type
         :param str related_id_field: the identifier field of the related model
         :param dict view_kwargs: kwargs from the resource view
         :return tuple: the object and related object(s)
         """
         logging.debug(
-            "self: %s, relationship_field: %s, related_type_: %s, related_id_field: %s, view_kwargs: %s",
+            "self: %s, relationship_field: %s, related_type: %s, related_id_field: %s, view_kwargs: %s",
             self,
             relationship_field,
-            related_type_,
+            related_type,
             related_id_field,
             view_kwargs,
         )
 
-        self.before_get_relationship(relationship_field, related_type_, related_id_field, view_kwargs)
+        self.before_get_relationship(relationship_field, related_type, related_id_field, view_kwargs)
 
         # TODO
 
-        self.after_get_relationship(obj, related_objects, relationship_field, related_type_, related_id_field, view_kwargs)
+        self.after_get_relationship(obj, related_objects, relationship_field, related_type, related_id_field, view_kwargs)
 
         if isinstance(related_objects, InstrumentedList):
-            return obj, [{"type": related_type_, "id": getattr(obj_, related_id_field)} for obj_ in related_objects]
+            return obj, [{"type": related_type, "id": getattr(obj_, related_id_field)} for obj_ in related_objects]
         else:
-            return obj, {"type": related_type_, "id": getattr(related_objects, related_id_field)}
+            return obj, {"type": related_type, "id": getattr(related_objects, related_id_field)}
 
     def update_relationship(self, json_data, relationship_field, related_id_field, view_kwargs):
         """Update a relationship
@@ -571,40 +571,39 @@ class APIData(BaseDataLayer):
             view_kwargs,
         )
 
-    def before_get_relationship(self, relationship_field, related_type_, related_id_field, view_kwargs):
+    def before_get_relationship(self, relationship_field, related_type, related_id_field, view_kwargs):
         """Make work before to get information about a relationship
         :param str relationship_field: the model attribute used for relationship
-        :param str related_type_: the related resource type
+        :param str related_type: the related resource type
         :param str related_id_field: the identifier field of the related model
         :param dict view_kwargs: kwargs from the resource view
         :return tuple: the object and related object(s)
         """
         logging.debug(
-            "self: %s, relationship_field: %s, related_type_: %s, related_id_field: %s, view_kwargs: %s",
+            "self: %s, relationship_field: %s, related_type: %s, related_id_field: %s, view_kwargs: %s",
             self,
             relationship_field,
-            related_type_,
+            related_type,
             related_id_field,
             view_kwargs,
         )
 
-    def after_get_relationship(self, obj, related_objects, relationship_field, related_type_, related_id_field, view_kwargs):
+    def after_get_relationship(self, obj, related_objects, relationship_field, related_type, related_id_field, view_kwargs):
         """Make work after to get information about a relationship
         :param obj: an object from data layer
         :param iterable related_objects: related objects of the object
         :param str relationship_field: the model attribute used for relationship
-        :param str related_type_: the related resource type
+        :param str related_type: the related resource type
         :param str related_id_field: the identifier field of the related model
         :param dict view_kwargs: kwargs from the resource view
         :return tuple: the object and related object(s)
         """
         logging.debug(
-            "self: %s, obj: %s, update: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
+            "self: %s, obj: %s, relationship_field: %s, related_type: %s, related_id_field: %s, view_kwargs: %s",
             self,
             obj,
-            updated,
-            json_data,
             relationship_field,
+            related_type,
             related_id_field,
             view_kwargs,
         )
