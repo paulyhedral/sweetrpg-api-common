@@ -1,2 +1,4 @@
 Flask>=2.0
 git+https://github.com/sweetrpg/db.git@develop
+mongoengine
+Flask-REST-JSONAPI

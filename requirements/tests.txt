@@ -25,9 +25,15 @@ filelock==3.0.12
     #   tox
     #   virtualenv
 flask==2.0.1
+    # via
+    #   -r ./pkg.in
+    #   flask-rest-jsonapi
+flask-rest-jsonapi==0.31.2
     # via -r ./pkg.in
 greenlet==1.1.1
-    # via -r ./tests.in
+    # via
+    #   -r ./tests.in
+    #   sqlalchemy
 iniconfig==1.1.1
     # via pytest
 itsdangerous==2.0.1
@@ -37,9 +43,16 @@ jinja2==3.0.1
 markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
-    # via sweetrpg-db
+    # via
+    #   flask-rest-jsonapi
+    #   marshmallow-jsonapi
+    #   sweetrpg-db
+marshmallow-jsonapi==0.24.0
+    # via flask-rest-jsonapi
 mongoengine==0.23.1
-    # via sweetrpg-db
+    # via
+    #   -r ./pkg.in
+    #   sweetrpg-db
 packaging==21.0
     # via
     #   pytest
@@ -68,9 +81,12 @@ python-dotenv==0.19.0
     # via -r ./tests.in
 six==1.16.0
     # via
+    #   flask-rest-jsonapi
     #   tox
     #   virtualenv
-git+https://github.com/sweetrpg/db.git@develop
+sqlalchemy==1.4.25
+    # via flask-rest-jsonapi
+sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 toml==0.10.2
     # via

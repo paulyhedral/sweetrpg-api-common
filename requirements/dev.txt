@@ -50,9 +50,15 @@ filelock==3.0.12
     #   tox
     #   virtualenv
 flask==2.0.1
+    # via
+    #   -r ./pkg.in
+    #   flask-rest-jsonapi
+flask-rest-jsonapi==0.31.2
     # via -r ./pkg.in
 greenlet==1.1.1
-    # via -r ./tests.in
+    # via
+    #   -r ./tests.in
+    #   sqlalchemy
 idna==3.2
     # via requests
 imagesize==1.2.0
@@ -68,9 +74,16 @@ jinja2==3.0.1
 markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
-    # via sweetrpg-db
+    # via
+    #   flask-rest-jsonapi
+    #   marshmallow-jsonapi
+    #   sweetrpg-db
+marshmallow-jsonapi==0.24.0
+    # via flask-rest-jsonapi
 mongoengine==0.23.1
-    # via sweetrpg-db
+    # via
+    #   -r ./pkg.in
+    #   sweetrpg-db
 mypy-extensions==0.4.3
     # via black
 networkx==2.6.3
@@ -135,6 +148,7 @@ rstcheck==3.3.1
     # via -r ./docs.in
 six==1.16.0
     # via
+    #   flask-rest-jsonapi
     #   tox
     #   virtualenv
 snooty-lextudio==1.11.4.dev0
@@ -166,7 +180,9 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-git+https://github.com/sweetrpg/db.git@develop
+sqlalchemy==1.4.25
+    # via flask-rest-jsonapi
+sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 toml==0.10.2
     # via

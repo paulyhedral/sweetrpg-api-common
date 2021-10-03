@@ -7,7 +7,13 @@
 click==8.0.1
     # via flask
 flask==2.0.1
+    # via
+    #   -r ./pkg.in
+    #   flask-rest-jsonapi
+flask-rest-jsonapi==0.31.2
     # via -r ./pkg.in
+greenlet==1.1.2
+    # via sqlalchemy
 itsdangerous==2.0.1
     # via flask
 jinja2==3.0.1
@@ -15,12 +21,23 @@ jinja2==3.0.1
 markupsafe==2.0.1
     # via jinja2
 marshmallow==3.13.0
-    # via sweetrpg-db
+    # via
+    #   flask-rest-jsonapi
+    #   marshmallow-jsonapi
+    #   sweetrpg-db
+marshmallow-jsonapi==0.24.0
+    # via flask-rest-jsonapi
 mongoengine==0.23.1
-    # via sweetrpg-db
+    # via
+    #   -r ./pkg.in
+    #   sweetrpg-db
 pymongo==3.12.0
     # via mongoengine
-git+https://github.com/sweetrpg/db.git@develop
+six==1.16.0
+    # via flask-rest-jsonapi
+sqlalchemy==1.4.25
+    # via flask-rest-jsonapi
+sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 werkzeug==2.0.1
     # via flask
