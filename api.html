@@ -35,6 +35,335 @@
 <span id="api"></span><h1>API<a class="headerlink" href="#module-sweetrpg_api_core" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="api-data">
 <h2>API Data<a class="headerlink" href="#api-data" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sweetrpg_api_core.data.</span></span><span class="sig-name descname"><span class="pre">APIData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData._add_repo">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">_add_repo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_info</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData._add_repo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData._add_repo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData._convert_properties">
+<span class="sig-name descname"><span class="pre">_convert_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData._convert_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData._convert_properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData._populate_object">
+<span class="sig-name descname"><span class="pre">_populate_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData._populate_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData._populate_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.add_model">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.add_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.add_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_create_object">
+<span class="sig-name descname"><span class="pre">after_create_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_create_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_create_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide additional data after object creation
+:param obj: an object from data layer
+:param dict data: the data validated by marshmallow
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_create_relationship">
+<span class="sig-name descname"><span class="pre">after_create_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_create_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_create_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after to create a relationship
+:param obj: an object from data layer
+:param bool updated: True if object was updated else False
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if relationship have changed else False</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_delete_object">
+<span class="sig-name descname"><span class="pre">after_delete_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_delete_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_delete_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after delete object
+:param obj: an object from data layer
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_delete_relationship">
+<span class="sig-name descname"><span class="pre">after_delete_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_delete_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_delete_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after to delete a relationship
+:param obj: an object from data layer
+:param bool updated: True if object was updated else False
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_get_collection">
+<span class="sig-name descname"><span class="pre">after_get_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_get_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_get_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after to retrieve a collection of objects
+:param iterable collection: the collection of objects
+:param QueryStringManager qs: a querystring manager to retrieve information from url
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_get_object">
+<span class="sig-name descname"><span class="pre">after_get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Work after fetching an object, including fetching child objects
+:param obj: an object from data layer
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_get_relationship">
+<span class="sig-name descname"><span class="pre">after_get_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_objects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_get_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_get_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after to get information about a relationship
+:param obj: an object from data layer
+:param iterable related_objects: related objects of the object
+:param str relationship_field: the model attribute used for relationship
+:param str related_type: the related resource type
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return tuple: the object and related object(s)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_update_object">
+<span class="sig-name descname"><span class="pre">after_update_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_update_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_update_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after update object
+:param obj: an object from data layer
+:param dict data: the data validated by marshmallow
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.after_update_relationship">
+<span class="sig-name descname"><span class="pre">after_update_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.after_update_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.after_update_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work after to update a relationship
+:param obj: an object from data layer
+:param bool updated: True if object was updated else False
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if relationship have changed else False</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_create_object">
+<span class="sig-name descname"><span class="pre">before_create_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_create_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_create_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide additional data before object creation
+:param dict data: the data validated by marshmallow
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_create_relationship">
+<span class="sig-name descname"><span class="pre">before_create_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_create_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_create_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work before to create a relationship
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if relationship have changed else False</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_delete_object">
+<span class="sig-name descname"><span class="pre">before_delete_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_delete_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_delete_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make checks before delete object
+:param obj: an object from data layer
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_delete_relationship">
+<span class="sig-name descname"><span class="pre">before_delete_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_delete_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_delete_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work before to delete a relationship
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_get_collection">
+<span class="sig-name descname"><span class="pre">before_get_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_get_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_get_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work before to retrieve a collection of objects
+:param QueryStringManager qs: a querystring manager to retrieve information from url
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_get_object">
+<span class="sig-name descname"><span class="pre">before_get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work before to retrieve an object
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_get_relationship">
+<span class="sig-name descname"><span class="pre">before_get_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_get_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_get_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work before to get information about a relationship
+:param str relationship_field: the model attribute used for relationship
+:param str related_type: the related resource type
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return tuple: the object and related object(s)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_update_object">
+<span class="sig-name descname"><span class="pre">before_update_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_update_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_update_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make checks or provide additional data before update object
+:param obj: an object from data layer
+:param dict data: the data validated by marshmallow
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.before_update_relationship">
+<span class="sig-name descname"><span class="pre">before_update_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.before_update_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.before_update_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make work before to update a relationship
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if relationship have changed else False</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.create_object">
+<span class="sig-name descname"><span class="pre">create_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">mongoengine.document.Document</span></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.create_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.create_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an object
+:param dict data: the data validated by marshmallow
+:param dict view_kwargs: kwargs from the resource view
+:return DeclarativeMeta: an object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.create_relationship">
+<span class="sig-name descname"><span class="pre">create_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.create_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.create_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a relationship
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if relationship have changed else False</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.delete_object">
+<span class="sig-name descname"><span class="pre">delete_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.delete_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.delete_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an item through the data layer
+:param DeclarativeMeta obj: an object
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.delete_relationship">
+<span class="sig-name descname"><span class="pre">delete_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.delete_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.delete_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a relationship
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.get_collection">
+<span class="sig-name descname"><span class="pre">get_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.get_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.get_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a collection of objects
+:param QueryStringManager qs: a querystring manager to retrieve information from url
+:param dict view_kwargs: kwargs from the resource view
+:param dict filters: A dictionary of key/value filters to apply to the eventual query (ignored since it usually contains nothing)
+:return tuple: the number of objects and the list of objects</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an object
+:params dict view_kwargs: kwargs from the resource view
+:params qs: A query string?
+:return DeclarativeMeta: an object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.get_relationship">
+<span class="sig-name descname"><span class="pre">get_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.get_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.get_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about a relationship
+:param str relationship_field: the model attribute used for relationship
+:param str related_type: the related resource type
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return tuple: the object and related object(s)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.models">
+<span class="sig-name descname"><span class="pre">models</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{}</span></em><a class="headerlink" href="#sweetrpg_api_core.data.APIData.models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.paginate_query">
+<span class="sig-name descname"><span class="pre">paginate_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paginate_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.paginate_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.paginate_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Paginate query according to jsonapi 1.0
+:param QueryOptions query: MongoDB query options
+:param dict paginate_info: pagination information
+:return QueryOptions: an updated QueryOptions with pagination information</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the base query to retrieve wanted data
+:param QueryStringManager qs: the QueryStringManager
+:param dict view_kwargs: kwargs from the resource view
+:return QueryOptions: An initialized QueryOptions object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.remove_model">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">remove_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.remove_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.remove_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.repos">
+<span class="sig-name descname"><span class="pre">repos</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{}</span></em><a class="headerlink" href="#sweetrpg_api_core.data.APIData.repos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.set_models">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">set_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.set_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.set_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.update_object">
+<span class="sig-name descname"><span class="pre">update_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.update_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.update_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update an object
+:param DeclarativeMeta obj: an object
+:param dict data: the data validated by marshmallow
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if object have changed else False</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.update_relationship">
+<span class="sig-name descname"><span class="pre">update_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relationship_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">related_id_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.update_relationship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.update_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a relationship
+:param dict json_data: the request params
+:param str relationship_field: the model attribute used for relationship
+:param str related_id_field: the identifier field of the related model
+:param dict view_kwargs: kwargs from the resource view
+:return boolean: True if relationship have changed else False</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 

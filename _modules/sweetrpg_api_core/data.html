@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sweetrpg_api_core.data &#8212; SweetRPG API Core 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for sweetrpg_api_core.data</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Paul Schifferer &lt;dm@sweetrpg.com&gt;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">flask_rest_jsonapi.data_layers.base</span> <span class="kn">import</span> <span class="n">BaseDataLayer</span>
+<span class="kn">from</span> <span class="nn">flask_rest_jsonapi.exceptions</span> <span class="kn">import</span> <span class="n">ObjectNotFound</span><span class="p">,</span> <span class="n">JsonApiException</span>
+<span class="kn">from</span> <span class="nn">sweetrpg_db.mongodb.repo</span> <span class="kn">import</span> <span class="n">MongoDataRepository</span>
+<span class="kn">from</span> <span class="nn">sweetrpg_db.mongodb.options</span> <span class="kn">import</span> <span class="n">QueryOptions</span>
+<span class="kn">from</span> <span class="nn">sweetrpg_model_core.convert.date</span> <span class="kn">import</span> <span class="n">to_datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pymongo.errors</span> <span class="kn">import</span> <span class="n">DuplicateKeyError</span>
+<span class="kn">from</span> <span class="nn">mongoengine</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
+<span class="kn">from</span> <span class="nn">sweetrpg_model_core.convert.model</span> <span class="kn">import</span> <span class="n">convert_document</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<div class="viewcode-block" id="APIData"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData">[docs]</a><span class="k">class</span> <span class="nc">APIData</span><span class="p">(</span><span class="n">BaseDataLayer</span><span class="p">):</span>
+
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">repos</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Intialize an data layer instance with kwargs</span>
+<span class="sd">        :param dict kwargs: information about data layer instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;init: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;methods&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bound_rewritable_methods</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;methods&quot;</span><span class="p">])</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;methods&quot;</span><span class="p">)</span>
+
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;APIData(type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">, repos=</span><span class="si">{</span><span class="n">APIData</span><span class="o">.</span><span class="n">repos</span><span class="si">}</span><span class="s2">, models=</span><span class="si">{</span><span class="n">APIData</span><span class="o">.</span><span class="n">models</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
+
+<div class="viewcode-block" id="APIData._add_repo"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData._add_repo">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_add_repo</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">APIData</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding repository for type </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="p">)</span>
+            <span class="n">APIData</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">MongoDataRepository</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">document</span><span class="o">=</span><span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">],</span> <span class="n">collection</span><span class="o">=</span><span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Repository already present for type </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.set_models"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.set_models">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">set_models</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Replacing models...&quot;</span><span class="p">)</span>
+        <span class="n">APIData</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
+        <span class="k">for</span> <span class="n">model_type</span><span class="p">,</span> <span class="n">model_info</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">APIData</span><span class="o">.</span><span class="n">_add_repo</span><span class="p">(</span><span class="n">model_type</span><span class="p">,</span> <span class="n">model_info</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.add_model"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.add_model">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding model </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">APIData</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="n">APIData</span><span class="o">.</span><span class="n">_add_repo</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.remove_model"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.remove_model">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">remove_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Removing model </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">APIData</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">APIData</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="APIData.create_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.create_object">[docs]</a>    <span class="k">def</span> <span class="nf">create_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create an object</span>
+<span class="sd">        :param dict data: the data validated by marshmallow</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return DeclarativeMeta: an object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># db = current_app.config[&quot;db&quot;]</span>
+        <span class="c1"># db = self.repos[self.type].db</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, data (</span><span class="si">%s</span><span class="s2">): </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_create_object</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">json</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>  <span class="c1"># schema().dump(data, many=False)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, json: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, repo: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Document created: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+            <span class="n">model_class</span> <span class="o">=</span> <span class="n">APIData</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, repo: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">convert_document</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">model_class</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, model: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">DuplicateKeyError</span> <span class="k">as</span> <span class="n">dke</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">JsonApiException</span><span class="p">(</span><span class="n">dke</span><span class="o">.</span><span class="n">details</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Duplicate key&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;409&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="s2">&quot;duplicate-key&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_create_object</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">model</span></div>
+
+<div class="viewcode-block" id="APIData.get_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.get_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">,</span> <span class="n">qs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve an object</span>
+<span class="sd">        :params dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :params qs: A query string?</span>
+<span class="sd">        :return DeclarativeMeta: an object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">, qs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">,</span> <span class="n">qs</span><span class="p">)</span>
+
+        <span class="c1"># analytics.write()</span>
+        <span class="c1"># analytics.identify(&quot;anonymous&quot;, {&quot;name&quot;: &quot;Michael Bolton&quot;, &quot;email&quot;: &quot;mbolton@example.com&quot;, &quot;created_at&quot;: datetime.now()})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_get_object</span><span class="p">(</span><span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">record_id</span> <span class="o">=</span> <span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Looking up record for ID &#39;</span><span class="si">%s</span><span class="s2">&#39;...&quot;</span><span class="p">,</span> <span class="n">record_id</span><span class="p">)</span>
+        <span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, repo: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">record_id</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, record: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">record</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ObjectNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1"> record found for ID </span><span class="si">{</span><span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ObjectNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1"> record found for ID </span><span class="si">{</span><span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">record</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_get_object</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, record: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">](</span><span class="o">**</span><span class="n">record</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="APIData.get_collection"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.get_collection">[docs]</a>    <span class="k">def</span> <span class="nf">get_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve a collection of objects</span>
+<span class="sd">        :param QueryStringManager qs: a querystring manager to retrieve information from url</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :param dict filters: A dictionary of key/value filters to apply to the eventual query (ignored since it usually contains nothing)</span>
+<span class="sd">        :return tuple: the number of objects and the list of objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, qs: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">, filters: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;querystring: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">querystring</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;fields: </span><span class="si">%s</span><span class="s2">, sorting: </span><span class="si">%s</span><span class="s2">, include: </span><span class="si">%s</span><span class="s2">, pagination: </span><span class="si">%s</span><span class="s2">, filters: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">sorting</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">include</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">pagination</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">filters</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_get_collection</span><span class="p">(</span><span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paginate_query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">qs</span><span class="o">.</span><span class="n">pagination</span><span class="p">)</span>
+
+        <span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, repo: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+        <span class="n">objs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, objs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">objs</span><span class="p">)</span>
+
+        <span class="n">collection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_get_collection</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">),</span> <span class="n">collection</span></div>
+
+<div class="viewcode-block" id="APIData.update_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.update_object">[docs]</a>    <span class="k">def</span> <span class="nf">update_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update an object</span>
+<span class="sd">        :param DeclarativeMeta obj: an object</span>
+<span class="sd">        :param dict data: the data validated by marshmallow</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if object have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_update_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">record_id</span> <span class="o">=</span> <span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, repo: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">updated_record</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">record_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, updated_record: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">updated_record</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ObjectNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unable to delete </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1"> record for ID </span><span class="si">{</span><span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_update_object</span><span class="p">(</span><span class="n">updated_record</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="APIData.delete_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.delete_object">[docs]</a>    <span class="k">def</span> <span class="nf">delete_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete an item through the data layer</span>
+<span class="sd">        :param DeclarativeMeta obj: an object</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_delete_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">record_id</span> <span class="o">=</span> <span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, repo: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">is_deleted</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">record_id</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, is_deleted: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">is_deleted</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ObjectNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unable to delete </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1"> record for ID </span><span class="si">{</span><span class="n">view_kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_delete_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">is_deleted</span></div>
+
+<div class="viewcode-block" id="APIData.create_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.create_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">create_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a relationship</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if relationship have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_create_relationship</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># TODO</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_create_relationship</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">updated</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="n">updated</span></div>
+
+<div class="viewcode-block" id="APIData.get_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.get_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">get_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_type</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get information about a relationship</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_type: the related resource type</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return tuple: the object and related object(s)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_type: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_type</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_get_relationship</span><span class="p">(</span><span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_type</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># TODO</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_get_relationship</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">related_objects</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_type</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">related_objects</span><span class="p">,</span> <span class="n">InstrumentedList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">related_type</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj_</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">)}</span> <span class="k">for</span> <span class="n">obj_</span> <span class="ow">in</span> <span class="n">related_objects</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">related_type</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">related_objects</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">)}</span></div>
+
+<div class="viewcode-block" id="APIData.update_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.update_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">update_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update a relationship</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if relationship have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_update_relationship</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># TODO</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_update_relationship</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">updated</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="n">updated</span></div>
+
+<div class="viewcode-block" id="APIData.delete_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.delete_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">delete_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delete a relationship</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_delete_relationship</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># TODO</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_delete_relationship</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">updated</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="n">updated</span></div>
+
+<div class="viewcode-block" id="APIData.query"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct the base query to retrieve wanted data</span>
+<span class="sd">        :param QueryStringManager qs: the QueryStringManager</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return QueryOptions: An initialized QueryOptions object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, qs: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">query</span> <span class="o">=</span> <span class="n">QueryOptions</span><span class="p">()</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">set_filters</span><span class="p">(</span><span class="n">from_querystring</span><span class="o">=</span><span class="n">qs</span><span class="o">.</span><span class="n">filters</span><span class="p">)</span>
+        <span class="c1"># query.set_projection(from_querystring=qs.fields.get(self.type))</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">set_sort</span><span class="p">(</span><span class="n">from_querystring</span><span class="o">=</span><span class="n">qs</span><span class="o">.</span><span class="n">sorting</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">query</span></div>
+
+<div class="viewcode-block" id="APIData.paginate_query"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.paginate_query">[docs]</a>    <span class="k">def</span> <span class="nf">paginate_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">paginate_info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Paginate query according to jsonapi 1.0</span>
+<span class="sd">        :param QueryOptions query: MongoDB query options</span>
+<span class="sd">        :param dict paginate_info: pagination information</span>
+<span class="sd">        :return QueryOptions: an updated QueryOptions with pagination information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, query: </span><span class="si">%s</span><span class="s2">, paginate_info: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">paginate_info</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">paginate_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">query</span>
+
+        <span class="n">page_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">paginate_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="ow">or</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;PAGE_SIZE&quot;</span><span class="p">]</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">page_size</span>
+        <span class="k">if</span> <span class="n">paginate_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">):</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">skip</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">paginate_info</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">page_size</span>
+
+        <span class="k">return</span> <span class="n">query</span></div>
+
+<div class="viewcode-block" id="APIData._convert_properties"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData._convert_properties">[docs]</a>    <span class="k">def</span> <span class="nf">_convert_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+        <span class="n">date_properties</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;created_at&quot;</span><span class="p">,</span> <span class="s2">&quot;updated_at&quot;</span><span class="p">,</span> <span class="s2">&quot;deleted_at&quot;</span><span class="p">]</span>
+        <span class="n">id_properties</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">date_properties</span> <span class="o">+</span> <span class="n">id_properties</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, p: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">property_value</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, property_value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">property_value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">property_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">date_properties</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, converting date property: </span><span class="si">%s</span><span class="s2">, value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">property_value</span><span class="p">)</span>
+                <span class="n">new_property_value</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">property_value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">id_properties</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, converting ID property: </span><span class="si">%s</span><span class="s2">, value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">property_value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">property_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">new_property_value</span> <span class="o">=</span> <span class="n">property_value</span><span class="p">[</span><span class="s2">&quot;$oid&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_property_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">property_value</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">obj</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_property_value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">new_property_value</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, converted object: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="APIData._populate_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData._populate_object">[docs]</a>    <span class="k">def</span> <span class="nf">_populate_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, properties: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">property_type</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, property_name: </span><span class="si">%s</span><span class="s2">, property_type: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">property_type</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">property_value</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, property_value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">property_value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">property_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">property_value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, property_value is a string&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+                <span class="n">new_property_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">property_type</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">property_value</span><span class="p">)</span>
+                <span class="c1"># logging.info(&quot;self: %s, new_value: %s&quot;, self, new_value)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, new_property_value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">new_property_value</span><span class="p">)</span>
+
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">new_property_value</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">property_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, property_value is a list&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+                <span class="n">new_property_value</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">list_value</span> <span class="ow">in</span> <span class="n">property_value</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, list_value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">list_value</span><span class="p">[</span><span class="s2">&quot;$oid&quot;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">list_value</span>
+                    <span class="n">new_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">property_type</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, new_obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">new_obj</span><span class="p">)</span>
+                    <span class="n">new_value</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">new_obj</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, new_value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">)</span>
+                    <span class="n">new_property_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, new_property_value: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">new_property_value</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">obj</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_property_value</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">new_property_value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="APIData.before_create_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_create_object">[docs]</a>    <span class="k">def</span> <span class="nf">before_create_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provide additional data before object creation</span>
+<span class="sd">        :param dict data: the data validated by marshmallow</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="nb">delattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;deleted_at&quot;</span><span class="p">)</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">now</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">now</span></div>
+
+<div class="viewcode-block" id="APIData.after_create_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_create_object">[docs]</a>    <span class="k">def</span> <span class="nf">after_create_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provide additional data after object creation</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param dict data: the data validated by marshmallow</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.before_get_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_get_object">[docs]</a>    <span class="k">def</span> <span class="nf">before_get_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work before to retrieve an object</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_get_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_get_object">[docs]</a>    <span class="k">def</span> <span class="nf">after_get_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Work after fetching an object, including fetching child objects</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">this_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, this_model: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">this_model</span><span class="p">)</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">this_model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, properties: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">converted_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_properties</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, converted_data: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">converted_data</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_populate_object</span><span class="p">(</span><span class="n">converted_data</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="APIData.before_get_collection"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_get_collection">[docs]</a>    <span class="k">def</span> <span class="nf">before_get_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work before to retrieve a collection of objects</span>
+<span class="sd">        :param QueryStringManager qs: a querystring manager to retrieve information from url</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, qs: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_get_collection"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_get_collection">[docs]</a>    <span class="k">def</span> <span class="nf">after_get_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after to retrieve a collection of objects</span>
+<span class="sd">        :param iterable collection: the collection of objects</span>
+<span class="sd">        :param QueryStringManager qs: a querystring manager to retrieve information from url</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, collection: </span><span class="si">%s</span><span class="s2">, qs: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">qs</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
+
+        <span class="n">this_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, this_model: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">this_model</span><span class="p">)</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">this_model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, properties: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+
+        <span class="n">updated_collection</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">converted_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_properties</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, converted_data: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">converted_data</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">converted_data</span>  <span class="c1"># self._populate_object(converted_data, properties)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+            <span class="c1"># logging.debug(&quot;self: %s, obj: %s&quot;, self, obj)</span>
+            <span class="c1"># self._populate_object(obj, properties)</span>
+            <span class="n">updated_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">updated_collection</span></div>
+
+<div class="viewcode-block" id="APIData.before_update_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_update_object">[docs]</a>    <span class="k">def</span> <span class="nf">before_update_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make checks or provide additional data before update object</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param dict data: the data validated by marshmallow</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_update_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_update_object">[docs]</a>    <span class="k">def</span> <span class="nf">after_update_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after update object</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param dict data: the data validated by marshmallow</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, data: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.before_delete_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_delete_object">[docs]</a>    <span class="k">def</span> <span class="nf">before_delete_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make checks before delete object</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_delete_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_delete_object">[docs]</a>    <span class="k">def</span> <span class="nf">after_delete_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after delete object</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.before_create_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_create_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">before_create_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work before to create a relationship</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if relationship have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_create_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_create_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">after_create_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">updated</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after to create a relationship</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param bool updated: True if object was updated else False</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if relationship have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, update: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">obj</span><span class="p">,</span>
+            <span class="n">updated</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.before_get_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_get_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">before_get_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_type</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work before to get information about a relationship</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_type: the related resource type</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return tuple: the object and related object(s)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_type: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_type</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_get_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_get_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">after_get_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">related_objects</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_type</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after to get information about a relationship</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param iterable related_objects: related objects of the object</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_type: the related resource type</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return tuple: the object and related object(s)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_type: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">obj</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_type</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.before_update_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_update_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">before_update_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work before to update a relationship</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if relationship have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_update_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_update_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">after_update_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">updated</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after to update a relationship</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param bool updated: True if object was updated else False</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        :return boolean: True if relationship have changed else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, update: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">obj</span><span class="p">,</span>
+            <span class="n">updated</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.before_delete_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.before_delete_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">before_delete_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work before to delete a relationship</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="APIData.after_delete_relationship"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.after_delete_relationship">[docs]</a>    <span class="k">def</span> <span class="nf">after_delete_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">updated</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">relationship_field</span><span class="p">,</span> <span class="n">related_id_field</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make work after to delete a relationship</span>
+<span class="sd">        :param obj: an object from data layer</span>
+<span class="sd">        :param bool updated: True if object was updated else False</span>
+<span class="sd">        :param dict json_data: the request params</span>
+<span class="sd">        :param str relationship_field: the model attribute used for relationship</span>
+<span class="sd">        :param str related_id_field: the identifier field of the related model</span>
+<span class="sd">        :param dict view_kwargs: kwargs from the resource view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;self: </span><span class="si">%s</span><span class="s2">, obj: </span><span class="si">%s</span><span class="s2">, update: </span><span class="si">%s</span><span class="s2">, json_data: </span><span class="si">%s</span><span class="s2">, relationship_field: </span><span class="si">%s</span><span class="s2">, related_id_field: </span><span class="si">%s</span><span class="s2">, view_kwargs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">obj</span><span class="p">,</span>
+            <span class="n">updated</span><span class="p">,</span>
+            <span class="n">json_data</span><span class="p">,</span>
+            <span class="n">relationship_field</span><span class="p">,</span>
+            <span class="n">related_id_field</span><span class="p">,</span>
+            <span class="n">view_kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">SweetRPG API Core</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=sweetrpg&repo=api-core&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Paul Schifferer.
+      
+    </div>
+
+    
+    <a href="https://github.com/sweetrpg/api-core" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
