@@ -3,7 +3,6 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 """
 
-from flask import current_app
 from flask_rest_jsonapi.data_layers.base import BaseDataLayer
 from flask_rest_jsonapi.exceptions import ObjectNotFound, JsonApiException
 from sweetrpg_db.mongodb.repo import MongoDataRepository
@@ -78,23 +77,21 @@ class APIData(BaseDataLayer):
         """
         # db = current_app.config["db"]
         # db = self.repos[self.type].db
-        current_app.logger.debug("self: %s, data (%s): %s, view_kwargs: %s", self, data, type(data), view_kwargs)
+        logging.debug("self: %s, data (%s): %s, view_kwargs: %s", self, data, type(data), view_kwargs)
 
         self.before_create_object(data, view_kwargs)
 
         json = data.to_dict()  # schema().dump(data, many=False)
-        current_app.logger.info("self: %s, json: %s", self, json)
+        logging.info("self: %s, json: %s", self, json)
 
         try:
             repo = self.repos[self.type]
-            current_app.logger.debug("self: %s, repo: %s", self, repo)
+            logging.debug("self: %s, repo: %s", self, repo)
             doc = repo.create(json)
-            current_app.logger.info("Document created: %s", doc)
+            logging.info("Document created: %s", doc)
             model_class = APIData.models[self.type]["model"]
-            model = convert_document(
-                doc,
-            )
-            current_app.logger.info("self: %s, model: %s", self, model)
+            logging.debug("self: %s, repo: %s", self, repo)
+            logging.info("self: %s, model: %s", self, model)
         except DuplicateKeyError as dke:
             raise JsonApiException(dke.details, title="Duplicate key", status="409", code="duplicate-key")
 
@@ -108,7 +105,7 @@ class APIData(BaseDataLayer):
         :params qs: A query string?
         :return DeclarativeMeta: an object
         """
-        current_app.logger.debug("self: %s, view_kwargs: %s, qs: %s", self, view_kwargs, qs)
+        logging.debug("self: %s, view_kwargs: %s, qs: %s", self, view_kwargs, qs)
 
         # analytics.write()
         # analytics.identify("anonymous", {"name": "Michael Bolton", "email": "mbolton@example.com", "created_at": datetime.now()})
@@ -116,22 +113,22 @@ class APIData(BaseDataLayer):
         self.before_get_object(view_kwargs)
 
         record_id = view_kwargs["id"]
-        current_app.logger.info("Looking up record for ID '%s'...", record_id)
+        logging.info("Looking up record for ID '%s'...", record_id)
         repo = self.repos[self.type]
-        current_app.logger.debug("self: %s, repo: %s", self, repo)
+        logging.debug("self: %s, repo: %s", self, repo)
         try:
             record = repo.get(record_id)
-            current_app.logger.info("self: %s, record: %s", self, record)
+            logging.info("self: %s, record: %s", self, record)
             if record is None:
                 raise ObjectNotFound(f'No {self.type} record found for ID {view_kwargs["id"]}')
         except:
             raise ObjectNotFound(f'No {self.type} record found for ID {view_kwargs["id"]}')
 
         record = self.after_get_object(record, view_kwargs)
-        current_app.logger.info("self: %s, record: %s", self, record)
+        logging.info("self: %s, record: %s", self, record)
 
         obj = models[self.type]["model"](**record)
-        current_app.logger.info("self: %s, obj: %s", self, obj)
+        logging.info("self: %s, obj: %s", self, obj)
 
         return obj
 
@@ -142,9 +139,9 @@ class APIData(BaseDataLayer):
         :param dict filters: A dictionary of key/value filters to apply to the eventual query (ignored since it usually contains nothing)
         :return tuple: the number of objects and the list of objects
         """
-        current_app.logger.debug("self: %s, qs: %s, view_kwargs: %s, filters: %s", self, qs, view_kwargs, filters)
-        current_app.logger.debug("querystring: %s", qs.querystring)
-        current_app.logger.debug(
+        logging.debug("self: %s, qs: %s, view_kwargs: %s, filters: %s", self, qs, view_kwargs, filters)
+        logging.debug("querystring: %s", qs.querystring)
+        logging.debug(
             "fields: %s, sorting: %s, include: %s, pagination: %s, filters: %s", qs.fields, qs.sorting, qs.include, qs.pagination, qs.filters
         )
 
@@ -154,9 +151,9 @@ class APIData(BaseDataLayer):
         query = self.paginate_query(query, qs.pagination)
 
         repo = self.repos[self.type]
-        current_app.logger.debug("self: %s, repo: %s", self, repo)
+        logging.debug("self: %s, repo: %s", self, repo)
         objs = repo.query(query)
-        current_app.logger.debug("self: %s, objs: %s", self, objs)
+        logging.debug("self: %s, objs: %s", self, objs)
 
         collection = self.after_get_collection(objs, qs, view_kwargs)
 
@@ -169,16 +166,16 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if object have changed else False
         """
-        current_app.logger.debug("self: %s, obj: %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
+        logging.debug("self: %s, obj: %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
 
         self.before_update_object(obj, data, view_kwargs)
 
         record_id = view_kwargs["id"]
         repo = self.repos[self.type]
-        current_app.logger.debug("self: %s, repo: %s", self, repo)
+        logging.debug("self: %s, repo: %s", self, repo)
         try:
             updated_record = repo.update(record_id, data)
-            current_app.logger.debug("self: %s, updated_record: %s", self, updated_record)
+            logging.debug("self: %s, updated_record: %s", self, updated_record)
         except:
             raise ObjectNotFound(f'Unable to delete {self.type} record for ID {view_kwargs["id"]}')
 
@@ -191,16 +188,16 @@ class APIData(BaseDataLayer):
         :param DeclarativeMeta obj: an object
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
+        logging.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
 
         self.before_delete_object(obj, view_kwargs)
 
         record_id = view_kwargs["id"]
         repo = self.repos[self.type]
-        current_app.logger.debug("self: %s, repo: %s", self, repo)
+        logging.debug("self: %s, repo: %s", self, repo)
         try:
             is_deleted = repo.delete(record_id)
-            current_app.logger.debug("self: %s, is_deleted: %s", self, is_deleted)
+            logging.debug("self: %s, is_deleted: %s", self, is_deleted)
         except:
             raise ObjectNotFound(f'Unable to delete {self.type} record for ID {view_kwargs["id"]}')
 
@@ -216,7 +213,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if relationship have changed else False
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             json_data,
@@ -243,7 +240,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return tuple: the object and related object(s)
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, relationship_field: %s, related_type_: %s, related_id_field: %s, view_kwargs: %s",
             self,
             relationship_field,
@@ -271,7 +268,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if relationship have changed else False
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             json_data,
@@ -297,7 +294,7 @@ class APIData(BaseDataLayer):
         :param str related_id_field: the identifier field of the related model
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             json_data,
@@ -322,7 +319,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return QueryOptions: An initialized QueryOptions object
         """
-        current_app.logger.debug("self: %s, qs: %s, view_kwargs: %s", self, qs, view_kwargs)
+        logging.debug("self: %s, qs: %s, view_kwargs: %s", self, qs, view_kwargs)
 
         query = QueryOptions()
         query.set_filters(from_querystring=qs.filters)
@@ -337,7 +334,7 @@ class APIData(BaseDataLayer):
         :param dict paginate_info: pagination information
         :return QueryOptions: an updated QueryOptions with pagination information
         """
-        current_app.logger.debug("self: %s, query: %s, paginate_info: %s", self, query, paginate_info)
+        logging.debug("self: %s, query: %s, paginate_info: %s", self, query, paginate_info)
 
         if int(paginate_info.get("size", 1)) == 0:
             return query
@@ -350,27 +347,27 @@ class APIData(BaseDataLayer):
         return query
 
     def _convert_properties(self, obj):
-        current_app.logger.debug("self: %s, obj: %s", self, obj)
+        logging.debug("self: %s, obj: %s", self, obj)
 
         date_properties = ["created_at", "updated_at", "deleted_at"]
         id_properties = ["_id", "id"]
         for p in date_properties + id_properties:
-            current_app.logger.debug("self: %s, p: %s", self, p)
+            logging.debug("self: %s, p: %s", self, p)
 
             try:
                 property_value = obj.get(p) or getattr(obj, p)
             except:
                 continue
 
-            current_app.logger.debug("self: %s, property_value: %s", self, property_value)
+            logging.debug("self: %s, property_value: %s", self, property_value)
             if property_value is None:
                 continue
 
             if p in date_properties:
-                current_app.logger.debug("self: %s, converting date property: %s, value: %s", self, p, property_value)
+                logging.debug("self: %s, converting date property: %s, value: %s", self, p, property_value)
                 new_property_value = to_datetime(property_value)
             elif p in id_properties:
-                current_app.logger.debug("self: %s, converting ID property: %s, value: %s", self, p, property_value)
+                logging.debug("self: %s, converting ID property: %s, value: %s", self, p, property_value)
                 if isinstance(property_value, dict):
                     new_property_value = property_value["$oid"]
                 else:
@@ -381,45 +378,45 @@ class APIData(BaseDataLayer):
             else:
                 setattr(obj, p, new_property_value)
 
-        current_app.logger.debug("self: %s, converted object: %s", self, obj)
+        logging.debug("self: %s, converted object: %s", self, obj)
         return obj
 
     def _populate_object(self, obj, properties):
-        current_app.logger.debug("self: %s, obj: %s, properties: %s", self, obj, properties)
+        logging.debug("self: %s, obj: %s, properties: %s", self, obj, properties)
 
         for property_name, property_type in properties.items():
-            current_app.logger.debug("self: %s, property_name: %s, property_type: %s", self, property_name, property_type)
+            logging.debug("self: %s, property_name: %s, property_type: %s", self, property_name, property_type)
             if not hasattr(obj, property_name) and not obj.get(property_name):
                 continue
             property_value = obj.get(property_name) or getattr(obj, property_name)
-            current_app.logger.debug("self: %s, property_value: %s", self, property_value)
+            logging.debug("self: %s, property_value: %s", self, property_value)
             if property_value is None:
                 continue
             if isinstance(property_value, str):
-                current_app.logger.debug("self: %s, property_value is a string", self)
+                logging.debug("self: %s, property_value is a string", self)
 
                 new_property_value = self.repos[property_type].get(property_value)
-                # current_app.logger.info("self: %s, new_value: %s", self, new_value)
-                current_app.logger.debug("self: %s, new_property_value: %s", self, new_property_value)
+                # logging.info("self: %s, new_value: %s", self, new_value)
+                logging.debug("self: %s, new_property_value: %s", self, new_property_value)
 
                 setattr(obj, property_name, new_property_value)
 
             if isinstance(property_value, list):
-                current_app.logger.debug("self: %s, property_value is a list", self)
+                logging.debug("self: %s, property_value is a list", self)
 
                 new_property_value = []
                 for list_value in property_value:
-                    current_app.logger.debug("self: %s, list_value: %s", self, list_value)
+                    logging.debug("self: %s, list_value: %s", self, list_value)
                     if isinstance(list_value, dict):
                         value = list_value["$oid"]
                     else:
                         value = list_value
                     new_obj = self.repos[property_type].get(value)
-                    current_app.logger.debug("self: %s, new_obj: %s", self, new_obj)
+                    logging.debug("self: %s, new_obj: %s", self, new_obj)
                     new_value = json.loads(new_obj.to_json())
-                    current_app.logger.debug("self: %s, new_value: %s", self, new_value)
+                    logging.debug("self: %s, new_value: %s", self, new_value)
                     new_property_value.append(new_value)
-                current_app.logger.debug("self: %s, new_property_value: %s", self, new_property_value)
+                logging.debug("self: %s, new_property_value: %s", self, new_property_value)
 
                 if isinstance(obj, dict):
                     obj[property_name] = new_property_value
@@ -433,7 +430,7 @@ class APIData(BaseDataLayer):
         :param dict data: the data validated by marshmallow
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, data: %s, view_kwargs: %s", self, data, view_kwargs)
+        logging.debug("self: %s, data: %s, view_kwargs: %s", self, data, view_kwargs)
 
         delattr(data, "id")
         delattr(data, "deleted_at")
@@ -447,32 +444,32 @@ class APIData(BaseDataLayer):
         :param dict data: the data validated by marshmallow
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
+        logging.debug("self: %s, %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
 
     def before_get_object(self, view_kwargs):
         """Make work before to retrieve an object
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, view_kwargs: %s", self, view_kwargs)
+        logging.debug("self: %s, view_kwargs: %s", self, view_kwargs)
 
     def after_get_object(self, obj, view_kwargs):
         """Work after fetching an object, including fetching child objects
         :param obj: an object from data layer
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
+        logging.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
 
         this_model = models[self.type]
-        current_app.logger.debug("self: %s, this_model: %s", self, this_model)
+        logging.debug("self: %s, this_model: %s", self, this_model)
         properties = this_model.get("properties", {})
-        current_app.logger.debug("self: %s, properties: %s", self, properties)
+        logging.debug("self: %s, properties: %s", self, properties)
 
         data = json.loads(obj.to_json())
-        current_app.logger.debug("self: %s, data: %s", self, data)
+        logging.debug("self: %s, data: %s", self, data)
         converted_data = self._convert_properties(data)
-        current_app.logger.debug("self: %s, converted_data: %s", self, converted_data)
+        logging.debug("self: %s, converted_data: %s", self, converted_data)
         obj = self._populate_object(converted_data, properties)
-        current_app.logger.debug("self: %s, obj: %s", self, obj)
+        logging.debug("self: %s, obj: %s", self, obj)
 
         return obj
 
@@ -481,7 +478,7 @@ class APIData(BaseDataLayer):
         :param QueryStringManager qs: a querystring manager to retrieve information from url
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, qs: %s, view_kwargs: %s", self, qs, view_kwargs)
+        logging.debug("self: %s, qs: %s, view_kwargs: %s", self, qs, view_kwargs)
 
     def after_get_collection(self, collection, qs, view_kwargs):
         """Make work after to retrieve a collection of objects
@@ -489,22 +486,22 @@ class APIData(BaseDataLayer):
         :param QueryStringManager qs: a querystring manager to retrieve information from url
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, collection: %s, qs: %s, view_kwargs: %s", self, collection, qs, view_kwargs)
+        logging.debug("self: %s, collection: %s, qs: %s, view_kwargs: %s", self, collection, qs, view_kwargs)
 
         this_model = models[self.type]
-        current_app.logger.debug("self: %s, this_model: %s", self, this_model)
+        logging.debug("self: %s, this_model: %s", self, this_model)
         properties = this_model.get("properties", {})
-        current_app.logger.debug("self: %s, properties: %s", self, properties)
+        logging.debug("self: %s, properties: %s", self, properties)
 
         updated_collection = []
         for obj in collection:
             data = json.loads(obj.to_json())
-            current_app.logger.debug("self: %s, data: %s", self, data)
+            logging.debug("self: %s, data: %s", self, data)
             converted_data = self._convert_properties(data)
-            current_app.logger.debug("self: %s, converted_data: %s", self, converted_data)
+            logging.debug("self: %s, converted_data: %s", self, converted_data)
             obj = converted_data  # self._populate_object(converted_data, properties)
-            current_app.logger.debug("self: %s, obj: %s", self, obj)
-            # current_app.logger.debug("self: %s, obj: %s", self, obj)
+            logging.debug("self: %s, obj: %s", self, obj)
+            # logging.debug("self: %s, obj: %s", self, obj)
             # self._populate_object(obj, properties)
             updated_collection.append(obj)
 
@@ -516,7 +513,7 @@ class APIData(BaseDataLayer):
         :param dict data: the data validated by marshmallow
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, obj: %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
+        logging.debug("self: %s, obj: %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
 
     def after_update_object(self, obj, data, view_kwargs):
         """Make work after update object
@@ -524,21 +521,21 @@ class APIData(BaseDataLayer):
         :param dict data: the data validated by marshmallow
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, obj: %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
+        logging.debug("self: %s, obj: %s, data: %s, view_kwargs: %s", self, obj, data, view_kwargs)
 
     def before_delete_object(self, obj, view_kwargs):
         """Make checks before delete object
         :param obj: an object from data layer
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
+        logging.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
 
     def after_delete_object(self, obj, view_kwargs):
         """Make work after delete object
         :param obj: an object from data layer
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
+        logging.debug("self: %s, obj: %s, view_kwargs: %s", self, obj, view_kwargs)
 
     def before_create_relationship(self, json_data, relationship_field, related_id_field, view_kwargs):
         """Make work before to create a relationship
@@ -548,7 +545,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if relationship have changed else False
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s", self, relationship_field, related_id_field, view_kwargs
         )
 
@@ -562,7 +559,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if relationship have changed else False
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, obj: %s, update: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             obj,
@@ -581,7 +578,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return tuple: the object and related object(s)
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, relationship_field: %s, related_type_: %s, related_id_field: %s, view_kwargs: %s",
             self,
             relationship_field,
@@ -600,7 +597,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return tuple: the object and related object(s)
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, obj: %s, update: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             obj,
@@ -619,7 +616,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if relationship have changed else False
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             json_data,
@@ -638,7 +635,7 @@ class APIData(BaseDataLayer):
         :param dict view_kwargs: kwargs from the resource view
         :return boolean: True if relationship have changed else False
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, obj: %s, update: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             obj,
@@ -656,7 +653,7 @@ class APIData(BaseDataLayer):
         :param str related_id_field: the identifier field of the related model
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             json_data,
@@ -674,7 +671,7 @@ class APIData(BaseDataLayer):
         :param str related_id_field: the identifier field of the related model
         :param dict view_kwargs: kwargs from the resource view
         """
-        current_app.logger.debug(
+        logging.debug(
             "self: %s, obj: %s, update: %s, json_data: %s, relationship_field: %s, related_id_field: %s, view_kwargs: %s",
             self,
             obj,
