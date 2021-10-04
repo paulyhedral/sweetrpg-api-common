@@ -42,9 +42,9 @@ class APIData(BaseDataLayer):
 
     @classmethod
     def _add_repo(cls, model_type: str, model_info: dict) -> None:
-        if APIData.repos[model_type] is None:
+        if cls.repos[model_type] is None:
             logging.info("Adding repository for type %s...", model_type)
-            APIData.repos[model_type] = MongoDataRepository(
+            cls.repos[model_type] = MongoDataRepository(
                 model=model_info["model"], document=model_info["document"], collection=model_info["collection"]
             )
         else:
@@ -53,21 +53,21 @@ class APIData(BaseDataLayer):
     @classmethod
     def set_models(cls, models: dict) -> None:
         logging.info("Replacing models...")
-        APIData.models = models
+        cls.models = models
         for model_type, model_info in models.items():
-            APIData._add_repo(model_type, model_info)
+            cls._add_repo(model_type, model_info)
 
     @classmethod
     def add_model(cls, name: str, model: dict) -> None:
         logging.info("Adding model %s...", name)
-        APIData.models[name] = model
-        APIData._add_repo(name, model)
+        cls.models[name] = model
+        cls._add_repo(name, model)
 
     @classmethod
     def remove_model(cls, name: str) -> None:
         logging.info("Removing model %s...", name)
-        del APIData.models[name]
-        del APIData.repos[name]
+        del cls.models[name]
+        del cls.repos[name]
 
     def create_object(self, data: dict, view_kwargs: dict) -> Document:
         """Create an object
