@@ -18,10 +18,6 @@ import logging
 
 
 class APIData(BaseDataLayer):
-
-    models = {}
-    repos = {}
-
     def __init__(self, kwargs):
         """Intialize an data layer instance with kwargs
         :param dict kwargs: information about data layer instance
@@ -34,41 +30,18 @@ class APIData(BaseDataLayer):
 
         kwargs.pop("class", None)
 
+        self.repos = {}
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def __repr__(self) -> str:
-        return f"<APIData(type={self.type}, repos={APIData.repos}, models={APIData.models})>"
-
-    @classmethod
-    def _add_repo(cls, model_type: str, model_info: dict) -> None:
-        if cls.repos[model_type] is None:
+        for model_type, model_info in self.model_info.items():
             logging.info("Adding repository for type %s...", model_type)
-            cls.repos[model_type] = MongoDataRepository(
+            self.repos[model_type] = MongoDataRepository(
                 model=model_info["model"], document=model_info["document"], collection=model_info["collection"]
             )
-        else:
-            logging.info("Repository already present for type %s.", model_type)
 
-    @classmethod
-    def set_models(cls, models: dict) -> None:
-        logging.info("Replacing models...")
-        cls.models = models
-        for model_type, model_info in models.items():
-            cls._add_repo(model_type, model_info)
-
-    @classmethod
-    def add_model(cls, name: str, model: dict) -> None:
-        logging.info("Adding model %s...", name)
-        logging.debug("cls: %s, name: %s, model: %s", cls, name, model)
-        cls.models[name] = model
-        cls._add_repo(name, model)
-
-    @classmethod
-    def remove_model(cls, name: str) -> None:
-        logging.info("Removing model %s...", name)
-        del cls.models[name]
-        del cls.repos[name]
+    def __repr__(self) -> str:
+        return f"<APIData(type={self.type}, repos={self.repos}, model_info={self.model_info})>"
 
     def create_object(self, data: dict, view_kwargs: dict) -> Document:
         """Create an object
