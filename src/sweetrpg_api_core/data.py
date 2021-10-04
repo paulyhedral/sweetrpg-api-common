@@ -60,6 +60,7 @@ class APIData(BaseDataLayer):
     @classmethod
     def add_model(cls, name: str, model: dict) -> None:
         logging.info("Adding model %s...", name)
+        logging.debug("cls: %s, name: %s, model: %s", cls, name, model)
         cls.models[name] = model
         cls._add_repo(name, model)
 
