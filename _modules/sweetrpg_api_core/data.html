@@ -51,10 +51,6 @@
 
 
 <div class="viewcode-block" id="APIData"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData">[docs]</a><span class="k">class</span> <span class="nc">APIData</span><span class="p">(</span><span class="n">BaseDataLayer</span><span class="p">):</span>
-
-    <span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">repos</span> <span class="o">=</span> <span class="p">{}</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intialize an data layer instance with kwargs</span>
 <span class="sd">        :param dict kwargs: information about data layer instance</span>
@@ -67,41 +63,18 @@
 
         <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">repos</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;APIData(type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">, repos=</span><span class="si">{</span><span class="n">APIData</span><span class="o">.</span><span class="n">repos</span><span class="si">}</span><span class="s2">, models=</span><span class="si">{</span><span class="n">APIData</span><span class="o">.</span><span class="n">models</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
-
-<div class="viewcode-block" id="APIData._add_repo"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData._add_repo">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_add_repo</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">model_type</span><span class="p">,</span> <span class="n">model_info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding repository for type </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="p">)</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">MongoDataRepository</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">MongoDataRepository</span><span class="p">(</span>
                 <span class="n">model</span><span class="o">=</span><span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">document</span><span class="o">=</span><span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">],</span> <span class="n">collection</span><span class="o">=</span><span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
             <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Repository already present for type </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="APIData.set_models"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.set_models">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">set_models</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Replacing models...&quot;</span><span class="p">)</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
-        <span class="k">for</span> <span class="n">model_type</span><span class="p">,</span> <span class="n">model_info</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">_add_repo</span><span class="p">(</span><span class="n">model_type</span><span class="p">,</span> <span class="n">model_info</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="APIData.add_model"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.add_model">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">add_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding model </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;cls: </span><span class="si">%s</span><span class="s2">, name: </span><span class="si">%s</span><span class="s2">, model: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_add_repo</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="APIData.remove_model"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.remove_model">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">remove_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Removing model </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="k">del</span> <span class="bp">cls</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-        <span class="k">del</span> <span class="bp">cls</span><span class="o">.</span><span class="n">repos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;APIData(type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">, repos=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">repos</span><span class="si">}</span><span class="s2">, model_info=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_info</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
 
 <div class="viewcode-block" id="APIData.create_object"><a class="viewcode-back" href="../../api.html#sweetrpg_api_core.data.APIData.create_object">[docs]</a>    <span class="k">def</span> <span class="nf">create_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Create an object</span>
