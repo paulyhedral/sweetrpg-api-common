@@ -23,10 +23,10 @@ docutils==0.16
     #   sphinx-tabs
 flask==2.0.1
     # via
-    #   -r ./pkg.in
+    #   -r requirements/pkg.in
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
-    # via -r ./pkg.in
+    # via -r requirements/pkg.in
 greenlet==1.1.2
     # via sqlalchemy
 idna==3.2
@@ -51,14 +51,14 @@ marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mongoengine==0.23.1
     # via
-    #   -r ./pkg.in
+    #   -r requirements/pkg.in
     #   sweetrpg-db
 packaging==21.0
     # via
     #   pallets-sphinx-themes
     #   sphinx
 pallets-sphinx-themes==2.0.1
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 pygments==2.10.0
     # via
     #   sphinx
@@ -74,22 +74,22 @@ pytz==2021.1
 requests==2.26.0
     # via sphinx
 rstcheck==3.3.1
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.1.0
     # via sphinx
 sphinx==4.2.0
     # via
-    #   -r ./docs.in
+    #   -r requirements/docs.in
     #   pallets-sphinx-themes
     #   sphinx-issues
     #   sphinx-tabs
     #   sphinxcontrib-log-cabinet
 sphinx-issues==1.2.0
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 sphinx-tabs==3.2.0
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -99,17 +99,19 @@ sphinxcontrib-htmlhelp==2.0.0
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-log-cabinet==1.0.1
-    # via -r ./docs.in
+    # via -r requirements/docs.in
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==1.4.25
     # via flask-rest-jsonapi
-sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
-    # via -r ./pkg.in
-sweetrpg-model-core @ git+https://github.com/sweetrpg/model-core.git@develop
-    # via -r ./pkg.in
+git+https://github.com/sweetrpg/db.git@develop
+    # via -r requirements/pkg.in
+git+https://github.com/sweetrpg/model-core.git@develop
+    # via
+    #   -r requirements/pkg.in
+    #   sweetrpg-db
 urllib3==1.26.6
     # via requests
 werkzeug==2.0.1
