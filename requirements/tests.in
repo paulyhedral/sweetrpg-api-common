@@ -1,9 +1,9 @@
 -r pkg.in
-pytest
-pytest-cov
 asgiref
 blinker
-greenlet
-python-dotenv
-tox
 coverage-badge
+greenlet==1.1.2
+pytest
+pytest-cov==3.0
+python-dotenv
+tox==3.24.4

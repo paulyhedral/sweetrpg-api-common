@@ -27,7 +27,7 @@ click==8.0.1
     #   black
     #   flask
     #   pip-tools
-coverage==5.5
+coverage[toml]==5.5
     # via pytest-cov
 coverage-badge==1.0.1
     # via -r ./tests.in
@@ -50,7 +50,7 @@ flask==2.0.1
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r ./pkg.in
-greenlet==1.1.1
+greenlet==1.1.2
     # via
     #   -r ./tests.in
     #   sqlalchemy
@@ -122,7 +122,7 @@ pytest==6.2.5
     # via
     #   -r ./tests.in
     #   pytest-cov
-pytest-cov==2.12.1
+pytest-cov==3.0
     # via -r ./tests.in
 python-dotenv==0.19.0
     # via -r ./tests.in
@@ -171,11 +171,13 @@ sqlalchemy==1.4.25
 sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 sweetrpg-model-core @ git+https://github.com/sweetrpg/model-core.git@develop
-    # via -r ./pkg.in
+    # via
+    #   -r ./pkg.in
+    #   sweetrpg-db
 toml==0.10.2
     # via
+    #   coverage
     #   pytest
-    #   pytest-cov
     #   tox
 tomli==1.2.1
     # via

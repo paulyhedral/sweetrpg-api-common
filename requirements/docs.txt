@@ -109,7 +109,9 @@ sqlalchemy==1.4.25
 sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
 sweetrpg-model-core @ git+https://github.com/sweetrpg/model-core.git@develop
-    # via -r ./pkg.in
+    # via
+    #   -r ./pkg.in
+    #   sweetrpg-db
 urllib3==1.26.6
     # via requests
 werkzeug==2.0.1
