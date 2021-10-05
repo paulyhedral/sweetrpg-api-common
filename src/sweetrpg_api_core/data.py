@@ -12,7 +12,8 @@ from datetime import datetime
 from pymongo.errors import DuplicateKeyError
 from mongoengine import Document
 from bson.objectid import ObjectId
-from sweetrpg_model_core.convert.model import to_document, to_model
+from sweetrpg_model_core.convert.document import to_model
+from sweetrpg_model_core.convert.model import to_document
 import json
 import logging
 
