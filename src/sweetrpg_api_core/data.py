@@ -12,7 +12,7 @@ from datetime import datetime
 from pymongo.errors import DuplicateKeyError
 from mongoengine import Document
 from bson.objectid import ObjectId
-from sweetrpg_model_core.convert.model import convert_document
+from sweetrpg_model_core.convert.model import to_document, to_model
 import json
 import logging
 
@@ -65,7 +65,7 @@ class APIData(BaseDataLayer):
             logging.info("Document created: %s", doc)
             model_class = self.model_info[self.type]["model"]
             logging.debug("self: %s, repo: %s", self, repo)
-            model = convert_document(doc, model_class)
+            model = to_document(doc, model_class)
             logging.info("self: %s, model: %s", self, model)
         except DuplicateKeyError as dke:
             raise JsonApiException(dke.details, title="Duplicate key", status="409", code="duplicate-key")
