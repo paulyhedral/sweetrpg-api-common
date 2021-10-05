@@ -65,7 +65,7 @@ class APIData(BaseDataLayer):
             logging.info("Document created: %s", doc)
             model_class = self.model_info[self.type]["model"]
             logging.debug("self: %s, repo: %s", self, repo)
-            model = to_document(doc, model_class)
+            model = to_model(doc, model_class)
             logging.info("self: %s, model: %s", self, model)
         except DuplicateKeyError as dke:
             raise JsonApiException(dke.details, title="Duplicate key", status="409", code="duplicate-key")
