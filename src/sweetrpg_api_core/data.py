@@ -63,7 +63,7 @@ class APIData(BaseDataLayer):
             logging.debug("self: %s, repo: %s", self, repo)
             doc = repo.create(json)
             logging.info("Document created: %s", doc)
-            model_class = APIData.models[self.type]["model"]
+            model_class = self.model_info[self.type]["model"]
             logging.debug("self: %s, repo: %s", self, repo)
             model = convert_document(doc, model_class)
             logging.info("self: %s, model: %s", self, model)
