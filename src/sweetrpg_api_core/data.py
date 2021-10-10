@@ -347,6 +347,10 @@ class APIData(BaseDataLayer):
                 else:
                     new_property_value = str(property_value)
 
+                if p == "_id":
+                    logging.debug("changing key of ID value '%s'", p)
+                    p = "id"
+
             if isinstance(obj, dict):
                 logging.debug("setting new dictionary value '%s' in dict %s: %s", p, obj, new_property_value)
                 obj[p] = new_property_value
