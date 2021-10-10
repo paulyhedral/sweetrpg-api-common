@@ -5,7 +5,7 @@
 __title__ = "SweetRPG API Core"
 __description__ = "Common code for API microservice applications"
 __url__ = "https://github.com/sweetrpg/api-core"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __build__ = 0x000000
 __author__ = "Paul Schifferer"
 __author_email__ = "dm@sweetrpg.com"
