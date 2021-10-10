@@ -7,8 +7,9 @@ from sweetrpg_api_core.data import APIData
 
 
 def test_create():
-    api = APIData()
-    data = {}
+    # api = APIData()
+    # data = {}
+    pass
 
 
 def test_get_object():
