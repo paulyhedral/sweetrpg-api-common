@@ -367,7 +367,7 @@ class APIData(BaseDataLayer):
             if property_value is None:
                 continue
             if isinstance(property_value, str):
-                logging.debug("property_value is a string", self)
+                logging.debug("property_value is a string")
 
                 new_property_value = self.repos[property_type].get(property_value)
                 # logging.info("new_value: %s", new_value)
@@ -376,7 +376,7 @@ class APIData(BaseDataLayer):
                 setattr(obj, property_name, new_property_value)
 
             if isinstance(property_value, list):
-                logging.debug("property_value is a list", self)
+                logging.debug("property_value is a list")
 
                 new_property_value = []
                 for list_value in property_value:
@@ -442,10 +442,10 @@ class APIData(BaseDataLayer):
         logging.debug("data: %s", data)
         converted_data = self._convert_properties(data)
         logging.debug("converted_data: %s", converted_data)
-        obj = self._populate_object(converted_data, properties)
-        logging.debug("obj: %s", obj)
+        # obj = self._populate_object(converted_data, properties)
+        # logging.debug("obj: %s", obj)
 
-        return obj
+        return converted_data  # obj
 
     def before_get_collection(self, qs, view_kwargs):
         """Make work before to retrieve a collection of objects
