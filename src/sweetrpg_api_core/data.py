@@ -12,6 +12,7 @@ from datetime import datetime
 from pymongo.errors import DuplicateKeyError
 from mongoengine import Document
 from bson.objectid import ObjectId
+from sweetrpg_model_core.model.base import BaseModel
 from sweetrpg_model_core.convert.document import to_model
 from sweetrpg_model_core.convert.model import to_document
 import json
@@ -44,36 +45,36 @@ class APIData(BaseDataLayer):
     def __repr__(self) -> str:
         return f"<APIData(type={self.type}, repos={self.repos}, model_info={self.model_info})>"
 
-    def create_object(self, data: dict, view_kwargs: dict) -> Document:
+    def create_object(self, model: BaseModel, view_kwargs: dict) -> Document:
         """Create an object
-        :param dict data: the data validated by marshmallow
+        :param BaseModel model: the data validated by marshmallow
         :param dict view_kwargs: kwargs from the resource view
         :return DeclarativeMeta: an object
         """
         # db = current_app.config["db"]
         # db = self.repos[self.type].db
-        logging.debug("self: %s, data (%s): %s, view_kwargs: %s", self, data, type(data), view_kwargs)
+        logging.debug("self: %s, data (%s): %s, view_kwargs: %s", self, model, type(model), view_kwargs)
 
-        self.before_create_object(data, view_kwargs)
+        self.before_create_object(model, view_kwargs)
 
-        json = data.to_dict()  # schema().dump(data, many=False)
-        logging.info("self: %s, json: %s", self, json)
+        data = model.to_dict()
+        logging.info("self: %s, data: %s", self, data)
 
         try:
             repo = self.repos[self.type]
             logging.debug("self: %s, repo: %s", self, repo)
-            doc = repo.create(json)
+            doc = repo.create(data)
             logging.info("Document created: %s", doc)
             model_class = self.model_info[self.type]["model"]
-            logging.debug("self: %s, repo: %s", self, repo)
-            model = to_model(doc, model_class)
-            logging.info("self: %s, model: %s", self, model)
+            logging.debug("self: %s, model_class: %s", self, model_class)
+            new_model = to_model(doc, model_class)
+            logging.info("self: %s, new_model: %s", self, new_model)
         except DuplicateKeyError as dke:
             raise JsonApiException(dke.details, title="Duplicate key", status="409", code="duplicate-key")
 
-        self.after_create_object(model, data, view_kwargs)
+        self.after_create_object(new_model, data, view_kwargs)
 
-        return model
+        return new_model
 
     def get_object(self, view_kwargs, qs=None):
         """Retrieve an object
