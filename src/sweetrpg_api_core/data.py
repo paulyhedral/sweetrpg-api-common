@@ -385,11 +385,11 @@ class APIData(BaseDataLayer):
                         value = list_value["$oid"]
                     else:
                         value = list_value
-                    new_obj = self.repos[property_type].get(value)
-                    logging.debug("new_obj: %s", new_obj)
-                    new_value = json.loads(new_obj.to_json())
-                    logging.debug("new_value: %s", new_value)
-                    new_property_value.append(new_value)
+                    # new_obj = self.repos[property_type].get(value)
+                    # logging.debug("new_obj: %s", new_obj)
+                    # new_value = json.loads(new_obj.to_json())
+                    # logging.debug("new_value: %s", new_value)
+                    new_property_value.append(value)
                 logging.debug("new_property_value: %s", new_property_value)
 
                 if isinstance(obj, dict):
@@ -442,10 +442,10 @@ class APIData(BaseDataLayer):
         logging.debug("data: %s", data)
         converted_data = self._convert_properties(data)
         logging.debug("converted_data: %s", converted_data)
-        # obj = self._populate_object(converted_data, properties)
-        # logging.debug("obj: %s", obj)
+        obj = self._populate_object(converted_data, properties)
+        logging.debug("obj: %s", obj)
 
-        return converted_data  # obj
+        return obj
 
     def before_get_collection(self, qs, view_kwargs):
         """Make work before to retrieve a collection of objects
