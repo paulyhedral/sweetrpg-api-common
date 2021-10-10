@@ -389,7 +389,7 @@ class APIData(BaseDataLayer):
                     # logging.debug("new_obj: %s", new_obj)
                     # new_value = json.loads(new_obj.to_json())
                     # logging.debug("new_value: %s", new_value)
-                    new_property_value.append(value)
+                    new_property_value.append({"id": value})
                 logging.debug("new_property_value: %s", new_property_value)
 
                 if isinstance(obj, dict):
