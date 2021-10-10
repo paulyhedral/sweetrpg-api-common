@@ -19,5 +19,5 @@ class BaseAPISchema(Schema):
 
     @post_load
     def make_object(self, data, **kwargs):
-        logging.debug("self: %s, data: %s, kwargs: %s", self, data, kwargs)
+        logging.debug("data: %s, kwargs: %s", data, kwargs)
         return self.model_class(**data)
