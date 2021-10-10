@@ -105,7 +105,7 @@ class APIData(BaseDataLayer):
         record = self.after_get_object(record, view_kwargs)
         logging.info("record: %s", record)
 
-        obj = models[self.type]["model"](**record)
+        obj = self.model_info[self.type]["model"](**record)
         logging.info("obj: %s", obj)
 
         return obj
@@ -433,7 +433,7 @@ class APIData(BaseDataLayer):
         """
         logging.debug("obj: %s, view_kwargs: %s", obj, view_kwargs)
 
-        this_model = models[self.type]
+        this_model = self.model_info[self.type]
         logging.debug("this_model: %s", this_model)
         properties = this_model.get("properties", {})
         logging.debug("properties: %s", properties)
