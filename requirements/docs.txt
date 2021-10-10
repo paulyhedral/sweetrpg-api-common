@@ -106,9 +106,9 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==1.4.25
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.4
+sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
     # via -r ./pkg.in
-sweetrpg-model-core==0.0.9
+sweetrpg-model-core @ git+https://github.com/sweetrpg/model-core.git@develop
     # via
     #   -r ./pkg.in
     #   sweetrpg-db

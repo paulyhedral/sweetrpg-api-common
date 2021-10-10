@@ -1,5 +1,5 @@
 Flask>=2.0
-sweetrpg-db
-sweetrpg-model-core
+git+https://github.com/sweetrpg/db.git@develop
+git+https://github.com/sweetrpg/model-core.git@develop
 mongoengine
 Flask-REST-JSONAPI
