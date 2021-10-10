@@ -462,13 +462,14 @@ class APIData(BaseDataLayer):
         """
         logging.debug("collection: %s, qs: %s, view_kwargs: %s", collection, qs, view_kwargs)
 
-        this_model = models[self.type]
+        this_model = self.model_info[self.type]
         logging.debug("this_model: %s", this_model)
         properties = this_model.get("properties", {})
         logging.debug("properties: %s", properties)
 
         updated_collection = []
         for obj in collection:
+            logging.debug("obj: %s", obj)
             data = json.loads(obj.to_json())
             logging.debug("data: %s", data)
             converted_data = self._convert_properties(data)
