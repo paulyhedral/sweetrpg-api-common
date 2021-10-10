@@ -348,8 +348,10 @@ class APIData(BaseDataLayer):
                     new_property_value = str(property_value)
 
             if isinstance(obj, dict):
+                logging.debug("setting new dictionary value '%s' in dict %s: %s", p, obj, new_property_value)
                 obj[p] = new_property_value
             else:
+                logging.debug("setting new attribute value '%s' in object %s: %s", p, obj, new_property_value)
                 setattr(obj, p, new_property_value)
 
         logging.debug("converted object: %s", obj)
@@ -474,7 +476,7 @@ class APIData(BaseDataLayer):
             logging.debug("data: %s", data)
             converted_data = self._convert_properties(data)
             logging.debug("converted_data: %s", converted_data)
-            obj = converted_data  # self._populate_object(converted_data, properties)
+            obj = self._populate_object(converted_data, properties)
             logging.debug("obj: %s", obj)
             # logging.debug("obj: %s", obj)
             # self._populate_object(obj, properties)
