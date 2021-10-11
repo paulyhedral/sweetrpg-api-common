@@ -387,7 +387,7 @@ class APIData(BaseDataLayer):
                 new_property_value = []
                 for list_value in property_value:
                     logging.debug("list_value: %s", list_value)
-                    if isinstance(list_value, dict):
+                    if isinstance(list_value, dict) and list_value.get("$oid"):
                         value = list_value["$oid"]
                     else:
                         value = list_value
