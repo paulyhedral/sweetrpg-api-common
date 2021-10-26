@@ -10,11 +10,11 @@ import logging
 
 
 class BaseAPISchema(Schema):
-    """A base schema for APIs."""
+    """A base schema for API data."""
 
     id = fields.Str()  # as_string=True, dump_only=True)
-    created_at = fields.DateTime(dump_only=True)
-    updated_at = fields.DateTime(dump_only=True)
+    created_at = fields.DateTime()  # dump_only=True)
+    updated_at = fields.DateTime()  # dump_only=True)
     deleted_at = fields.DateTime()
 
     @post_load
