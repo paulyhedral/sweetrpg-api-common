@@ -22,6 +22,8 @@ coverage-badge==1.0.2
     # via -r requirements/tests.in
 distlib==0.3.2
     # via virtualenv
+dnspython==1.16.0
+    # via pymongo
 filelock==3.0.12
     # via
     #   tox
@@ -49,6 +51,7 @@ marshmallow==3.14.0
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
     #   sweetrpg-db
+    #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mongoengine==0.23.1
@@ -69,8 +72,10 @@ py==1.10.0
     # via
     #   pytest
     #   tox
-pymongo==3.12.0
-    # via mongoengine
+pymongo[srv,tls]==3.12.0
+    # via
+    #   mongoengine
+    #   sweetrpg-model-core
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5
@@ -88,9 +93,9 @@ six==1.16.0
     #   virtualenv
 sqlalchemy==1.4.25
     # via flask-rest-jsonapi
-sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
+sweetrpg-db==0.0.15
     # via -r requirements/pkg.in
-sweetrpg-model-core @ git+https://github.com/sweetrpg/model-core.git@develop
+sweetrpg-model-core==0.0.20
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db

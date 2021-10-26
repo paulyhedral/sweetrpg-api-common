@@ -14,6 +14,8 @@ charset-normalizer==2.0.6
     # via requests
 click==8.0.1
     # via flask
+dnspython==1.16.0
+    # via pymongo
 docutils==0.16
     # via
     #   rstcheck
@@ -44,6 +46,7 @@ marshmallow==3.14.0
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
     #   sweetrpg-db
+    #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mongoengine==0.23.1
@@ -60,8 +63,10 @@ pygments==2.10.0
     # via
     #   sphinx
     #   sphinx-tabs
-pymongo==3.12.0
-    # via mongoengine
+pymongo[srv,tls]==3.12.0
+    # via
+    #   mongoengine
+    #   sweetrpg-model-core
 pyparsing==2.4.7
     # via packaging
 pytz==2021.1
@@ -101,9 +106,9 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==1.4.25
     # via flask-rest-jsonapi
-sweetrpg-db @ git+https://github.com/sweetrpg/db.git@develop
+sweetrpg-db==0.0.15
     # via -r requirements/pkg.in
-sweetrpg-model-core @ git+https://github.com/sweetrpg/model-core.git@develop
+sweetrpg-model-core==0.0.20
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
