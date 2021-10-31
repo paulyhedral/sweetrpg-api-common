@@ -12,7 +12,7 @@ backports.entry-points-selectable==1.1.0
     # via virtualenv
 blinker==1.4
     # via -r requirements/tests.in
-click==8.0.1
+click==8.0.3
     # via flask
 coverage[toml]==5.5
     # via
@@ -20,11 +20,11 @@ coverage[toml]==5.5
     #   pytest-cov
 coverage-badge==1.0.2
     # via -r requirements/tests.in
-distlib==0.3.2
+distlib==0.3.3
     # via virtualenv
-dnspython==1.16.0
+dnspython==2.1.0
     # via pymongo
-filelock==3.0.12
+filelock==3.3.2
     # via
     #   tox
     #   virtualenv
@@ -42,7 +42,7 @@ iniconfig==1.1.1
     # via pytest
 itsdangerous==2.0.1
     # via flask
-jinja2==3.0.1
+jinja2==3.0.2
     # via flask
 markupsafe==2.0.1
     # via jinja2
@@ -58,11 +58,11 @@ mongoengine==0.23.1
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-packaging==21.0
+packaging==21.2
     # via
     #   pytest
     #   tox
-platformdirs==2.3.0
+platformdirs==2.4.0
     # via virtualenv
 pluggy==1.0.0
     # via
@@ -72,7 +72,7 @@ py==1.10.0
     # via
     #   pytest
     #   tox
-pymongo[srv,tls]==3.12.0
+pymongo[srv,tls]==3.12.1
     # via
     #   mongoengine
     #   sweetrpg-model-core
@@ -91,11 +91,11 @@ six==1.16.0
     #   flask-rest-jsonapi
     #   tox
     #   virtualenv
-sqlalchemy==1.4.25
+sqlalchemy==1.4.26
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.15
+sweetrpg-db==0.0.18
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.20
+sweetrpg-model-core==0.0.22
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -106,7 +106,7 @@ toml==0.10.2
     #   tox
 tox==3.24.4
     # via -r requirements/tests.in
-virtualenv==20.8.0
+virtualenv==20.9.0
     # via tox
-werkzeug==2.0.1
+werkzeug==2.0.2
     # via flask

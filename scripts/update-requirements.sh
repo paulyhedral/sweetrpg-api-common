@@ -8,7 +8,7 @@ pushd ${scriptdir}/..
 
 for r in pkg docs tests dev; do
     echo "Requirement: $r"
-    pip-compile -r requirements/$r.in
+    pip-compile -r -U requirements/$r.in
 done
 
 popd

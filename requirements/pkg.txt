@@ -4,9 +4,9 @@
 #
 #    pip-compile requirements/pkg.in
 #
-click==8.0.1
+click==8.0.3
     # via flask
-dnspython==1.16.0
+dnspython==2.1.0
     # via pymongo
 flask==2.0.2
     # via
@@ -18,7 +18,7 @@ greenlet==1.1.2
     # via sqlalchemy
 itsdangerous==2.0.1
     # via flask
-jinja2==3.0.1
+jinja2==3.0.2
     # via flask
 markupsafe==2.0.1
     # via jinja2
@@ -34,19 +34,19 @@ mongoengine==0.23.1
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-pymongo[srv,tls]==3.12.0
+pymongo[srv,tls]==3.12.1
     # via
     #   mongoengine
     #   sweetrpg-model-core
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==1.4.25
+sqlalchemy==1.4.26
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.15
+sweetrpg-db==0.0.18
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.20
+sweetrpg-model-core==0.0.22
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-werkzeug==2.0.1
+werkzeug==2.0.2
     # via flask
