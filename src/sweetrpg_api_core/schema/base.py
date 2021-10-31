@@ -14,8 +14,11 @@ class BaseAPISchema(Schema):
 
     id = fields.Str()  # as_string=True, dump_only=True)
     created_at = fields.DateTime()  # dump_only=True)
+    created_by = fields.String()
     updated_at = fields.DateTime()  # dump_only=True)
+    updated_by = fields.String()
     deleted_at = fields.DateTime()
+    deleted_by = fields.String()
 
     @post_load
     def make_object(self, data, **kwargs):
