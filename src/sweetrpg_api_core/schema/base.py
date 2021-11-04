@@ -19,6 +19,8 @@ class BaseAPISchema(Schema):
     updated_by = fields.String()
     deleted_at = fields.DateTime()
     deleted_by = fields.String()
+    document_meta = fields.DocumentMeta()
+    resource_meta = fields.ResourceMeta()
 
     @post_load
     def make_object(self, data, **kwargs):
