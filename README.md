@@ -2,6 +2,7 @@
 
 [![Unit tests](https://github.com/sweetrpg/api-core/actions/workflows/python-ci.yml/badge.svg)](https://github.com/sweetrpg/api-core/actions/workflows/python-ci.yml)
 [![Coverage](https://github.com/sweetrpg/api-core/blob/develop/coverage.svg)](https://github.com/sweetrpg/api-core)
+[![PyPI version](https://badgen.net/pypi/v/sweetrpg-api-core)](https://pypi.org/project/sweetrpg-api-core)
 [![License](https://img.shields.io/github/license/sweetrpg/api-core.svg)](https://img.shields.io/github/license/sweetrpg/api-core.svg)
 [![Issues](https://img.shields.io/github/issues/sweetrpg/api-core.svg)](https://img.shields.io/github/issues/sweetrpg/api-core.svg)
 [![PRs](https://img.shields.io/github/issues-pr/sweetrpg/api-core.svg)](https://img.shields.io/github/issues-pr/sweetrpg/api-core.svg)
