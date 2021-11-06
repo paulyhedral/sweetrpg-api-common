@@ -16,8 +16,17 @@ blueprint = Blueprint("health", __name__, url_prefix="/health")
 _health_check_service_hooks = {}
 
 
-def register_health_check_service_hook(name: str, callable):
-    _health_check_service_hooks[name] = callable
+def register_health_check_service_hook(name: str, callable) -> None:
+    """Add a callable service hook for the health check endpoint.
+
+    :param name: The name of the hook.
+    :param callable: A callable that will return a JSON-encodable result. If this is `None`,
+        the hook will be deregistered.
+    """
+    if callable is None:
+        del _health_check_service_hooks[name]
+    else:
+        _health_check_service_hooks[name] = callable
 
 
 @blueprint.route("/status")
