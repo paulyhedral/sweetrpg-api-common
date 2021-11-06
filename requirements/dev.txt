@@ -106,7 +106,7 @@ pluggy==1.0.0
     # via
     #   pytest
     #   tox
-py==1.10.0
+py==1.11.0
     # via
     #   pytest
     #   tox
@@ -130,7 +130,7 @@ python-dotenv==0.19.1
     # via -r requirements/tests.in
 pytz==2021.3
     # via babel
-regex==2021.10.23
+regex==2021.11.2
     # via black
 requests==2.26.0
     # via sphinx
@@ -170,9 +170,9 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==1.4.26
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.18
+sweetrpg-db==0.0.20
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.22
+sweetrpg-model-core==0.0.24
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -191,7 +191,7 @@ typing-extensions==3.10.0.2
     # via black
 urllib3==1.26.7
     # via requests
-virtualenv==20.9.0
+virtualenv==20.10.0
     # via tox
 werkzeug==2.0.2
     # via flask

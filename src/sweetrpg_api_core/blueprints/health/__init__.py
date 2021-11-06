@@ -1,24 +1,42 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
+"""health.py
+Health endpoints.
 """
-auth.py
-- Authentication and authorization endpoints.
-"""
-
 
 from flask import Blueprint, current_app, jsonify
 from werkzeug.exceptions import HTTPException
 import json
+import os
+from sweetrpg_api_core import constants
 
 
 blueprint = Blueprint("health", __name__, url_prefix="/health")
 
+_health_check_service_hooks = {}
+
+
+def register_health_check_service_hook(name: str, callable):
+    _health_check_service_hooks[name] = callable
+
 
 @blueprint.route("/status")
 def health_check():
-    with open(f"/{current_app.static_folder}/build-info.json", "r") as bi:
-        build_info = json.load(bi)
-        return {"build": build_info, "services": {}}
+    r = {'services': {}}
+    build_info_path = os.environ.get(constants.BUILD_INFO_PATH)
+    if build_info_path:
+        with open(build_info_path, "r") as bi:
+            build_info = json.load(bi)
+            r["build"] = build_info
+
+    for k,v in _health_check_service_hooks.items():
+        try:
+            result = v()
+            r['services'][k] = result
+        except:
+            r['services'][k] = 'Unknown'
+
+    return r
 
 
 @blueprint.route("/ping")

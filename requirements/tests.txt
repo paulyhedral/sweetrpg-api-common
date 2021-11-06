@@ -68,7 +68,7 @@ pluggy==1.0.0
     # via
     #   pytest
     #   tox
-py==1.10.0
+py==1.11.0
     # via
     #   pytest
     #   tox
@@ -93,9 +93,9 @@ six==1.16.0
     #   virtualenv
 sqlalchemy==1.4.26
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.18
+sweetrpg-db==0.0.20
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.22
+sweetrpg-model-core==0.0.24
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -106,7 +106,7 @@ toml==0.10.2
     #   tox
 tox==3.24.4
     # via -r requirements/tests.in
-virtualenv==20.9.0
+virtualenv==20.10.0
     # via tox
 werkzeug==2.0.2
     # via flask
