@@ -90,3 +90,28 @@ jobs:
                   bump: "--patch"
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   pypi_token: ${{ secrets.PYPI_TOKEN }}
+
+    notify:
+        needs: [publish]
+        runs-on: ubuntu-latest
+        concurrency: notify
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - repo: model-core
+                    - repo: db
+                    - repo: library-objects
+                    - repo: api-core
+                    - repo: library-api
+                    - repo: web-core
+                    - repo: client
+                    - repo: library-web
+                    - repo: main-web
+                    - repo: shared-web
+        steps:
+            - uses: juztcode/repo-ditpatch-action@v1
+              with:
+                event-type: api-core-published
+                token: ${{ secrets.REPO_ACCESS_TOKEN }}
+                repository: sweetrpg/${{ matrix.repo }}
