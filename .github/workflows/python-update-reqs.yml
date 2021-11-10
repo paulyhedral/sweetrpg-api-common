@@ -25,4 +25,4 @@ jobs:
                   scripts/update-requirements.sh
                   git add requirements/*.txt
                   git commit -m "Update requirements"
-                  # git push origin
+                  git push origin
