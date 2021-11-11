@@ -11,6 +11,9 @@ on:
             - tox.ini
             - "requirements/**"
             - "docs/**"
+    workflow_run:
+        workflows: ["Update Requirements"]
+        types: [completed]
 
 jobs:
     tests:
