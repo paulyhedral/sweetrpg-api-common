@@ -91,11 +91,11 @@ six==1.16.0
     #   flask-rest-jsonapi
     #   tox
     #   virtualenv
-sqlalchemy==1.4.26
+sqlalchemy==1.4.27
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.23
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.36
+sweetrpg-model-core==0.0.37
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
