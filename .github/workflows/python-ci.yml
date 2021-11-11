@@ -104,7 +104,6 @@ jobs:
                     - repo: model-core
                     - repo: db
                     - repo: library-objects
-                    - repo: api-core
                     - repo: library-api
                     - repo: web-core
                     - repo: client
