@@ -84,7 +84,7 @@ pytest==6.2.5
     #   pytest-cov
 pytest-cov==3.0
     # via -r requirements/tests.in
-python-dotenv==0.19.1
+python-dotenv==0.19.2
     # via -r requirements/tests.in
 six==1.16.0
     # via
