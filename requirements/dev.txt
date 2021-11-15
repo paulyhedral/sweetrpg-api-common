@@ -31,7 +31,7 @@ coverage[toml]==5.5
     # via
     #   coverage-badge
     #   pytest-cov
-coverage-badge==1.0.2
+coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.3
     # via virtualenv
