@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API &#8212; SweetRPG API Core 0.0.36 documentation</title>
+    <title>API &#8212; SweetRPG API Core 0.0.37 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -37,7 +37,7 @@
 <h2>API Data<a class="headerlink" href="#api-data" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sweetrpg_api_core.data.</span></span><span class="sig-name descname"><span class="pre">APIData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sweetrpg_api_core.data.</span></span><span class="sig-name descname"><span class="pre">APIData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData._convert_properties">
 <span class="sig-name descname"><span class="pre">_convert_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData._convert_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData._convert_properties" title="Permalink to this definition">¶</a></dt>
@@ -227,7 +227,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sweetrpg_api_core.data.APIData.create_object">
-<span class="sig-name descname"><span class="pre">create_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sweetrpg_model_core.model.base.BaseModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">mongoengine.document.Document</span></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.create_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.create_object" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sweetrpg_model_core.model.base.BaseModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">mongoengine.document.Document</span></span></span><a class="reference internal" href="_modules/sweetrpg_api_core/data.html#APIData.create_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sweetrpg_api_core.data.APIData.create_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an object
 :param BaseModel model: the data validated by marshmallow
 :param dict view_kwargs: kwargs from the resource view
