@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""
+"""API data abstraction.
 """
 
 from flask import current_app
@@ -21,8 +21,13 @@ import logging
 
 
 class APIData(BaseDataLayer):
+    """
+
+    """
+
     def __init__(self, kwargs):
-        """Intialize an data layer instance with kwargs
+        """Initialize a data layer instance with kwargs.
+
         :param dict kwargs: information about data layer instance
         """
         print("init: %s", kwargs)
@@ -47,7 +52,8 @@ class APIData(BaseDataLayer):
         return f"<APIData(type={self.type}, repos={self.repos}, model_info={self.model_info})>"
 
     def create_object(self, model: BaseModel, view_kwargs: dict) -> Document:
-        """Create an object
+        """Create an object.
+
         :param BaseModel model: the data validated by marshmallow
         :param dict view_kwargs: kwargs from the resource view
         :return DeclarativeMeta: an object
@@ -321,21 +327,30 @@ class APIData(BaseDataLayer):
         return query
 
     def _convert_properties(self, obj):
+        """Convert some property values of an object, such as identifiers and date fields.
+
+        :param obj: The object whose values should be converted.
+        :return: The updated object.
+        """
         logging.debug("obj: %s", obj)
 
         date_properties = ["created_at", "updated_at", "deleted_at"]
         id_properties = ["_id", "id"]
         for p in date_properties + id_properties:
-            logging.debug("p: %s", p)
+            logging.debug("p (%s): %s", type(p), p)
 
             try:
                 property_value = obj.get(p) or getattr(obj, p)
             except:
+                logging.debug("could not get property value '%s'; skipping", p)
                 continue
 
             logging.debug("property_value: %s", property_value)
             if property_value is None:
                 continue
+
+            logging.debug("initializing new_property_value with current value")
+            new_property_value = property_value
 
             if p in date_properties:
                 logging.debug("converting date property: %s, value: %s", p, property_value)
@@ -343,10 +358,13 @@ class APIData(BaseDataLayer):
             elif p in id_properties:
                 logging.debug("converting ID property: %s, value: %s", p, property_value)
                 if isinstance(property_value, dict):
+                    logging.debug("converting dictionary with possible $oid key")
                     new_property_value = property_value["$oid"]
                 else:
+                    logging.debug("coercing property value into string from %s", type(property_value))
                     new_property_value = str(property_value)
 
+                logging.debug("new_property_value: %s", new_property_value)
                 if p == "_id":
                     logging.debug("changing key of ID value '%s'", p)
                     p = "id"
@@ -361,7 +379,14 @@ class APIData(BaseDataLayer):
         logging.debug("converted object: %s", obj)
         return obj
 
-    def _populate_object(self, obj, properties):
+    def _populate_object(self, obj, properties: dict):
+        """Populate an object's properties with sub-objects, where appropriate.
+
+        :param obj: The object to populate.
+        :param dict properties: A dictionary of the properties to populate. The key is the name of the property,
+            the value is the property's type.
+        :return: The populated object.
+        """
         logging.debug("obj: %s, properties: %s", obj, properties)
 
         for property_name, property_type in properties.items():
