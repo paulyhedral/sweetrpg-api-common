@@ -366,6 +366,8 @@ class APIData(BaseDataLayer):
 
                 logging.debug("new_property_value: %s", new_property_value)
                 if p == "_id":
+                    logging.debug("deleting old value with key '%s'", p)
+                    del obj[p]
                     logging.debug("changing key of ID value '%s'", p)
                     p = "id"
 
