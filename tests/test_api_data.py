@@ -4,6 +4,27 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 
 from sweetrpg_api_core.data import APIData
+from unittest.mock import patch, Mock
+
+
+class TestModel():
+    def __init__(self, **kwargs):
+        pass
+
+
+class TestDocument():
+    def to_json(self):
+        return r'{"id":"1"}'
+
+model_info = {
+    "test": {
+        "model": TestModel,
+        "document": TestDocument,
+        "type": "test",
+        "collection": "tests",
+        "properties": {},
+    },
+}
 
 
 def test_create():
@@ -12,8 +33,15 @@ def test_create():
     pass
 
 
-def test_get_object():
-    pass
+@patch('sweetrpg_db.mongodb.repo.MongoDataRepository.get')
+def test_get_object(repo_get):
+
+    repo_get.return_value = TestDocument()
+
+    api = APIData({'type': 'test', 'db': None, 'model_info': model_info})
+    api.get_object({'id': 1})
+
+    # TODO
 
 
 def test_get_collection():

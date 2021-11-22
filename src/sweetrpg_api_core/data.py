@@ -30,7 +30,7 @@ class APIData(BaseDataLayer):
 
         :param dict kwargs: information about data layer instance
         """
-        print("init: %s", kwargs)
+        logging.debug("init: %s", kwargs)
 
         if kwargs.get("methods") is not None:
             self.bound_rewritable_methods(kwargs["methods"])
@@ -416,13 +416,13 @@ class APIData(BaseDataLayer):
                     logging.debug("list_value: %s", list_value)
                     if isinstance(list_value, dict) and list_value.get("$oid"):
                         value = list_value["$oid"]
+                        new_property_value.append({"id": value})
                     else:
-                        value = list_value
+                        new_property_value.append(list_value)
                     # new_obj = self.repos[property_type].get(value)
                     # logging.debug("new_obj: %s", new_obj)
                     # new_value = json.loads(new_obj.to_json())
                     # logging.debug("new_value: %s", new_value)
-                    new_property_value.append({"id": value})
                 logging.debug("new_property_value: %s", new_property_value)
 
                 if isinstance(obj, dict):
