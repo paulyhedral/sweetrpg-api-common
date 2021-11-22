@@ -9,7 +9,8 @@ from unittest.mock import patch, Mock
 
 class TestModel():
     def __init__(self, **kwargs):
-        pass
+        for k,v in kwargs.items():
+            setattr(self, k, v)
 
 
 class TestDocument():
@@ -39,8 +40,10 @@ def test_get_object(repo_get):
     repo_get.return_value = TestDocument()
 
     api = APIData({'type': 'test', 'db': None, 'model_info': model_info})
-    api.get_object({'id': 1})
+    obj = api.get_object({'id': "1"})
 
+    assert isinstance(obj, TestModel)
+    assert obj.id == "1"
     # TODO
 
 
