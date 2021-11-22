@@ -439,8 +439,10 @@ class APIData(BaseDataLayer):
         """
         logging.debug("data: %s, view_kwargs: %s", data, view_kwargs)
 
-        delattr(data, "id")
-        delattr(data, "deleted_at")
+        if hasattr(data, 'id'):
+            delattr(data, "id")
+        if hasattr(data, 'deleted_at'):
+            delattr(data, "deleted_at")
         now = datetime.utcnow()
         data.created_at = now
         data.updated_at = now
