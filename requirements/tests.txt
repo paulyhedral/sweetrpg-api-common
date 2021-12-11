@@ -20,7 +20,7 @@ coverage[toml]==6.2
     #   pytest-cov
 coverage-badge==1.1.0
     # via -r requirements/tests.in
-distlib==0.3.3
+distlib==0.3.4
     # via virtualenv
 dnspython==2.1.0
     # via
@@ -94,11 +94,11 @@ six==1.16.0
     #   flask-rest-jsonapi
     #   tox
     #   virtualenv
-sqlalchemy==1.4.27
+sqlalchemy==1.4.28
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.44
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.53
+sweetrpg-model-core==0.0.54
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
