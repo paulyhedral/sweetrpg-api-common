@@ -65,7 +65,7 @@ class APIData(BaseDataLayer):
         self.before_create_object(model, view_kwargs)
 
         data = model.to_dict()
-        logging.info("data: %s", data)
+        logging.debug("data: %s", data)
 
         try:
             repo = self.repos[self.type]
@@ -75,7 +75,7 @@ class APIData(BaseDataLayer):
             model_class = self.model_info[self.type]["model"]
             logging.debug("model_class: %s", model_class)
             new_model = to_model(doc, model_class)
-            logging.info("new_model: %s", new_model)
+            logging.debug("new_model: %s", new_model)
         except DuplicateKeyError as dke:
             raise JsonApiException(dke.details, title="Duplicate key", status="409", code="duplicate-key")
 
@@ -102,17 +102,17 @@ class APIData(BaseDataLayer):
         logging.debug("repo: %s", repo)
         try:
             record = repo.get(record_id)
-            logging.info("record: %s", record)
+            logging.debug("record: %s", record)
             if record is None:
                 raise ObjectNotFound(f'No {self.type} record found for ID {view_kwargs["id"]}')
         except:
             raise ObjectNotFound(f'No {self.type} record found for ID {view_kwargs["id"]}')
 
         record = self.after_get_object(record, view_kwargs)
-        logging.info("record: %s", record)
+        logging.debug("record: %s", record)
 
         obj = self.model_info[self.type]["model"](**record)
-        logging.info("obj: %s", obj)
+        logging.debug("obj: %s", obj)
 
         return obj
 

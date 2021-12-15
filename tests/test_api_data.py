@@ -6,20 +6,36 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 from sweetrpg_api_core.data import APIData
 from unittest.mock import patch, Mock
 from flask_rest_jsonapi.querystring import QueryStringManager
+from bson.objectid import ObjectId
+import datetime
+import json
 
 
 class TestModel():
     def __init__(self, **kwargs):
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
     def to_dict(self):
         return {}
 
 
-class TestDocument():
+class TestDocument(object):
+    _id = ObjectId("1234567890abcdef12345678")
+    created = datetime.datetime.now()
+    items = ["1", "2"]
+    ref = ObjectId("234567890abcdef123456789")
+    refs = [ObjectId("34567890abcdef1234567890")]
+
     def to_json(self):
-        return r'{"id":"1"}'
+        this = {
+            'id': str(self._id),
+            'created': str(self.created),
+            'items': self.items,
+            'ref': str(self.ref),
+            'refs': list(map(str, self.refs)),
+        }
+        return json.dumps(this)
 
 model_info = {
     "test": {
@@ -51,7 +67,16 @@ def test_get_object(repo_get):
     obj = api.get_object({'id': "1"})
 
     assert isinstance(obj, TestModel)
-    assert obj.id == "1"
+    assert obj.id == "1234567890abcdef12345678"
+    # assert obj.created == None
+    assert isinstance(obj.items, list)
+    assert len(obj.items) == 2
+    assert obj.items[0] == "1"
+    assert obj.items[1] == "2"
+    assert obj.ref == "234567890abcdef123456789"
+    assert isinstance(obj.refs, list)
+    assert len(obj.refs) == 1
+    assert obj.refs[0] == "34567890abcdef1234567890"
     # TODO
 
 
