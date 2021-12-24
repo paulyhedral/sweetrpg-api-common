@@ -31,19 +31,29 @@ def register_health_check_service_hook(name: str, callable) -> None:
 
 @blueprint.route("/status")
 def health_check():
-    r = {'services': {}}
+    r = {'services': {}, 'environment': {}}
     build_info_path = os.environ.get(constants.BUILD_INFO_PATH)
     if build_info_path:
         with open(build_info_path, "r") as bi:
             build_info = json.load(bi)
             r["build"] = build_info
 
-    for k,v in _health_check_service_hooks.items():
+    for k, v in _health_check_service_hooks.items():
         try:
             result = v()
             r['services'][k] = result
         except:
             r['services'][k] = 'Unknown'
+
+    words = ['secret', 'pass', 'key']
+    for k, v in os.environ.items():
+        add_it = True
+        for word in words:
+            if word in k.lower():
+                add_it = False
+                break
+        if add_it:
+            r['environment'][k] = v
 
     return r
 

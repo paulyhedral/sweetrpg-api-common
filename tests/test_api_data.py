@@ -11,7 +11,7 @@ import datetime
 import json
 
 
-class TestModel():
+class TestModel(object):
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -65,6 +65,8 @@ def test_get_object(repo_get):
 
     api = APIData({'type': 'test', 'db': None, 'model_info': model_info})
     obj = api.get_object({'id': "1"})
+
+    print(obj)
 
     assert isinstance(obj, TestModel)
     assert obj.id == "1234567890abcdef12345678"
