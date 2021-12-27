@@ -26,7 +26,7 @@ dnspython==2.1.0
     # via
     #   pymongo
     #   sweetrpg-db
-filelock==3.4.0
+filelock==3.4.2
     # via
     #   tox
     #   virtualenv
@@ -64,7 +64,7 @@ packaging==21.3
     # via
     #   pytest
     #   tox
-platformdirs==2.4.0
+platformdirs==2.4.1
     # via virtualenv
 pluggy==1.0.0
     # via
@@ -94,9 +94,9 @@ six==1.16.0
     #   flask-rest-jsonapi
     #   tox
     #   virtualenv
-sqlalchemy==1.4.28
+sqlalchemy==1.4.29
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.45
+sweetrpg-db==0.0.46
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.54
     # via
@@ -106,7 +106,7 @@ toml==0.10.2
     # via
     #   pytest
     #   tox
-tomli==1.2.2
+tomli==2.0.0
     # via coverage
 tox==3.24.4
     # via -r requirements/tests.in
