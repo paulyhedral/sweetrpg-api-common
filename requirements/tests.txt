@@ -6,10 +6,8 @@
 #
 asgiref==3.4.1
     # via -r requirements/tests.in
-attrs==21.2.0
+attrs==21.4.0
     # via pytest
-backports.entry-points-selectable==1.1.1
-    # via virtualenv
 blinker==1.4
     # via -r requirements/tests.in
 click==8.0.3
@@ -110,7 +108,7 @@ tomli==2.0.0
     # via coverage
 tox==3.24.4
     # via -r requirements/tests.in
-virtualenv==20.10.0
+virtualenv==20.13.0
     # via tox
 werkzeug==2.0.2
     # via flask

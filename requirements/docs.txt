@@ -10,7 +10,7 @@ babel==2.9.1
     # via sphinx
 certifi==2021.10.8
     # via requests
-charset-normalizer==2.0.9
+charset-normalizer==2.0.10
     # via requests
 click==8.0.3
     # via flask
@@ -61,7 +61,7 @@ packaging==21.3
     #   sphinx
 pallets-sphinx-themes==2.0.2
     # via -r requirements/docs.in
-pygments==2.10.0
+pygments==2.11.2
     # via
     #   sphinx
     #   sphinx-tabs
@@ -74,7 +74,7 @@ pyparsing==3.0.6
     # via packaging
 pytz==2021.3
     # via babel
-requests==2.26.0
+requests==2.27.1
     # via sphinx
 rstcheck==3.3.1
     # via -r requirements/docs.in
@@ -89,7 +89,7 @@ sphinx==4.3.2
     #   sphinx-issues
     #   sphinx-tabs
     #   sphinxcontrib-log-cabinet
-sphinx-issues==1.2.0
+sphinx-issues==2.0.0
     # via -r requirements/docs.in
 sphinx-tabs==3.2.0
     # via -r requirements/docs.in
@@ -115,7 +115,7 @@ sweetrpg-model-core==0.0.55
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-urllib3==1.26.7
+urllib3==1.26.8
     # via requests
 werkzeug==2.0.2
     # via flask

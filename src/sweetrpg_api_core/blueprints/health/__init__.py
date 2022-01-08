@@ -9,6 +9,7 @@ from werkzeug.exceptions import HTTPException
 import json
 import os
 from sweetrpg_api_core import constants
+from sweetrpg_api_core.utils import SafeEncoder
 
 
 blueprint = Blueprint("health", __name__, url_prefix="/health")
@@ -53,7 +54,9 @@ def health_check():
                 break
         r['environment'][k] = v
 
-    return r
+    j = json.dumps(r, cls=SafeEncoder)
+
+    return json.loads(j)
 
 
 @blueprint.route("/ping")
