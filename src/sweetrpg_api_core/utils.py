@@ -18,5 +18,5 @@ class SafeEncoder(json.JSONEncoder):
         if isinstance(o, Timestamp):
             return str(o.as_datetime())
         elif isinstance(o, bytes):
-            return base64.b64encode(o)
+            return base64.b64encode(o).decode('utf-8')
         return json.JSONEncoder.default(self, o)
