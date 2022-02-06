@@ -12,7 +12,7 @@ blinker==1.4
     # via -r requirements/tests.in
 click==8.0.3
     # via flask
-coverage[toml]==6.3
+coverage[toml]==6.3.1
     # via
     #   coverage-badge
     #   pytest-cov
@@ -79,7 +79,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.7
     # via packaging
-pytest==6.2.5
+pytest==7.0.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -96,19 +96,19 @@ sqlalchemy==1.4.31
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.51
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.57
+sweetrpg-model-core==0.0.58
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
 toml==0.10.2
-    # via
-    #   pytest
-    #   tox
+    # via tox
 tomli==2.0.0
-    # via coverage
+    # via
+    #   coverage
+    #   pytest
 tox==3.24.5
     # via -r requirements/tests.in
-virtualenv==20.13.0
+virtualenv==20.13.1
     # via tox
 werkzeug==2.0.2
     # via flask
