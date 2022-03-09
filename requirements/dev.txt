@@ -18,14 +18,14 @@ blinker==1.4
     # via -r requirements/tests.in
 certifi==2021.10.8
     # via requests
-charset-normalizer==2.0.11
+charset-normalizer==2.0.12
     # via requests
-click==8.0.3
+click==8.0.4
     # via
     #   black
     #   flask
     #   pip-tools
-coverage[toml]==6.3.1
+coverage[toml]==6.3.2
     # via
     #   coverage-badge
     #   pytest-cov
@@ -33,7 +33,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.4
     # via virtualenv
-dnspython==2.2.0
+dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
@@ -42,7 +42,7 @@ docutils==0.16
     #   rstcheck
     #   sphinx
     #   sphinx-tabs
-filelock==3.4.2
+filelock==3.6.0
     # via
     #   tox
     #   virtualenv
@@ -60,17 +60,17 @@ idna==3.3
     # via requests
 imagesize==1.3.0
     # via sphinx
-importlib-metadata==4.10.1
+importlib-metadata==4.11.2
     # via sphinx
 iniconfig==1.1.1
     # via pytest
-itsdangerous==2.0.1
+itsdangerous==2.1.0
     # via flask
 jinja2==3.0.3
     # via
     #   flask
     #   sphinx
-markupsafe==2.0.1
+markupsafe==2.1.0
     # via jinja2
 marshmallow==3.14.1
     # via
@@ -80,7 +80,7 @@ marshmallow==3.14.1
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.23.1
+mongoengine==0.24.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -100,7 +100,7 @@ pep517==0.12.0
     # via pip-tools
 pip-tools==6.4.0
     # via -r requirements/dev.in
-platformdirs==2.4.1
+platformdirs==2.5.1
     # via
     #   black
     #   virtualenv
@@ -123,7 +123,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.0
+pytest==7.0.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -169,17 +169,17 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.31
+sqlalchemy==1.4.32
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.52
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.59
+sweetrpg-model-core==0.0.60
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
 toml==0.10.2
     # via tox
-tomli==2.0.0
+tomli==2.0.1
     # via
     #   black
     #   coverage
@@ -187,13 +187,13 @@ tomli==2.0.0
     #   pytest
 tox==3.24.5
     # via -r requirements/tests.in
-typing-extensions==4.0.1
+typing-extensions==4.1.1
     # via black
 urllib3==1.26.8
     # via requests
-virtualenv==20.13.1
+virtualenv==20.13.3
     # via tox
-werkzeug==2.0.2
+werkzeug==2.0.3
     # via flask
 wheel==0.37.1
     # via pip-tools
