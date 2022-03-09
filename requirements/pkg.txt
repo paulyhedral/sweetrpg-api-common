@@ -10,7 +10,7 @@ dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
-flask==2.0.2
+flask==2.0.3
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
