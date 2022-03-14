@@ -18,7 +18,7 @@ dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
-docutils==0.16
+docutils==0.17.1
     # via
     #   rstcheck
     #   sphinx
@@ -93,7 +93,7 @@ sphinx==4.4.0
     #   sphinxcontrib-log-cabinet
 sphinx-issues==3.0.1
     # via -r requirements/docs.in
-sphinx-tabs==3.2.0
+sphinx-tabs==3.3.0
     # via -r requirements/docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
