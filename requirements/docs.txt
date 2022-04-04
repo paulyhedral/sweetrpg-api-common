@@ -23,7 +23,7 @@ docutils==0.16
     #   rstcheck
     #   sphinx
     #   sphinx-tabs
-flask==2.0.2
+flask==2.1.1
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
@@ -36,7 +36,9 @@ idna==3.3
 imagesize==1.3.0
     # via sphinx
 importlib-metadata==4.11.2
-    # via sphinx
+    # via
+    #   flask
+    #   sphinx
 itsdangerous==2.1.0
     # via flask
 jinja2==3.0.3
