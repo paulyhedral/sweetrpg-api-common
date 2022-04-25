@@ -79,7 +79,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.1
+pytest==7.1.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
