@@ -10,7 +10,7 @@ dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
-flask==2.0.2
+flask==2.1.2
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
@@ -18,6 +18,8 @@ flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
 greenlet==1.1.2
     # via sqlalchemy
+importlib-metadata==4.11.3
+    # via flask
 itsdangerous==2.1.0
     # via flask
 jinja2==3.0.3
@@ -53,3 +55,5 @@ sweetrpg-model-core==0.0.62
     #   sweetrpg-db
 werkzeug==2.0.3
     # via flask
+zipp==3.8.0
+    # via importlib-metadata
