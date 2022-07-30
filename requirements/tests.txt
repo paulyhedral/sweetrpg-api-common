@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/tests.in
 #
-asgiref==3.5.0
+asgiref==3.5.2
     # via -r requirements/tests.in
 attrs==21.4.0
     # via pytest
@@ -79,7 +79,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.1
+pytest==7.1.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
