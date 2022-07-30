@@ -13,14 +13,19 @@ certifi==2021.10.8
 charset-normalizer==2.0.12
     # via requests
 click==8.0.4
-    # via flask
+    # via
+    #   flask
+    #   typer
+colorama==0.4.5
+    # via typer
 dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
-docutils==0.16
+docutils==0.17.1
     # via
     #   rstcheck
+    #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
 flask==2.0.2
@@ -43,6 +48,7 @@ jinja2==3.0.3
     # via
     #   flask
     #   sphinx
+    #   sphinx-tabs
 markupsafe==2.1.0
     # via jinja2
 marshmallow==3.14.1
@@ -63,6 +69,10 @@ packaging==21.3
     #   sphinx
 pallets-sphinx-themes==2.0.2
     # via -r requirements/docs.in
+pydantic==1.9.1
+    # via
+    #   rstcheck
+    #   rstcheck-core
 pygments==2.11.2
     # via
     #   sphinx
@@ -78,8 +88,12 @@ pytz==2021.3
     # via babel
 requests==2.27.1
     # via sphinx
-rstcheck==3.3.1
+rstcheck==6.0.0.post1
     # via -r requirements/docs.in
+rstcheck-core==1.0.2
+    # via rstcheck
+shellingham==1.4.0
+    # via typer
 six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
@@ -93,7 +107,7 @@ sphinx==4.4.0
     #   sphinxcontrib-log-cabinet
 sphinx-issues==3.0.1
     # via -r requirements/docs.in
-sphinx-tabs==3.2.0
+sphinx-tabs==3.4.0
     # via -r requirements/docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -117,6 +131,14 @@ sweetrpg-model-core==0.0.62
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
+typer[all]==0.4.2
+    # via rstcheck
+types-docutils==0.18.3
+    # via
+    #   rstcheck
+    #   rstcheck-core
+typing-extensions==4.3.0
+    # via pydantic
 urllib3==1.26.8
     # via requests
 werkzeug==2.0.3

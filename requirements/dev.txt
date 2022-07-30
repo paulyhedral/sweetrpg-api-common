@@ -25,6 +25,9 @@ click==8.0.4
     #   black
     #   flask
     #   pip-tools
+    #   typer
+colorama==0.4.5
+    # via typer
 coverage[toml]==6.3.2
     # via
     #   coverage-badge
@@ -37,9 +40,10 @@ dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
-docutils==0.16
+docutils==0.17.1
     # via
     #   rstcheck
+    #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
 filelock==3.6.0
@@ -70,6 +74,7 @@ jinja2==3.0.3
     # via
     #   flask
     #   sphinx
+    #   sphinx-tabs
 markupsafe==2.1.0
     # via jinja2
 marshmallow==3.14.1
@@ -112,6 +117,10 @@ py==1.11.0
     # via
     #   pytest
     #   tox
+pydantic==1.9.1
+    # via
+    #   rstcheck
+    #   rstcheck-core
 pygments==2.11.2
     # via
     #   sphinx
@@ -123,7 +132,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.1
+pytest==7.1.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -135,8 +144,12 @@ pytz==2021.3
     # via babel
 requests==2.27.1
     # via sphinx
-rstcheck==3.3.1
+rstcheck==6.0.0.post1
     # via -r requirements/docs.in
+rstcheck-core==1.0.2
+    # via rstcheck
+shellingham==1.4.0
+    # via typer
 six==1.16.0
     # via
     #   flask-rest-jsonapi
@@ -153,7 +166,7 @@ sphinx==4.4.0
     #   sphinxcontrib-log-cabinet
 sphinx-issues==3.0.1
     # via -r requirements/docs.in
-sphinx-tabs==3.2.0
+sphinx-tabs==3.4.0
     # via -r requirements/docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -187,8 +200,16 @@ tomli==2.0.1
     #   pytest
 tox==3.24.5
     # via -r requirements/tests.in
+typer[all]==0.4.2
+    # via rstcheck
+types-docutils==0.18.3
+    # via
+    #   rstcheck
+    #   rstcheck-core
 typing-extensions==4.1.1
-    # via black
+    # via
+    #   black
+    #   pydantic
 urllib3==1.26.8
     # via requests
 virtualenv==20.13.3
