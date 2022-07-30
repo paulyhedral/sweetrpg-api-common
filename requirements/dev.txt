@@ -191,7 +191,7 @@ tomli==2.0.1
     #   build
     #   coverage
     #   pytest
-tox==3.24.5
+tox==3.25.1
     # via -r requirements/tests.in
 typing-extensions==4.1.1
     # via black
