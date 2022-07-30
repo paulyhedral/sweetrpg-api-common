@@ -4,11 +4,11 @@
 #
 #    pip-compile requirements/tests.in
 #
-asgiref==3.5.0
+asgiref==3.5.2
     # via -r requirements/tests.in
 attrs==21.4.0
     # via pytest
-blinker==1.4
+blinker==1.5
     # via -r requirements/tests.in
 click==8.0.4
     # via flask
@@ -87,7 +87,7 @@ pytest==7.1.2
     #   pytest-cov
 pytest-cov==3.0
     # via -r requirements/tests.in
-python-dotenv==0.19.2
+python-dotenv==0.20.0
     # via -r requirements/tests.in
 six==1.16.0
     # via
