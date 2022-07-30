@@ -8,7 +8,7 @@ asgiref==3.5.0
     # via -r requirements/tests.in
 attrs==21.4.0
     # via pytest
-blinker==1.4
+blinker==1.5
     # via -r requirements/tests.in
 click==8.0.4
     # via flask
@@ -79,7 +79,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.1
+pytest==7.1.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
