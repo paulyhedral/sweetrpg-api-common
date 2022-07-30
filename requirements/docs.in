@@ -1,6 +1,6 @@
 -r pkg.in
 Pallets-Sphinx-Themes
-Sphinx==4.4.0
+Sphinx==5.1.1
 sphinx-issues
 sphinxcontrib-log-cabinet
 sphinx-tabs
