@@ -90,7 +90,7 @@ pytz==2021.3
     # via babel
 requests==2.27.1
     # via sphinx
-rstcheck==6.0.0.post1
+rstcheck==6.1.0
     # via -r requirements/docs.in
 rstcheck-core==1.0.2
     # via rstcheck
