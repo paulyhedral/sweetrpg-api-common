@@ -5,6 +5,8 @@ on:
         types:
             - db-published
             - model-core-published
+    schedule:
+        - cron: '0 1 * * 0'
 
 jobs:
     update-reqs:
