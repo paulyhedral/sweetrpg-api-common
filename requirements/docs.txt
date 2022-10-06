@@ -90,11 +90,11 @@ pymongo[srv]==4.0.2
     #   sweetrpg-model-core
 pyparsing==3.0.9
     # via packaging
-pytz==2022.2.1
+pytz==2022.4
     # via babel
 requests==2.28.1
     # via sphinx
-rich==12.5.1
+rich==12.6.0
     # via typer
 rstcheck==6.1.0
     # via -r requirements/docs.in
