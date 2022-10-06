@@ -1,6 +1,7 @@
 name: Update Requirements
 
 on:
+    workflow_dispatch:
     repository_dispatch:
         types:
             - db-published
