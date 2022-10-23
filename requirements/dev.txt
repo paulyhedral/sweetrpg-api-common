@@ -149,7 +149,7 @@ pytest-cov==4.0.0
     # via -r requirements/tests.in
 python-dotenv==0.21.0
     # via -r requirements/tests.in
-pytz==2022.4
+pytz==2022.5
     # via babel
 requests==2.28.1
     # via sphinx
@@ -192,7 +192,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.41
+sqlalchemy==1.4.42
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.54
     # via -r requirements/pkg.in
