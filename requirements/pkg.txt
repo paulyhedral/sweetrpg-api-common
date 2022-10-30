@@ -57,5 +57,5 @@ sweetrpg-model-core==0.0.63
     #   sweetrpg-db
 werkzeug==2.2.2
     # via flask
-zipp==3.9.0
+zipp==3.10.0
     # via importlib-metadata
