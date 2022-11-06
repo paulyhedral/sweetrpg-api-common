@@ -42,10 +42,6 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.0.0
-    # via
-    #   flask
-    #   sphinx
 itsdangerous==2.1.2
     # via flask
 jinja2==3.1.2
@@ -151,5 +147,3 @@ urllib3==1.26.12
     # via requests
 werkzeug==2.2.2
     # via flask
-zipp==3.10.0
-    # via importlib-metadata
