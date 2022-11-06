@@ -10,7 +10,7 @@ asgiref==3.5.2
     # via -r requirements/tests.in
 attrs==22.1.0
     # via pytest
-babel==2.10.3
+babel==2.11.0
     # via sphinx
 black==22.10.0
     # via -r requirements/dev.in
@@ -50,7 +50,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-exceptiongroup==1.0.0
+exceptiongroup==1.0.1
     # via pytest
 filelock==3.8.0
     # via
@@ -149,7 +149,7 @@ pytest-cov==4.0.0
     # via -r requirements/tests.in
 python-dotenv==0.21.0
     # via -r requirements/tests.in
-pytz==2022.5
+pytz==2022.6
     # via babel
 requests==2.28.1
     # via sphinx
@@ -192,7 +192,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.42
+sqlalchemy==1.4.43
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.54
     # via -r requirements/pkg.in
@@ -226,7 +226,7 @@ virtualenv==20.16.6
     # via tox
 werkzeug==2.2.2
     # via flask
-wheel==0.37.1
+wheel==0.38.2
     # via pip-tools
 zipp==3.10.0
     # via importlib-metadata

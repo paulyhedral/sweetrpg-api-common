@@ -24,7 +24,7 @@ dnspython==2.2.1
     # via
     #   pymongo
     #   sweetrpg-db
-exceptiongroup==1.0.0
+exceptiongroup==1.0.1
     # via pytest
 filelock==3.8.0
     # via
@@ -95,7 +95,7 @@ six==1.16.0
     # via
     #   flask-rest-jsonapi
     #   tox
-sqlalchemy==1.4.42
+sqlalchemy==1.4.43
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.54
     # via -r requirements/pkg.in
