@@ -69,10 +69,6 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.1.0
-    # via
-    #   flask
-    #   sphinx
 iniconfig==1.1.1
     # via pytest
 itsdangerous==2.1.2
@@ -112,7 +108,7 @@ pathspec==0.10.2
     # via black
 pep517==0.13.0
     # via build
-pip-tools==6.8.0
+pip-tools==6.10.0
     # via -r requirements/dev.in
 platformdirs==2.5.4
     # via
@@ -212,9 +208,7 @@ typer[all]==0.7.0
 types-docutils==0.19.1.1
     # via rstcheck-core
 typing-extensions==4.4.0
-    # via
-    #   black
-    #   pydantic
+    # via pydantic
 urllib3==1.26.13
     # via requests
 virtualenv==20.16.7
@@ -223,8 +217,6 @@ werkzeug==2.2.2
     # via flask
 wheel==0.38.4
     # via pip-tools
-zipp==3.11.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
