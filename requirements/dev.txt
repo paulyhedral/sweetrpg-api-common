@@ -69,7 +69,7 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.0.0
+importlib-metadata==5.1.0
     # via
     #   flask
     #   sphinx
@@ -215,7 +215,7 @@ typing-extensions==4.4.0
     # via
     #   black
     #   pydantic
-urllib3==1.26.12
+urllib3==1.26.13
     # via requests
 virtualenv==20.16.7
     # via tox
@@ -223,7 +223,7 @@ werkzeug==2.2.2
     # via flask
 wheel==0.38.4
     # via pip-tools
-zipp==3.10.0
+zipp==3.11.0
     # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
