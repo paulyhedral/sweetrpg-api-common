@@ -12,13 +12,13 @@ attrs==22.1.0
     # via pytest
 babel==2.11.0
     # via sphinx
-black==22.10.0
+black==22.12.0
     # via -r requirements/dev.in
 blinker==1.5
     # via -r requirements/tests.in
 build==0.9.0
     # via pip-tools
-certifi==2022.9.24
+certifi==2022.12.7
     # via requests
 charset-normalizer==2.1.1
     # via requests
@@ -51,7 +51,7 @@ docutils==0.18.1
     #   sphinx-tabs
 exceptiongroup==1.0.4
     # via pytest
-filelock==3.8.0
+filelock==3.8.2
     # via
     #   tox
     #   virtualenv
@@ -99,7 +99,7 @@ mongoengine==0.24.2
     #   sweetrpg-db
 mypy-extensions==0.4.3
     # via black
-packaging==21.3
+packaging==22.0
     # via
     #   build
     #   pallets-sphinx-themes
@@ -108,13 +108,13 @@ packaging==21.3
     #   tox
 pallets-sphinx-themes==2.0.2
     # via -r requirements/docs.in
-pathspec==0.10.2
+pathspec==0.10.3
     # via black
 pep517==0.13.0
     # via build
 pip-tools==6.8.0
     # via -r requirements/dev.in
-platformdirs==2.5.4
+platformdirs==2.6.0
     # via
     #   black
     #   virtualenv
@@ -136,8 +136,6 @@ pymongo[srv]==4.0.2
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyparsing==3.0.9
-    # via packaging
 pytest==7.2.0
     # via
     #   -r requirements/tests.in
@@ -189,7 +187,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.44
+sqlalchemy==1.4.45
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.54
     # via -r requirements/pkg.in
@@ -217,7 +215,7 @@ typing-extensions==4.4.0
     #   pydantic
 urllib3==1.26.13
     # via requests
-virtualenv==20.17.0
+virtualenv==20.17.1
     # via tox
 werkzeug==2.2.2
     # via flask
