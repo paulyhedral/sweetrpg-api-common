@@ -109,9 +109,6 @@ jobs:
                     - repo: library-api
                     - repo: web-core
                     - repo: client
-                    - repo: library-web
-                    - repo: main-web
-                    - repo: shared-web
         steps:
             - uses: juztcode/repo-ditpatch-action@v1
               with:
