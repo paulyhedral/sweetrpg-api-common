@@ -41,7 +41,7 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.1.0
+importlib-metadata==5.2.0
     # via
     #   flask
     #   sphinx
@@ -71,7 +71,7 @@ packaging==22.0
     # via
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.0.2
+pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
 pydantic==1.10.2
     # via rstcheck-core
@@ -85,7 +85,7 @@ pymongo[srv]==4.0.2
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pytz==2022.6
+pytz==2022.7
     # via babel
 requests==2.28.1
     # via sphinx
