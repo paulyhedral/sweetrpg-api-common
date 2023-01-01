@@ -63,7 +63,7 @@ marshmallow==3.14.1
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.24.2
+mongoengine==0.25.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -73,7 +73,7 @@ packaging==22.0
     #   sphinx
 pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
-pydantic==1.10.2
+pydantic==1.10.4
     # via rstcheck-core
 pygments==2.13.0
     # via

@@ -26,7 +26,7 @@ dnspython==2.2.1
     #   sweetrpg-db
 exceptiongroup==1.1.0
     # via pytest
-filelock==3.8.2
+filelock==3.9.0
     # via
     #   tox
     #   virtualenv
@@ -60,7 +60,7 @@ marshmallow==3.14.1
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.24.2
+mongoengine==0.25.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -68,7 +68,7 @@ packaging==22.0
     # via
     #   pytest
     #   tox
-platformdirs==2.6.0
+platformdirs==2.6.2
     # via virtualenv
 pluggy==1.0.0
     # via
