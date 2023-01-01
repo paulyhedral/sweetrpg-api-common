@@ -41,10 +41,6 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.2.0
-    # via
-    #   flask
-    #   sphinx
 itsdangerous==2.1.2
     # via flask
 jinja2==3.1.2
@@ -101,7 +97,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==5.2.3
+sphinx==6.0.0
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -144,5 +140,3 @@ urllib3==1.26.13
     # via requests
 werkzeug==2.2.2
     # via flask
-zipp==3.11.0
-    # via importlib-metadata
