@@ -20,7 +20,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.6
     # via virtualenv
-dnspython==2.2.1
+dnspython==2.3.0
     # via
     #   pymongo
     #   sweetrpg-db
@@ -48,7 +48,7 @@ itsdangerous==2.1.2
     # via flask
 jinja2==3.1.2
     # via flask
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   jinja2
     #   werkzeug
@@ -60,7 +60,7 @@ marshmallow==3.14.1
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.25.0
+mongoengine==0.26.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
