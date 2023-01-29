@@ -90,11 +90,12 @@ jobs:
               with:
                   fetch-depth: 0
             - name: publish
-              uses: sweetrpg/python-semantic-release@master
+              uses: relekang/python-semantic-release@master
               with:
-                  bump: "--patch"
+                  additional_options: "--patch"
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  pypi_token: ${{ secrets.PYPI_TOKEN }}
+                  repository_username: __token__
+                  repository_password: ${{ secrets.PYPI_TOKEN }}
 
     notify:
         needs: [publish]
