@@ -16,8 +16,10 @@ flask==2.2.2
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==2.0.1
+greenlet==2.0.2
     # via sqlalchemy
+importlib-metadata==6.0.0
+    # via flask
 itsdangerous==2.1.2
     # via flask
 jinja2==3.1.2
@@ -45,13 +47,17 @@ pymongo[srv]==4.0.2
     #   sweetrpg-model-core
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==1.4.46
+sqlalchemy==2.0.0
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.54
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.63
+sweetrpg-model-core==0.0.98
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
+typing-extensions==4.4.0
+    # via sqlalchemy
 werkzeug==2.2.2
     # via flask
+zipp==3.12.0
+    # via importlib-metadata
