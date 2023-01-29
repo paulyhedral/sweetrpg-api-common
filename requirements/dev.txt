@@ -67,7 +67,7 @@ flask==2.2.2
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==1.1.3
+greenlet==2.0.1
     # via
     #   -r requirements/tests.in
     #   sqlalchemy
@@ -113,7 +113,7 @@ pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
 pathspec==0.10.3
     # via black
-pip-tools==6.8.0
+pip-tools==6.12.1
     # via -r requirements/dev.in
 platformdirs==2.6.2
     # via
@@ -146,7 +146,7 @@ pytest==7.2.1
     #   pytest-cov
 pytest-cov==4.0.0
     # via -r requirements/tests.in
-python-dotenv==0.21.0
+python-dotenv==0.21.1
     # via -r requirements/tests.in
 pytz==2022.7.1
     # via babel
@@ -164,7 +164,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==5.2.3
+sphinx==6.1.3
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
