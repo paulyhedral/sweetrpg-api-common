@@ -40,8 +40,6 @@ greenlet==1.1.3
     # via
     #   -r requirements/tests.in
     #   sqlalchemy
-importlib-metadata==6.0.0
-    # via flask
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
@@ -87,7 +85,7 @@ pytest==7.2.1
     #   pytest-cov
 pytest-cov==4.0.0
     # via -r requirements/tests.in
-python-dotenv==0.21.0
+python-dotenv==0.21.1
     # via -r requirements/tests.in
 six==1.16.0
     # via
@@ -112,5 +110,3 @@ virtualenv==20.17.1
     # via tox
 werkzeug==2.2.2
     # via flask
-zipp==3.11.0
-    # via importlib-metadata
