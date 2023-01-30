@@ -46,8 +46,6 @@ greenlet==2.0.1
     # via
     #   -r requirements/tests.in
     #   sqlalchemy
-importlib-metadata==6.0.0
-    # via flask
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
@@ -114,7 +112,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.3.5
+tox==4.4.2
     # via -r requirements/tests.in
 typing-extensions==4.4.0
     # via sqlalchemy
@@ -122,5 +120,3 @@ virtualenv==20.17.1
     # via tox
 werkzeug==2.2.2
     # via flask
-zipp==3.12.0
-    # via importlib-metadata
