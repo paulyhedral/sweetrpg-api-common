@@ -42,8 +42,10 @@ flask==2.2.2
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==2.0.1
-    # via -r requirements/tests.in
+greenlet==2.0.2
+    # via
+    #   -r requirements/tests.in
+    #   sqlalchemy
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
@@ -81,6 +83,7 @@ pluggy==1.0.0
     #   tox
 pymongo[srv]==4.0.2
     # via
+    #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.5.0
