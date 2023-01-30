@@ -15,5 +15,6 @@
     "python.linting.pycodestylePath": "${env:HOME}/.virtualenvs/sweetrpg-api-core/bin/pycodestyle",
     "python.linting.pydocstylePath": "${env:HOME}/.virtualenvs/sweetrpg-api-core/bin/pydocstyle",
     "python.linting.pylintPath": "${env:HOME}/.virtualenvs/sweetrpg-api-core/bin/pylint",
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "esbonio.sphinx.confDir": "${workspaceFolder}/docs"
 }
