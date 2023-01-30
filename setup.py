@@ -4,10 +4,10 @@ from setuptools import setup
 setup(
     name="sweetrpg-api-core",
     install_requires=[
-        "Flask==2.2.2",
+        "Flask<3.0",
         "sweetrpg-db",
         "sweetrpg-model-core",
-        "mongoengine",
+        "mongoengine @ git+https://github.com/MongoEngine/mongoengine.git",
         "Flask-REST-JSONAPI",
     ],
     extras_require={},
