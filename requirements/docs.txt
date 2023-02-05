@@ -35,8 +35,6 @@ flask==2.2.2
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==2.0.2
-    # via sqlalchemy
 idna==3.4
     # via requests
 imagesize==1.4.1
