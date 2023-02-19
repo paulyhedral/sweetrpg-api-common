@@ -110,7 +110,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.4.2
+tox==4.4.5
     # via -r requirements/tests.in
 typing-extensions==4.5.0
     # via sqlalchemy
