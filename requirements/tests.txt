@@ -36,7 +36,7 @@ filelock==3.9.0
     # via
     #   tox
     #   virtualenv
-flask==2.2.2
+flask==2.2.3
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
@@ -96,7 +96,7 @@ python-dotenv==0.21.1
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.3
+sqlalchemy==2.0.4
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.54
     # via -r requirements/pkg.in
@@ -112,9 +112,9 @@ tomli==2.0.1
     #   tox
 tox==4.4.2
     # via -r requirements/tests.in
-typing-extensions==4.4.0
+typing-extensions==4.5.0
     # via sqlalchemy
 virtualenv==20.19.0
     # via tox
-werkzeug==2.2.2
+werkzeug==2.2.3
     # via flask
