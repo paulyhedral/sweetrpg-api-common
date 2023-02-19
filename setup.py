@@ -7,7 +7,7 @@ setup(
         "Flask<3.0",
         "sweetrpg-db",
         "sweetrpg-model-core",
-        "mongoengine @ git+https://github.com/MongoEngine/mongoengine.git",
+        "mongoengine==0.26.0",
         "Flask-REST-JSONAPI",
     ],
     extras_require={},
