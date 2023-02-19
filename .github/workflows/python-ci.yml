@@ -103,11 +103,8 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - repo: model-core
-                    - repo: db
                     - repo: library-objects
                     - repo: library-api
-                    - repo: web-core
                     - repo: client
         steps:
             - uses: juztcode/repo-ditpatch-action@v1

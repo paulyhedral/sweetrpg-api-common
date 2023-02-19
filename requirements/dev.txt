@@ -67,8 +67,6 @@ flask==2.2.3
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==2.0.2
-    # via sqlalchemy
 idna==3.4
     # via requests
 imagesize==1.4.1
@@ -205,7 +203,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.4.2
+tox==4.4.5
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
