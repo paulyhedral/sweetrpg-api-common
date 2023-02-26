@@ -125,7 +125,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==2.0.4
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.91
+sweetrpg-db==0.0.92
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.106
     # via
@@ -133,7 +133,7 @@ sweetrpg-model-core==0.0.106
     #   sweetrpg-db
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.4
+types-docutils==0.19.1.6
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
