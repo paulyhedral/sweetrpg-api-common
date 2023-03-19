@@ -38,7 +38,7 @@ colorama==0.4.6
     #   typer
 commonmark==0.9.1
     # via rich
-coverage[toml]==7.2.1
+coverage[toml]==7.2.2
     # via
     #   coverage-badge
     #   pytest-cov
@@ -55,9 +55,9 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-exceptiongroup==1.1.0
+exceptiongroup==1.1.1
     # via pytest
-filelock==3.9.0
+filelock==3.10.0
     # via
     #   tox
     #   virtualenv
@@ -111,7 +111,7 @@ packaging==23.0
     #   tox
 pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
-pathspec==0.11.0
+pathspec==0.11.1
     # via black
 pip-tools==6.12.2
     # via -r requirements/dev.in
@@ -136,7 +136,7 @@ pymongo[srv]==4.3.3
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.5.0
+pyproject-api==1.5.1
     # via tox
 pyproject-hooks==1.0.0
     # via build
@@ -152,7 +152,7 @@ requests==2.28.2
     # via sphinx
 rich==12.6.0
     # via typer
-rstcheck==6.1.1
+rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
@@ -187,9 +187,9 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.5.post1
+sqlalchemy==2.0.7
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.97
+sweetrpg-db==0.0.98
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.109
     # via
@@ -216,11 +216,11 @@ typing-extensions==4.5.0
     #   sqlalchemy
 urllib3==1.26.15
     # via requests
-virtualenv==20.20.0
+virtualenv==20.21.0
     # via tox
 werkzeug==2.2.3
     # via flask
-wheel==0.38.4
+wheel==0.40.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
