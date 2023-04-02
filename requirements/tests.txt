@@ -32,7 +32,7 @@ dnspython==2.3.0
     #   sweetrpg-db
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.10.5
+filelock==3.10.7
     # via
     #   tox
     #   virtualenv
@@ -97,9 +97,9 @@ python-dotenv==0.21.1
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.7
+sqlalchemy==2.0.8
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.101
+sweetrpg-db==0.0.102
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.111
     # via
