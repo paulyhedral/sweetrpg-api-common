@@ -14,7 +14,7 @@ babel==2.12.1
     # via sphinx
 black==23.3.0
     # via -r requirements/dev.in
-blinker==1.5
+blinker==1.6
     # via -r requirements/tests.in
 build==0.10.0
     # via pip-tools
@@ -212,6 +212,7 @@ types-docutils==0.19.1.7
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
+    #   blinker
     #   pydantic
     #   sqlalchemy
 urllib3==1.26.15
