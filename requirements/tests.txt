@@ -91,7 +91,7 @@ pytest==7.3.0
     #   pytest-cov
 pytest-cov==4.0.0
     # via -r requirements/tests.in
-python-dotenv==0.21.1
+python-dotenv==1.0.0
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
