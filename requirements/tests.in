@@ -4,5 +4,5 @@ blinker
 coverage-badge==1.1.0
 pytest
 pytest-cov==4.0.0
-tox==4.4.5
+tox==4.4.11
 python-dotenv==0.21.1
