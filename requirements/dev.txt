@@ -12,7 +12,7 @@ babel==2.12.1
     # via sphinx
 black==23.3.0
     # via -r requirements/dev.in
-blinker==1.6
+blinker==1.6.1
     # via -r requirements/tests.in
 build==0.10.0
     # via pip-tools
