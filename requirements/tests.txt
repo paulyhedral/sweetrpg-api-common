@@ -6,7 +6,7 @@
 #
 asgiref==3.6.0
     # via -r requirements/tests.in
-blinker==1.6
+blinker==1.6.2
     # via -r requirements/tests.in
 cachetools==5.3.0
     # via tox
@@ -64,7 +64,7 @@ mongoengine==0.26.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-packaging==23.0
+packaging==23.1
     # via
     #   marshmallow
     #   pyproject-api
@@ -85,7 +85,7 @@ pymongo[srv]==4.3.3
     #   sweetrpg-model-core
 pyproject-api==1.5.1
     # via tox
-pytest==7.3.0
+pytest==7.3.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -97,7 +97,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.9
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.105
+sweetrpg-db==0.0.106
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.113
     # via
@@ -112,9 +112,7 @@ tomli==2.0.1
 tox==4.4.5
     # via -r requirements/tests.in
 typing-extensions==4.5.0
-    # via
-    #   blinker
-    #   sqlalchemy
+    # via sqlalchemy
 virtualenv==20.21.0
     # via tox
 werkzeug==2.2.3

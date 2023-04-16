@@ -63,7 +63,7 @@ mongoengine==0.26.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-packaging==23.0
+packaging==23.1
     # via
     #   marshmallow
     #   pallets-sphinx-themes
@@ -72,7 +72,7 @@ pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
 pydantic==1.10.7
     # via rstcheck-core
-pygments==2.14.0
+pygments==2.15.0
     # via
     #   rich
     #   sphinx
@@ -123,7 +123,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==2.0.9
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.105
+sweetrpg-db==0.0.106
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.113
     # via
