@@ -55,7 +55,7 @@ docutils==0.18.1
     #   sphinx-tabs
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.11.0
+filelock==3.12.0
     # via
     #   tox
     #   virtualenv
@@ -124,7 +124,7 @@ pluggy==1.0.0
     #   tox
 pydantic==1.10.7
     # via rstcheck-core
-pygments==2.15.0
+pygments==2.15.1
     # via
     #   rich
     #   sphinx
@@ -185,9 +185,9 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.9
+sqlalchemy==2.0.10
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.107
+sweetrpg-db==0.0.108
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.114
     # via
@@ -214,7 +214,7 @@ typing-extensions==4.5.0
     #   sqlalchemy
 urllib3==1.26.15
     # via requests
-virtualenv==20.21.0
+virtualenv==20.22.0
     # via tox
 werkzeug==2.2.3
     # via flask
