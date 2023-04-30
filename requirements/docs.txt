@@ -8,6 +8,8 @@ alabaster==0.7.13
     # via sphinx
 babel==2.12.1
     # via sphinx
+blinker==1.6.2
+    # via flask
 certifi==2022.12.7
     # via requests
 charset-normalizer==3.1.0
@@ -29,7 +31,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-flask==2.2.3
+flask==2.3.1
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
@@ -68,7 +70,7 @@ packaging==23.1
     #   marshmallow
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.0.3
+pallets-sphinx-themes==2.1.0
     # via -r requirements/docs.in
 pydantic==1.10.7
     # via rstcheck-core
@@ -82,7 +84,7 @@ pymongo[srv]==4.3.3
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-requests==2.28.2
+requests==2.29.0
     # via sphinx
 rich==12.6.0
     # via typer
@@ -121,9 +123,9 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.10
+sqlalchemy==2.0.11
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.109
+sweetrpg-db==0.0.110
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.115
     # via
@@ -131,7 +133,7 @@ sweetrpg-model-core==0.0.115
     #   sweetrpg-db
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.7
+types-docutils==0.19.1.8
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
@@ -139,5 +141,5 @@ typing-extensions==4.5.0
     #   sqlalchemy
 urllib3==1.26.15
     # via requests
-werkzeug==2.2.3
+werkzeug==2.3.2
     # via flask
