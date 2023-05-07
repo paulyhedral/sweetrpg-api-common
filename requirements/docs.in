@@ -1,6 +1,6 @@
 -r pkg.in
 Pallets-Sphinx-Themes
-Sphinx==6.1.3
+Sphinx==7.0.0
 sphinx-issues
 sphinxcontrib-log-cabinet
 sphinx-tabs
