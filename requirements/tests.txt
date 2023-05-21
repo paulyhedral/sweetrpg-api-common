@@ -97,9 +97,9 @@ python-dotenv==0.21.1
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.13
+sqlalchemy==2.0.15
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.115
+sweetrpg-db==0.0.116
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.118
     # via
