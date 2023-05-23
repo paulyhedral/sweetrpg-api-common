@@ -28,6 +28,7 @@ distlib==0.3.6
     # via virtualenv
 dnspython==2.3.0
     # via
+    #   -r requirements/tests.in
     #   pymongo
     #   sweetrpg-db
 exceptiongroup==1.1.1
@@ -42,8 +43,6 @@ flask==2.3.2
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==2.0.2
-    # via sqlalchemy
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
@@ -62,7 +61,7 @@ marshmallow==3.19.0
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.26.0
+mongoengine==0.27.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -91,9 +90,15 @@ pytest==7.3.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
+    #   pytest-env
+    #   pytest-ordering
 pytest-cov==4.0.0
     # via -r requirements/tests.in
-python-dotenv==0.21.1
+pytest-env==0.8.1
+    # via -r requirements/tests.in
+pytest-ordering==0.6
+    # via -r requirements/tests.in
+python-dotenv==1.0.0
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
@@ -111,7 +116,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.4.5
+tox==4.5.1
     # via -r requirements/tests.in
 typing-extensions==4.6.0
     # via sqlalchemy

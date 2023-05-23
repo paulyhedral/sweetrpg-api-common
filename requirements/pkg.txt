@@ -18,8 +18,6 @@ flask==2.3.2
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==2.0.2
-    # via sqlalchemy
 itsdangerous==2.1.2
     # via flask
 jinja2==3.1.2
@@ -36,7 +34,7 @@ marshmallow==3.19.0
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.26.0
+mongoengine==0.27.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
