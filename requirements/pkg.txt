@@ -51,13 +51,13 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.15
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.116
+sweetrpg-db==0.0.118
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.119
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-typing-extensions==4.5.0
+typing-extensions==4.6.0
     # via sqlalchemy
 werkzeug==2.3.4
     # via flask

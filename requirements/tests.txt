@@ -99,7 +99,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.15
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.117
+sweetrpg-db==0.0.118
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.119
     # via
@@ -113,7 +113,7 @@ tomli==2.0.1
     #   tox
 tox==4.4.5
     # via -r requirements/tests.in
-typing-extensions==4.5.0
+typing-extensions==4.6.0
     # via sqlalchemy
 virtualenv==20.23.0
     # via tox
