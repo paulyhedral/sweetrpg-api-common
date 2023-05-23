@@ -99,7 +99,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.15
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.118
+sweetrpg-db==0.0.119
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.121
     # via
