@@ -4,13 +4,13 @@
 #
 #    pip-compile requirements/tests.in
 #
-asgiref==3.6.0
+asgiref==3.7.2
     # via -r requirements/tests.in
 blinker==1.6.2
     # via
     #   -r requirements/tests.in
     #   flask
-cachetools==5.3.0
+cachetools==5.3.1
     # via tox
 chardet==5.1.0
     # via tox
@@ -18,7 +18,7 @@ click==8.1.3
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.2.5
+coverage[toml]==7.2.6
     # via
     #   coverage-badge
     #   pytest-cov
@@ -94,7 +94,7 @@ pytest==7.3.1
     #   pytest-cov
     #   pytest-env
     #   pytest-ordering
-pytest-cov==4.0.0
+pytest-cov==4.1.0
     # via -r requirements/tests.in
 pytest-env==0.8.1
     # via -r requirements/tests.in
@@ -106,7 +106,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.15
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.122
+sweetrpg-db==0.0.123
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.123
     # via
@@ -118,10 +118,12 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.5.1
+tox==4.5.2
     # via -r requirements/tests.in
-typing-extensions==4.6.0
-    # via sqlalchemy
+typing-extensions==4.6.2
+    # via
+    #   asgiref
+    #   sqlalchemy
 virtualenv==20.23.0
     # via tox
 werkzeug==2.3.4
