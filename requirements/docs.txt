@@ -70,9 +70,9 @@ packaging==23.1
     #   marshmallow
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.1.0
+pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==1.10.8
+pydantic==1.10.9
     # via rstcheck-core
 pygments==2.15.1
     # via
@@ -123,9 +123,9 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.15
+sqlalchemy==2.0.16
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.125
+sweetrpg-db==0.0.126
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.125
     # via
@@ -139,7 +139,7 @@ typing-extensions==4.6.3
     # via
     #   pydantic
     #   sqlalchemy
-urllib3==2.0.2
+urllib3==2.0.3
     # via requests
-werkzeug==2.3.4
+werkzeug==2.3.6
     # via flask
