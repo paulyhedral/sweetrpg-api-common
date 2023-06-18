@@ -58,7 +58,7 @@ docutils==0.18.1
     #   sphinx-tabs
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.12.1
+filelock==3.12.2
     # via
     #   tox
     #   virtualenv
@@ -137,7 +137,7 @@ pymongo[srv]==4.3.3
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.5.1
+pyproject-api==1.5.2
     # via tox
 pyproject-hooks==1.0.0
     # via build
@@ -149,7 +149,7 @@ pytest==7.3.2
     #   pytest-ordering
 pytest-cov==4.1.0
     # via -r requirements/tests.in
-pytest-env==0.8.1
+pytest-env==0.8.2
     # via -r requirements/tests.in
 pytest-ordering==0.6
     # via -r requirements/tests.in
@@ -196,7 +196,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==2.0.16
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.127
+sweetrpg-db==0.0.128
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.126
     # via
@@ -211,7 +211,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.6.0
+tox==4.6.2
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
@@ -224,7 +224,7 @@ typing-extensions==4.6.3
     #   sqlalchemy
 urllib3==2.0.3
     # via requests
-virtualenv==20.23.0
+virtualenv==20.23.1
     # via tox
 werkzeug==2.3.6
     # via flask
