@@ -116,12 +116,12 @@ pathspec==0.11.1
     # via black
 pip-tools==6.13.0
     # via -r requirements/dev.in
-platformdirs==3.5.3
+platformdirs==3.8.0
     # via
     #   black
     #   tox
     #   virtualenv
-pluggy==1.0.0
+pluggy==1.2.0
     # via
     #   pytest
     #   tox
@@ -132,7 +132,7 @@ pygments==2.15.1
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.3.3
+pymongo[srv]==4.4.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -141,7 +141,7 @@ pyproject-api==1.5.2
     # via tox
 pyproject-hooks==1.0.0
     # via build
-pytest==7.3.2
+pytest==7.4.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -194,9 +194,9 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.16
+sqlalchemy==2.0.17
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.129
+sweetrpg-db==0.0.130
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.127
     # via
@@ -211,7 +211,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.6.2
+tox==4.6.3
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
