@@ -114,7 +114,7 @@ pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
 pathspec==0.11.1
     # via black
-pip-tools==6.13.0
+pip-tools==6.14.0
     # via -r requirements/dev.in
 platformdirs==3.8.0
     # via
@@ -125,7 +125,7 @@ pluggy==1.2.0
     # via
     #   pytest
     #   tox
-pydantic==1.10.9
+pydantic==1.10.10
     # via rstcheck-core
 pygments==2.15.1
     # via
@@ -196,7 +196,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==2.0.17
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.131
+sweetrpg-db==0.0.132
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.128
     # via
@@ -207,6 +207,7 @@ tomli==2.0.1
     #   black
     #   build
     #   coverage
+    #   pip-tools
     #   pyproject-api
     #   pyproject-hooks
     #   pytest
@@ -217,7 +218,7 @@ typer[all]==0.7.0
     # via rstcheck
 types-docutils==0.19.1.9
     # via rstcheck-core
-typing-extensions==4.6.3
+typing-extensions==4.7.0
     # via
     #   asgiref
     #   pydantic
