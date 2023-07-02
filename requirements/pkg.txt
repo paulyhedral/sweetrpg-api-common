@@ -53,7 +53,7 @@ sqlalchemy==2.0.17
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.132
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.128
+sweetrpg-model-core==0.0.129
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
