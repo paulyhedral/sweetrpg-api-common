@@ -104,6 +104,7 @@ jobs:
             matrix:
                 include:
                     - repo: library-objects
+                    - repo: catalog-objects
                     - repo: library-api
                     - repo: client
         steps:
