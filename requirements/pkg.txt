@@ -68,7 +68,7 @@ sniffio==1.3.0
     #   httpcore
 sqlalchemy==2.0.19
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.136
+sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.131
     # via
