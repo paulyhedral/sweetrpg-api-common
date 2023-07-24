@@ -242,7 +242,7 @@ typing-extensions==4.7.1
     #   sqlalchemy
 urllib3==2.0.4
     # via requests
-virtualenv==20.24.1
+virtualenv==20.24.2
     # via tox
 werkzeug==2.3.6
     # via flask

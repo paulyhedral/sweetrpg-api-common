@@ -141,7 +141,7 @@ typing-extensions==4.7.1
     # via
     #   asgiref
     #   sqlalchemy
-virtualenv==20.24.1
+virtualenv==20.24.2
     # via tox
 werkzeug==2.3.6
     # via flask
