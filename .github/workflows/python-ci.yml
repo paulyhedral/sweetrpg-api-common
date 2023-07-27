@@ -48,7 +48,7 @@ jobs:
                   python -m pip install -U pip
             - name: get-pip-cache-dir
               id: pip-cache
-              run: echo "::set-output name=dir::$(pip cache dir)"
+              run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
             - name: cache-pip
               uses: actions/cache@v2
               with:
@@ -89,7 +89,7 @@ jobs:
               with:
                   fetch-depth: 0
             - name: publish
-              uses: relekang/python-semantic-release@master
+              uses: relekang/python-semantic-release@v7.34.6
               with:
                   additional_options: "--patch"
                   github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -106,6 +106,7 @@ jobs:
                     - repo: library-objects
                     - repo: catalog-objects
                     - repo: library-api
+                    - repo: catalog-api
                     - repo: client
         steps:
             - uses: juztcode/repo-ditpatch-action@v1
