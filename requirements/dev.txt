@@ -169,7 +169,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==6.2.1
+sphinx==7.1.1
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
