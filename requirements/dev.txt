@@ -22,7 +22,7 @@ cachetools==5.3.1
     # via tox
 certifi==2023.7.22
     # via requests
-chardet==5.1.0
+chardet==5.2.0
     # via tox
 charset-normalizer==3.2.0
     # via requests
@@ -169,7 +169,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.1.1
+sphinx==7.1.2
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -198,7 +198,7 @@ sqlalchemy==2.0.19
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.136
+sweetrpg-model-core==0.0.137
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -229,7 +229,7 @@ virtualenv==20.24.2
     # via tox
 werkzeug==2.3.6
     # via flask
-wheel==0.41.0
+wheel==0.41.1
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
