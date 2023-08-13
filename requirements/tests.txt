@@ -18,7 +18,7 @@ click==8.1.6
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.2.7
+coverage[toml]==7.3.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -26,7 +26,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.7
     # via virtualenv
-dnspython==2.4.1
+dnspython==2.4.2
     # via
     #   -r requirements/tests.in
     #   pymongo
@@ -118,13 +118,13 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.6.4
+tox==4.8.0
     # via -r requirements/tests.in
 typing-extensions==4.7.1
     # via
     #   asgiref
     #   sqlalchemy
-virtualenv==20.24.2
+virtualenv==20.24.3
     # via tox
 werkzeug==2.3.6
     # via flask
