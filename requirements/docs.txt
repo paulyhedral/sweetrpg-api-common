@@ -31,7 +31,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-flask==2.3.2
+flask==2.3.3
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
@@ -79,7 +79,7 @@ pygments==2.16.1
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.4.1
+pymongo[srv]==4.5.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -98,7 +98,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.2.2
+sphinx==7.2.3
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -126,7 +126,7 @@ sphinxcontrib-log-cabinet==1.0.1
     # via -r requirements/docs.in
 sphinxcontrib-qthelp==1.0.6
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.8
+sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
 sqlalchemy==2.0.20
     # via flask-rest-jsonapi
