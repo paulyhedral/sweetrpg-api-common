@@ -12,7 +12,7 @@ asgiref==3.7.2
     # via -r requirements/tests.in
 babel==2.12.1
     # via sphinx
-black==23.9.0
+black==23.9.1
     # via -r requirements/dev.in
 blinker==1.6.2
     # via
