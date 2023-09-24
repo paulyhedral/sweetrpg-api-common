@@ -104,7 +104,7 @@ python-dotenv==1.0.0
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.20
+sqlalchemy==2.0.21
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -120,7 +120,7 @@ tomli==2.0.1
     #   tox
 tox==4.11.3
     # via -r requirements/tests.in
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
     #   asgiref
     #   sqlalchemy

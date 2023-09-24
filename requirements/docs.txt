@@ -92,7 +92,7 @@ pymongo[srv]==4.5.0
     #   sweetrpg-model-core
 requests==2.31.0
     # via sphinx
-rich==13.5.2
+rich==13.5.3
     # via typer
 rstcheck==6.2.0
     # via -r requirements/docs.in
@@ -134,7 +134,7 @@ sphinxcontrib-qthelp==1.0.6
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
-sqlalchemy==2.0.20
+sqlalchemy==2.0.21
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -144,13 +144,13 @@ sweetrpg-model-core==0.0.144
     #   sweetrpg-db
 typer[all]==0.9.0
     # via rstcheck
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.0.4
+urllib3==2.0.5
     # via requests
 werkzeug==2.3.7
     # via flask
