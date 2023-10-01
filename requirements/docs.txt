@@ -14,7 +14,7 @@ blinker==1.6.2
     # via flask
 certifi==2023.7.22
     # via requests
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via requests
 click==8.1.7
     # via
@@ -76,9 +76,9 @@ packaging==23.1
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.3.0
+pydantic==2.4.2
     # via rstcheck-core
-pydantic-core==2.6.3
+pydantic-core==2.10.1
     # via pydantic
 pygments==2.16.1
     # via
@@ -92,7 +92,7 @@ pymongo[srv]==4.5.0
     #   sweetrpg-model-core
 requests==2.31.0
     # via sphinx
-rich==13.5.3
+rich==13.6.0
     # via typer
 rstcheck==6.2.0
     # via -r requirements/docs.in
@@ -152,5 +152,5 @@ typing-extensions==4.8.0
     #   typer
 urllib3==2.0.5
     # via requests
-werkzeug==2.3.7
+werkzeug==3.0.0
     # via flask

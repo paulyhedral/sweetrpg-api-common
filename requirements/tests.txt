@@ -126,5 +126,5 @@ typing-extensions==4.8.0
     #   sqlalchemy
 virtualenv==20.24.5
     # via tox
-werkzeug==2.3.7
+werkzeug==3.0.0
     # via flask
