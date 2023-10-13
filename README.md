@@ -13,7 +13,6 @@
 [![Built with love](https://ForTheBadge.com/images/badges/built-with-love.svg)](https://ForTheBadge.com/images/badges/built-with-love.svg)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/259544218b7d81de38d1/maintainability)](https://codeclimate.com/github/sweetrpg/api-core/maintainability)
-Put something useful here.
 
 ## Documentation
 
