@@ -84,6 +84,7 @@ pluggy==1.3.0
 pymongo[srv]==4.5.0
     # via
     #   mongoengine
+    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.6.1

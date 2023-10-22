@@ -45,6 +45,7 @@ packaging==23.2
 pymongo[srv]==4.5.0
     # via
     #   mongoengine
+    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 six==1.16.0

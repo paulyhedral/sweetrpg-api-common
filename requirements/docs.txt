@@ -88,6 +88,7 @@ pygments==2.16.1
 pymongo[srv]==4.5.0
     # via
     #   mongoengine
+    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 requests==2.31.0
@@ -143,14 +144,16 @@ sweetrpg-model-core==0.0.153
     #   -r requirements/pkg.in
     #   sweetrpg-db
 typer[all]==0.9.0
-    # via rstcheck
+    # via
+    #   rstcheck
+    #   typer
 typing-extensions==4.8.0
     # via
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.0.6
+urllib3==2.0.7
     # via requests
 werkzeug==3.0.0
     # via flask
