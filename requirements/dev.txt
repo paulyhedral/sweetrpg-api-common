@@ -141,7 +141,6 @@ pygments==2.16.1
 pymongo[srv]==4.5.0
     # via
     #   mongoengine
-    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.6.1
@@ -190,7 +189,7 @@ sphinx==7.2.6
     #   sphinxcontrib-serializinghtml
 sphinx-issues==3.0.1
     # via -r requirements/docs.in
-sphinx-tabs==3.4.1
+sphinx-tabs==3.4.4
     # via -r requirements/docs.in
 sphinxcontrib-applehelp==1.0.7
     # via sphinx
@@ -227,9 +226,7 @@ tomli==2.0.1
 tox==4.11.3
     # via -r requirements/tests.in
 typer[all]==0.9.0
-    # via
-    #   rstcheck
-    #   typer
+    # via rstcheck
 typing-extensions==4.8.0
     # via
     #   asgiref
