@@ -12,7 +12,7 @@ dnspython==2.4.2
     # via
     #   pymongo
     #   sweetrpg-db
-flask==2.3.3
+flask==3.0.0
     # via
     #   -r requirements/pkg.in
     #   flask-rest-jsonapi
@@ -45,7 +45,6 @@ packaging==23.2
 pymongo[srv]==4.5.0
     # via
     #   mongoengine
-    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 six==1.16.0
