@@ -10,11 +10,11 @@ annotated-types==0.6.0
     # via pydantic
 babel==2.13.1
     # via sphinx
-blinker==1.6.3
+blinker==1.7.0
     # via flask
 certifi==2023.7.22
     # via requests
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via
@@ -85,7 +85,7 @@ pygments==2.16.1
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.5.0
+pymongo[srv]==4.6.0
     # via
     #   mongoengine
     #   pymongo
@@ -135,7 +135,7 @@ sphinxcontrib-qthelp==1.0.6
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
-sqlalchemy==2.0.22
+sqlalchemy==2.0.23
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
