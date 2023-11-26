@@ -31,7 +31,7 @@ dnspython==2.4.2
     #   -r requirements/tests.in
     #   pymongo
     #   sweetrpg-db
-exceptiongroup==1.1.3
+exceptiongroup==1.2.0
     # via pytest
 filelock==3.13.1
     # via
@@ -73,7 +73,7 @@ packaging==23.2
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==3.11.0
+platformdirs==4.0.0
     # via
     #   tox
     #   virtualenv
@@ -126,7 +126,7 @@ typing-extensions==4.8.0
     # via
     #   asgiref
     #   sqlalchemy
-virtualenv==20.24.6
+virtualenv==20.24.7
     # via tox
 werkzeug==3.0.1
     # via flask
