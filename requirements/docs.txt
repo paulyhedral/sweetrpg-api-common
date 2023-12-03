@@ -85,7 +85,7 @@ pygments==2.17.2
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.0
+pymongo[srv]==4.6.1
     # via
     #   mongoengine
     #   pymongo
