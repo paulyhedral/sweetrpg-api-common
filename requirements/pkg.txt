@@ -58,7 +58,7 @@ sweetrpg-model-core==0.0.153
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-typing-extensions==4.8.0
+typing-extensions==4.9.0
     # via sqlalchemy
 werkzeug==3.0.1
     # via flask
