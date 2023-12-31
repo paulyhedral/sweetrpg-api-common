@@ -38,7 +38,7 @@ colorama==0.4.6
     # via
     #   tox
     #   typer
-coverage[toml]==7.3.4
+coverage[toml]==7.4.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -206,7 +206,7 @@ sphinxcontrib-qthelp==1.0.6
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
-sqlalchemy==2.0.23
+sqlalchemy==2.0.24
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
