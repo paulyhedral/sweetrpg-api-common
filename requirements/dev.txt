@@ -46,7 +46,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.8
     # via virtualenv
-dnspython==2.5.0
+dnspython==2.6.0
     # via
     #   -r requirements/tests.in
     #   pymongo
@@ -118,7 +118,7 @@ pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
 pathspec==0.12.1
     # via black
-pip-tools==7.3.0
+pip-tools==7.4.0
     # via -r requirements/dev.in
 platformdirs==4.2.0
     # via
@@ -147,7 +147,9 @@ pymongo[srv]==4.6.1
 pyproject-api==1.6.1
     # via tox
 pyproject-hooks==1.0.0
-    # via build
+    # via
+    #   build
+    #   pip-tools
 pytest==7.4.4
     # via
     #   -r requirements/tests.in
@@ -201,7 +203,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.25
+sqlalchemy==2.0.27
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -220,12 +222,10 @@ tomli==2.0.1
     #   pytest
     #   pytest-env
     #   tox
-tox==4.12.1
+tox==4.13.0
     # via -r requirements/tests.in
 typer[all]==0.9.0
-    # via
-    #   rstcheck
-    #   typer
+    # via rstcheck
 typing-extensions==4.9.0
     # via
     #   asgiref
