@@ -38,7 +38,7 @@ colorama==0.4.6
     # via
     #   tox
     #   typer
-coverage[toml]==7.4.1
+coverage[toml]==7.4.3
     # via
     #   coverage-badge
     #   pytest-cov
@@ -46,7 +46,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.8
     # via virtualenv
-dnspython==2.6.0
+dnspython==2.6.1
     # via
     #   -r requirements/tests.in
     #   pymongo
@@ -129,16 +129,16 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
-pydantic==2.6.1
+pydantic==2.6.2
     # via rstcheck-core
-pydantic-core==2.16.2
+pydantic-core==2.16.3
     # via pydantic
 pygments==2.17.2
     # via
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.1
+pymongo[srv]==4.6.2
     # via
     #   mongoengine
     #   pymongo
@@ -234,9 +234,9 @@ typing-extensions==4.9.0
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.0
+urllib3==2.2.1
     # via requests
-virtualenv==20.25.0
+virtualenv==20.25.1
     # via tox
 werkzeug==3.0.1
     # via flask

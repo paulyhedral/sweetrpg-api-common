@@ -22,7 +22,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via typer
-dnspython==2.6.0
+dnspython==2.6.1
     # via
     #   pymongo
     #   sweetrpg-db
@@ -76,16 +76,16 @@ packaging==23.2
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.6.1
+pydantic==2.6.2
     # via rstcheck-core
-pydantic-core==2.16.2
+pydantic-core==2.16.3
     # via pydantic
 pygments==2.17.2
     # via
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.1
+pymongo[srv]==4.6.2
     # via
     #   mongoengine
     #   pymongo
@@ -146,7 +146,7 @@ typing-extensions==4.9.0
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.0
+urllib3==2.2.1
     # via requests
 werkzeug==3.0.1
     # via flask
