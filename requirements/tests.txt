@@ -10,7 +10,7 @@ blinker==1.7.0
     # via
     #   -r requirements/tests.in
     #   flask
-cachetools==5.3.2
+cachetools==5.3.3
     # via tox
 chardet==5.2.0
     # via tox
@@ -55,7 +55,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.20.2
+marshmallow==3.21.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -63,7 +63,7 @@ marshmallow==3.20.2
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.27.0
+mongoengine==0.28.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -122,7 +122,7 @@ tomli==2.0.1
     #   tox
 tox==4.13.0
     # via -r requirements/tests.in
-typing-extensions==4.9.0
+typing-extensions==4.10.0
     # via
     #   asgiref
     #   sqlalchemy

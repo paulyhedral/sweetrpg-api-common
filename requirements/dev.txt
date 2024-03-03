@@ -18,9 +18,9 @@ blinker==1.7.0
     # via
     #   -r requirements/tests.in
     #   flask
-build==1.0.3
+build==1.1.1
     # via pip-tools
-cachetools==5.3.2
+cachetools==5.3.3
     # via tox
 certifi==2024.2.2
     # via requests
@@ -88,7 +88,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.20.2
+marshmallow==3.21.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -98,7 +98,7 @@ marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.27.0
+mongoengine==0.28.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -129,7 +129,7 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
-pydantic==2.6.2
+pydantic==2.6.3
     # via rstcheck-core
 pydantic-core==2.16.3
     # via pydantic
@@ -166,7 +166,7 @@ python-dotenv==1.0.1
     # via -r requirements/tests.in
 requests==2.31.0
     # via sphinx
-rich==13.7.0
+rich==13.7.1
     # via typer
 rstcheck==6.2.0
     # via -r requirements/docs.in
@@ -226,7 +226,7 @@ tox==4.13.0
     # via -r requirements/tests.in
 typer[all]==0.9.0
     # via rstcheck
-typing-extensions==4.9.0
+typing-extensions==4.10.0
     # via
     #   asgiref
     #   black
