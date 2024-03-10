@@ -98,7 +98,7 @@ marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.28.1
+mongoengine==0.28.2
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -118,7 +118,7 @@ pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
 pathspec==0.12.1
     # via black
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements/dev.in
 platformdirs==4.2.0
     # via
@@ -222,7 +222,7 @@ tomli==2.0.1
     #   pytest
     #   pytest-env
     #   tox
-tox==4.13.0
+tox==4.14.1
     # via -r requirements/tests.in
 typer[all]==0.9.0
     # via rstcheck

@@ -63,7 +63,7 @@ marshmallow==3.21.1
     #   sweetrpg-model-core
 marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
-mongoengine==0.28.1
+mongoengine==0.28.2
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -120,7 +120,7 @@ tomli==2.0.1
     #   pytest
     #   pytest-env
     #   tox
-tox==4.13.0
+tox==4.14.1
     # via -r requirements/tests.in
 typing-extensions==4.10.0
     # via
