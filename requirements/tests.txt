@@ -18,7 +18,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.4.3
+coverage[toml]==7.4.4
     # via
     #   coverage-badge
     #   pytest-cov
@@ -67,7 +67,7 @@ mongoengine==0.28.2
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-packaging==23.2
+packaging==24.0
     # via
     #   marshmallow
     #   pyproject-api

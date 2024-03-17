@@ -69,14 +69,14 @@ mongoengine==0.28.2
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-packaging==23.2
+packaging==24.0
     # via
     #   marshmallow
     #   pallets-sphinx-themes
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.6.3
+pydantic==2.6.4
     # via rstcheck-core
 pydantic-core==2.16.3
     # via pydantic

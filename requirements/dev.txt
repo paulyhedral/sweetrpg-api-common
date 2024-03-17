@@ -38,7 +38,7 @@ colorama==0.4.6
     # via
     #   tox
     #   typer
-coverage[toml]==7.4.3
+coverage[toml]==7.4.4
     # via
     #   coverage-badge
     #   pytest-cov
@@ -104,7 +104,7 @@ mongoengine==0.28.2
     #   sweetrpg-db
 mypy-extensions==1.0.0
     # via black
-packaging==23.2
+packaging==24.0
     # via
     #   black
     #   build
@@ -129,7 +129,7 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
-pydantic==2.6.3
+pydantic==2.6.4
     # via rstcheck-core
 pydantic-core==2.16.3
     # via pydantic
@@ -240,7 +240,7 @@ virtualenv==20.25.1
     # via tox
 werkzeug==3.0.1
     # via flask
-wheel==0.42.0
+wheel==0.43.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
