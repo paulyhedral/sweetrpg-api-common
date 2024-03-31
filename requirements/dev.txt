@@ -18,7 +18,7 @@ blinker==1.7.0
     # via
     #   -r requirements/tests.in
     #   flask
-build==1.1.1
+build==1.2.1
     # via pip-tools
 cachetools==5.3.3
     # via tox
@@ -33,11 +33,9 @@ click==8.1.7
     #   black
     #   flask
     #   pip-tools
-    #   typer
+    #   typer-slim
 colorama==0.4.6
-    # via
-    #   tox
-    #   typer
+    # via tox
 coverage[toml]==7.4.4
     # via
     #   coverage-badge
@@ -58,7 +56,7 @@ docutils==0.20.1
     #   sphinx-tabs
 exceptiongroup==1.2.0
     # via pytest
-filelock==3.13.1
+filelock==3.13.3
     # via
     #   tox
     #   virtualenv
@@ -138,7 +136,7 @@ pygments==2.17.2
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.2
+pymongo[srv]==4.6.3
     # via
     #   mongoengine
     #   pymongo
@@ -167,13 +165,13 @@ python-dotenv==1.0.1
 requests==2.31.0
     # via sphinx
 rich==13.7.1
-    # via typer
+    # via typer-slim
 rstcheck==6.2.1
     # via -r requirements/docs.in
 rstcheck-core==1.2.1
     # via rstcheck
 shellingham==1.5.4
-    # via typer
+    # via typer-slim
 six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
@@ -224,8 +222,14 @@ tomli==2.0.1
     #   tox
 tox==4.14.2
     # via -r requirements/tests.in
-typer[all]==0.10.0
+typer[all]==0.12.0
     # via rstcheck
+typer-cli==0.12.0
+    # via typer
+typer-slim[standard]==0.12.0
+    # via
+    #   typer
+    #   typer-cli
 typing-extensions==4.10.0
     # via
     #   asgiref
@@ -233,7 +237,7 @@ typing-extensions==4.10.0
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
-    #   typer
+    #   typer-slim
 urllib3==2.2.1
     # via requests
 virtualenv==20.25.1
