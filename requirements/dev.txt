@@ -33,7 +33,7 @@ click==8.1.7
     #   black
     #   flask
     #   pip-tools
-    #   typer-slim
+    #   typer
 colorama==0.4.6
     # via tox
 coverage[toml]==7.4.4
@@ -165,13 +165,13 @@ python-dotenv==1.0.1
 requests==2.31.0
     # via sphinx
 rich==13.7.1
-    # via typer-slim
+    # via typer
 rstcheck==6.2.1
     # via -r requirements/docs.in
 rstcheck-core==1.2.1
     # via rstcheck
 shellingham==1.5.4
-    # via typer-slim
+    # via typer
 six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
@@ -222,27 +222,21 @@ tomli==2.0.1
     #   tox
 tox==4.14.2
     # via -r requirements/tests.in
-typer[all]==0.12.0
+typer[all]==0.12.1
     # via rstcheck
-typer-cli==0.12.0
-    # via typer
-typer-slim[standard]==0.12.0
-    # via
-    #   typer
-    #   typer-cli
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   asgiref
     #   black
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
-    #   typer-slim
+    #   typer
 urllib3==2.2.1
     # via requests
 virtualenv==20.25.1
     # via tox
-werkzeug==3.0.1
+werkzeug==3.0.2
     # via flask
 wheel==0.43.0
     # via pip-tools
