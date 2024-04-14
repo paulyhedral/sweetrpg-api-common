@@ -33,7 +33,7 @@ dnspython==2.6.1
     #   sweetrpg-db
 exceptiongroup==1.2.0
     # via pytest
-filelock==3.13.3
+filelock==3.13.4
     # via
     #   tox
     #   virtualenv

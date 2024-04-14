@@ -37,7 +37,7 @@ flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
 greenlet==3.0.3
     # via sqlalchemy
-idna==3.6
+idna==3.7
     # via requests
 imagesize==1.4.1
     # via sphinx
@@ -74,9 +74,9 @@ packaging==24.0
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.6.4
+pydantic==2.7.0
     # via rstcheck-core
-pydantic-core==2.16.3
+pydantic-core==2.18.1
     # via pydantic
 pygments==2.17.2
     # via
@@ -136,7 +136,7 @@ sweetrpg-model-core==0.0.154
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-typer[all]==0.12.1
+typer[all]==0.12.3
     # via rstcheck
 typing-extensions==4.11.0
     # via
