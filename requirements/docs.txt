@@ -24,7 +24,7 @@ dnspython==2.6.1
     # via
     #   pymongo
     #   sweetrpg-db
-docutils==0.20.1
+docutils==0.21.1
     # via
     #   rstcheck-core
     #   sphinx
@@ -41,7 +41,7 @@ idna==3.7
     # via requests
 imagesize==1.4.1
     # via sphinx
-itsdangerous==2.1.2
+itsdangerous==2.2.0
     # via flask
 jinja2==3.1.3
     # via
@@ -72,7 +72,7 @@ packaging==24.0
     #   marshmallow
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.1.1
+pallets-sphinx-themes==2.1.2
     # via -r requirements/docs.in
 pydantic==2.7.0
     # via rstcheck-core
@@ -103,7 +103,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.2.6
+sphinx==7.3.7
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -136,6 +136,8 @@ sweetrpg-model-core==0.0.154
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
+tomli==2.0.1
+    # via sphinx
 typer[all]==0.12.3
     # via rstcheck
 typing-extensions==4.11.0
