@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/pkg.in
 #
-blinker==1.7.0
+blinker==1.8.0
     # via flask
 click==8.1.7
     # via flask
@@ -42,7 +42,7 @@ mongoengine==0.28.2
     #   sweetrpg-db
 packaging==24.0
     # via marshmallow
-pymongo[srv]==4.6.3
+pymongo[srv]==4.7.0
     # via
     #   mongoengine
     #   pymongo

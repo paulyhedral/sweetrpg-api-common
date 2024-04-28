@@ -14,7 +14,7 @@ babel==2.14.0
     # via sphinx
 black==23.12.1
     # via -r requirements/dev.in
-blinker==1.7.0
+blinker==1.8.0
     # via
     #   -r requirements/tests.in
     #   flask
@@ -36,11 +36,11 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.4.4
+coverage[toml]==7.5.0
     # via
     #   coverage-badge
     #   pytest-cov
-coverage-badge==1.1.0
+coverage-badge==1.1.1
     # via -r requirements/tests.in
 distlib==0.3.8
     # via virtualenv
@@ -49,7 +49,7 @@ dnspython==2.6.1
     #   -r requirements/tests.in
     #   pymongo
     #   sweetrpg-db
-docutils==0.21.1
+docutils==0.21.2
     # via
     #   rstcheck-core
     #   sphinx
@@ -118,7 +118,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements/dev.in
-platformdirs==4.2.0
+platformdirs==4.2.1
     # via
     #   black
     #   tox
@@ -127,16 +127,16 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pydantic==2.7.0
+pydantic==2.7.1
     # via rstcheck-core
-pydantic-core==2.18.1
+pydantic-core==2.18.2
     # via pydantic
 pygments==2.17.2
     # via
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.3
+pymongo[srv]==4.7.0
     # via
     #   mongoengine
     #   pymongo
@@ -221,7 +221,7 @@ tomli==2.0.1
     #   pytest-env
     #   sphinx
     #   tox
-tox==4.14.2
+tox==4.15.0
     # via -r requirements/tests.in
 typer[all]==0.12.3
     # via rstcheck
@@ -235,7 +235,7 @@ typing-extensions==4.11.0
     #   typer
 urllib3==2.2.1
     # via requests
-virtualenv==20.25.3
+virtualenv==20.26.0
     # via tox
 werkzeug==3.0.2
     # via flask
