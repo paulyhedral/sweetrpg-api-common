@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/pkg.in
 #
-blinker==1.8.0
+blinker==1.8.1
     # via flask
 click==8.1.7
     # via flask
@@ -28,7 +28,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.1
+marshmallow==3.21.2
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -42,7 +42,7 @@ mongoengine==0.28.2
     #   sweetrpg-db
 packaging==24.0
     # via marshmallow
-pymongo[srv]==4.7.0
+pymongo[srv]==4.7.1
     # via
     #   mongoengine
     #   pymongo

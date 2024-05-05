@@ -6,7 +6,7 @@
 #
 asgiref==3.8.1
     # via -r requirements/tests.in
-blinker==1.8.0
+blinker==1.8.1
     # via
     #   -r requirements/tests.in
     #   flask
@@ -18,7 +18,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.5.0
+coverage[toml]==7.5.1
     # via
     #   coverage-badge
     #   pytest-cov
@@ -33,7 +33,7 @@ dnspython==2.6.1
     #   sweetrpg-db
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.13.4
+filelock==3.14.0
     # via
     #   tox
     #   virtualenv
@@ -55,7 +55,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.1
+marshmallow==3.21.2
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -81,7 +81,7 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.7.0
+pymongo[srv]==4.7.1
     # via
     #   mongoengine
     #   pymongo
@@ -126,7 +126,7 @@ typing-extensions==4.11.0
     # via
     #   asgiref
     #   sqlalchemy
-virtualenv==20.26.0
+virtualenv==20.26.1
     # via tox
 werkzeug==3.0.2
     # via flask

@@ -14,7 +14,7 @@ babel==2.14.0
     # via sphinx
 black==23.12.1
     # via -r requirements/dev.in
-blinker==1.8.0
+blinker==1.8.1
     # via
     #   -r requirements/tests.in
     #   flask
@@ -36,7 +36,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.5.0
+coverage[toml]==7.5.1
     # via
     #   coverage-badge
     #   pytest-cov
@@ -56,7 +56,7 @@ docutils==0.21.2
     #   sphinx-tabs
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.13.4
+filelock==3.14.0
     # via
     #   tox
     #   virtualenv
@@ -86,7 +86,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.1
+marshmallow==3.21.2
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -112,7 +112,7 @@ packaging==24.0
     #   pytest
     #   sphinx
     #   tox
-pallets-sphinx-themes==2.1.2
+pallets-sphinx-themes==2.1.3
     # via -r requirements/docs.in
 pathspec==0.12.1
     # via black
@@ -131,12 +131,12 @@ pydantic==2.7.1
     # via rstcheck-core
 pydantic-core==2.18.2
     # via pydantic
-pygments==2.17.2
+pygments==2.18.0
     # via
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.7.0
+pymongo[srv]==4.7.1
     # via
     #   mongoengine
     #   pymongo
@@ -144,7 +144,7 @@ pymongo[srv]==4.7.0
     #   sweetrpg-model-core
 pyproject-api==1.6.1
     # via tox
-pyproject-hooks==1.0.0
+pyproject-hooks==1.1.0
     # via
     #   build
     #   pip-tools
@@ -216,7 +216,6 @@ tomli==2.0.1
     #   coverage
     #   pip-tools
     #   pyproject-api
-    #   pyproject-hooks
     #   pytest
     #   pytest-env
     #   sphinx
@@ -235,7 +234,7 @@ typing-extensions==4.11.0
     #   typer
 urllib3==2.2.1
     # via requests
-virtualenv==20.26.0
+virtualenv==20.26.1
     # via tox
 werkzeug==3.0.2
     # via flask
