@@ -118,7 +118,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements/dev.in
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
     #   black
     #   tox
@@ -234,7 +234,7 @@ typing-extensions==4.11.0
     #   typer
 urllib3==2.2.1
     # via requests
-virtualenv==20.26.1
+virtualenv==20.26.2
     # via tox
 werkzeug==3.0.3
     # via flask

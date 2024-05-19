@@ -73,7 +73,7 @@ packaging==24.0
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
     #   tox
     #   virtualenv
@@ -126,7 +126,7 @@ typing-extensions==4.11.0
     # via
     #   asgiref
     #   sqlalchemy
-virtualenv==20.26.1
+virtualenv==20.26.2
     # via tox
 werkzeug==3.0.3
     # via flask
