@@ -6,7 +6,7 @@
 #
 alabaster==0.7.16
     # via sphinx
-annotated-types==0.6.0
+annotated-types==0.7.0
     # via pydantic
 babel==2.15.0
     # via sphinx
@@ -89,7 +89,7 @@ pymongo[srv]==4.7.2
     #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
-requests==2.31.0
+requests==2.32.2
     # via sphinx
 rich==13.7.1
     # via typer
@@ -140,7 +140,7 @@ tomli==2.0.1
     # via sphinx
 typer[all]==0.12.3
     # via rstcheck
-typing-extensions==4.11.0
+typing-extensions==4.12.0
     # via
     #   pydantic
     #   pydantic-core
