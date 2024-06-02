@@ -36,7 +36,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.5.1
+coverage[toml]==7.5.3
     # via
     #   coverage-badge
     #   pytest-cov
@@ -127,9 +127,9 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pydantic==2.7.1
+pydantic==2.7.2
     # via rstcheck-core
-pydantic-core==2.18.2
+pydantic-core==2.18.3
     # via pydantic
 pygments==2.18.0
     # via
@@ -162,7 +162,7 @@ pytest-ordering==0.6
     # via -r requirements/tests.in
 python-dotenv==1.0.1
     # via -r requirements/tests.in
-requests==2.32.2
+requests==2.32.3
     # via sphinx
 rich==13.7.1
     # via typer
@@ -224,7 +224,7 @@ tox==4.15.0
     # via -r requirements/tests.in
 typer[all]==0.12.3
     # via rstcheck
-typing-extensions==4.12.0
+typing-extensions==4.12.1
     # via
     #   asgiref
     #   black
