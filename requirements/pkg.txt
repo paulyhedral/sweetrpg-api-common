@@ -28,7 +28,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.2
+marshmallow==3.21.3
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -42,7 +42,7 @@ mongoengine==0.28.2
     #   sweetrpg-db
 packaging==24.0
     # via marshmallow
-pymongo[srv]==4.7.2
+pymongo[srv]==4.7.3
     # via
     #   mongoengine
     #   pymongo
@@ -58,7 +58,7 @@ sweetrpg-model-core==0.0.154
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via sqlalchemy
 werkzeug==3.0.3
     # via flask

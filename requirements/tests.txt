@@ -55,7 +55,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.2
+marshmallow==3.21.3
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -81,7 +81,7 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.7.2
+pymongo[srv]==4.7.3
     # via
     #   mongoengine
     #   pymongo
@@ -120,9 +120,9 @@ tomli==2.0.1
     #   pytest
     #   pytest-env
     #   tox
-tox==4.15.0
+tox==4.15.1
     # via -r requirements/tests.in
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via
     #   asgiref
     #   sqlalchemy
