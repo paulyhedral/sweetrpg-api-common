@@ -128,7 +128,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.30
+sqlalchemy==2.0.31
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -146,7 +146,7 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.1
+urllib3==2.2.2
     # via requests
 werkzeug==3.0.3
     # via flask

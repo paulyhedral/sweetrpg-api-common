@@ -36,7 +36,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.5.3
+coverage[toml]==7.5.4
     # via
     #   coverage-badge
     #   pytest-cov
@@ -56,7 +56,7 @@ docutils==0.21.2
     #   sphinx-tabs
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.15.1
+filelock==3.15.4
     # via
     #   tox
     #   virtualenv
@@ -142,7 +142,7 @@ pymongo[srv]==4.7.3
     #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.6.1
+pyproject-api==1.7.1
     # via tox
 pyproject-hooks==1.1.0
     # via
@@ -201,7 +201,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.30
+sqlalchemy==2.0.31
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -232,9 +232,9 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.1
+urllib3==2.2.2
     # via requests
-virtualenv==20.26.2
+virtualenv==20.26.3
     # via tox
 werkzeug==3.0.3
     # via flask
