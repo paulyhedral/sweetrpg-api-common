@@ -42,7 +42,7 @@ mongoengine==0.28.2
     #   sweetrpg-db
 packaging==24.1
     # via marshmallow
-pymongo[srv]==4.7.3
+pymongo[srv]==4.8.0
     # via
     #   mongoengine
     #   pymongo

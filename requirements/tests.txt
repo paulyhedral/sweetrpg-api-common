@@ -81,7 +81,7 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.7.3
+pymongo[srv]==4.8.0
     # via
     #   mongoengine
     #   pymongo
