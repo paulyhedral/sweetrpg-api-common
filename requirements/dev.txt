@@ -22,7 +22,7 @@ build==1.2.1
     # via pip-tools
 cachetools==5.3.3
     # via tox
-certifi==2024.6.2
+certifi==2024.7.4
     # via requests
 chardet==5.2.0
     # via tox
@@ -127,9 +127,9 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pydantic==2.7.4
+pydantic==2.8.2
     # via rstcheck-core
-pydantic-core==2.18.4
+pydantic-core==2.20.1
     # via pydantic
 pygments==2.18.0
     # via
@@ -220,7 +220,7 @@ tomli==2.0.1
     #   pytest-env
     #   sphinx
     #   tox
-tox==4.15.1
+tox==4.16.0
     # via -r requirements/tests.in
 typer[all]==0.12.3
     # via rstcheck
