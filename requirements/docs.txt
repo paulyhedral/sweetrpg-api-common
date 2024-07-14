@@ -93,7 +93,7 @@ requests==2.32.3
     # via sphinx
 rich==13.7.1
     # via typer
-rstcheck==6.2.1
+rstcheck==6.2.4
     # via -r requirements/docs.in
 rstcheck-core==1.2.1
     # via rstcheck
@@ -138,7 +138,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-db
 tomli==2.0.1
     # via sphinx
-typer[all]==0.12.3
+typer==0.12.3
     # via rstcheck
 typing-extensions==4.12.2
     # via
