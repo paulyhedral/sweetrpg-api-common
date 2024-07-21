@@ -20,7 +20,7 @@ blinker==1.8.2
     #   flask
 build==1.2.1
     # via pip-tools
-cachetools==5.3.3
+cachetools==5.4.0
     # via tox
 certifi==2024.7.4
     # via requests
@@ -176,7 +176,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.3.7
+sphinx==7.4.7
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -191,13 +191,13 @@ sphinxcontrib-applehelp==1.0.8
     # via sphinx
 sphinxcontrib-devhelp==1.0.6
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.5
+sphinxcontrib-htmlhelp==2.0.6
     # via sphinx
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-log-cabinet==1.0.1
     # via -r requirements/docs.in
-sphinxcontrib-qthelp==1.0.7
+sphinxcontrib-qthelp==1.0.8
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
