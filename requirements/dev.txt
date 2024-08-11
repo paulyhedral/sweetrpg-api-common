@@ -10,7 +10,7 @@ annotated-types==0.7.0
     # via pydantic
 asgiref==3.8.1
     # via -r requirements/tests.in
-babel==2.15.0
+babel==2.16.0
     # via sphinx
 black==23.12.1
     # via -r requirements/dev.in
@@ -36,7 +36,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.6.0
+coverage[toml]==7.6.1
     # via
     #   coverage-badge
     #   pytest-cov
@@ -201,7 +201,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.31
+sqlalchemy==2.0.32
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -220,7 +220,7 @@ tomli==2.0.1
     #   pytest-env
     #   sphinx
     #   tox
-tox==4.16.0
+tox==4.17.1
     # via -r requirements/tests.in
 typer==0.12.3
     # via rstcheck
@@ -238,7 +238,7 @@ virtualenv==20.26.3
     # via tox
 werkzeug==3.0.3
     # via flask
-wheel==0.43.0
+wheel==0.44.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:

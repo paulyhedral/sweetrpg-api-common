@@ -50,7 +50,7 @@ pymongo[srv]==4.8.0
     #   sweetrpg-model-core
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.31
+sqlalchemy==2.0.32
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
