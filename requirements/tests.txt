@@ -120,7 +120,7 @@ tomli==2.0.1
     #   pytest
     #   pytest-env
     #   tox
-tox==4.17.1
+tox==4.18.0
     # via -r requirements/tests.in
 typing-extensions==4.12.2
     # via
