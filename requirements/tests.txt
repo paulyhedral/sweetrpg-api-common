@@ -10,7 +10,7 @@ blinker==1.8.2
     # via
     #   -r requirements/tests.in
     #   flask
-cachetools==5.4.0
+cachetools==5.5.0
     # via tox
 chardet==5.2.0
     # via tox
@@ -55,7 +55,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.3
+marshmallow==3.22.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -128,7 +128,7 @@ typing-extensions==4.12.2
     #   sqlalchemy
 virtualenv==20.26.3
     # via tox
-werkzeug==3.0.3
+werkzeug==3.0.4
     # via flask
 
 # The following packages are considered to be unsafe in a requirements file:

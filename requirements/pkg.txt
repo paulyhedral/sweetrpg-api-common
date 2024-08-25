@@ -28,7 +28,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.3
+marshmallow==3.22.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -60,5 +60,5 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-db
 typing-extensions==4.12.2
     # via sqlalchemy
-werkzeug==3.0.3
+werkzeug==3.0.4
     # via flask

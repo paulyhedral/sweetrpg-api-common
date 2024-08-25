@@ -37,7 +37,7 @@ flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
 greenlet==3.0.3
     # via sqlalchemy
-idna==3.7
+idna==3.8
     # via requests
 imagesize==1.4.1
     # via sphinx
@@ -53,7 +53,7 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.21.3
+marshmallow==3.22.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -138,7 +138,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-db
 tomli==2.0.1
     # via sphinx
-typer==0.12.4
+typer==0.12.5
     # via rstcheck
 typing-extensions==4.12.2
     # via
@@ -148,5 +148,5 @@ typing-extensions==4.12.2
     #   typer
 urllib3==2.2.2
     # via requests
-werkzeug==3.0.3
+werkzeug==3.0.4
     # via flask
