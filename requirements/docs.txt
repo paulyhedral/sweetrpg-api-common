@@ -12,7 +12,7 @@ babel==2.16.0
     # via sphinx
 blinker==1.8.2
     # via flask
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
 charset-normalizer==3.3.2
     # via requests
@@ -63,7 +63,7 @@ marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.28.2
+mongoengine==0.29.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -91,7 +91,7 @@ pymongo[srv]==4.8.0
     #   sweetrpg-model-core
 requests==2.32.3
     # via sphinx
-rich==13.7.1
+rich==13.8.0
     # via typer
 rstcheck==6.2.4
     # via -r requirements/docs.in

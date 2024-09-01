@@ -22,7 +22,7 @@ build==1.2.1
     # via pip-tools
 cachetools==5.5.0
     # via tox
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
 chardet==5.2.0
     # via tox
@@ -96,7 +96,7 @@ marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.28.2
+mongoengine==0.29.0
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
@@ -164,7 +164,7 @@ python-dotenv==1.0.1
     # via -r requirements/tests.in
 requests==2.32.3
     # via sphinx
-rich==13.7.1
+rich==13.8.0
     # via typer
 rstcheck==6.2.4
     # via -r requirements/docs.in
