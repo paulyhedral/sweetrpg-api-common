@@ -33,7 +33,7 @@ dnspython==2.6.1
     #   sweetrpg-db
 exceptiongroup==1.2.2
     # via pytest
-filelock==3.15.4
+filelock==3.16.0
     # via
     #   tox
     #   virtualenv
@@ -73,7 +73,7 @@ packaging==24.1
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.2.2
+platformdirs==4.3.1
     # via
     #   tox
     #   virtualenv
@@ -105,7 +105,7 @@ python-dotenv==1.0.1
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.32
+sqlalchemy==2.0.34
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -120,13 +120,13 @@ tomli==2.0.1
     #   pytest
     #   pytest-env
     #   tox
-tox==4.18.0
+tox==4.18.1
     # via -r requirements/tests.in
 typing-extensions==4.12.2
     # via
     #   asgiref
     #   sqlalchemy
-virtualenv==20.26.3
+virtualenv==20.26.4
     # via tox
 werkzeug==3.0.4
     # via flask

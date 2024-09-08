@@ -18,7 +18,7 @@ blinker==1.8.2
     # via
     #   -r requirements/tests.in
     #   flask
-build==1.2.1
+build==1.2.2
     # via pip-tools
 cachetools==5.5.0
     # via tox
@@ -56,7 +56,7 @@ docutils==0.21.2
     #   sphinx-tabs
 exceptiongroup==1.2.2
     # via pytest
-filelock==3.15.4
+filelock==3.16.0
     # via
     #   tox
     #   virtualenv
@@ -118,7 +118,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements/dev.in
-platformdirs==4.2.2
+platformdirs==4.3.1
     # via
     #   black
     #   tox
@@ -127,9 +127,9 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pydantic==2.8.2
+pydantic==2.9.0
     # via rstcheck-core
-pydantic-core==2.20.1
+pydantic-core==2.23.2
     # via pydantic
 pygments==2.18.0
     # via
@@ -201,7 +201,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.32
+sqlalchemy==2.0.34
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.137
     # via -r requirements/pkg.in
@@ -220,7 +220,7 @@ tomli==2.0.1
     #   pytest-env
     #   sphinx
     #   tox
-tox==4.18.0
+tox==4.18.1
     # via -r requirements/tests.in
 typer==0.12.5
     # via rstcheck
@@ -232,9 +232,11 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
+tzdata==2024.1
+    # via pydantic
 urllib3==2.2.2
     # via requests
-virtualenv==20.26.3
+virtualenv==20.26.4
     # via tox
 werkzeug==3.0.4
     # via flask
