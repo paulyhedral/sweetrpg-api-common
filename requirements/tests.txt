@@ -43,7 +43,7 @@ flask==2.3.3
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
     # via -r requirements/pkg.in
-greenlet==3.0.3
+greenlet==3.1.0
     # via sqlalchemy
 iniconfig==2.0.0
     # via pytest
@@ -73,7 +73,7 @@ packaging==24.1
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.3.1
+platformdirs==4.3.3
     # via
     #   tox
     #   virtualenv
