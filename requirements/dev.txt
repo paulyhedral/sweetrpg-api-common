@@ -234,7 +234,7 @@ typing-extensions==4.12.2
     #   typer
 urllib3==2.2.3
     # via requests
-virtualenv==20.26.5
+virtualenv==20.26.6
     # via tox
 werkzeug==3.0.4
     # via flask
