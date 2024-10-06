@@ -8,7 +8,7 @@ blinker==1.8.2
     # via flask
 click==8.1.7
     # via flask
-dnspython==2.6.1
+dnspython==2.7.0
     # via
     #   pymongo
     #   sweetrpg-db
@@ -42,7 +42,7 @@ mongoengine==0.29.1
     #   sweetrpg-db
 packaging==24.1
     # via marshmallow
-pymongo[srv]==4.9.1
+pymongo[srv]==4.10.1
     # via
     #   mongoengine
     #   pymongo
