@@ -1,6 +1,6 @@
 -r pkg.in
 Pallets-Sphinx-Themes~=2.0
-Sphinx~=7.0
+Sphinx~=8.0
 sphinx-issues~=3.0
 sphinxcontrib-log-cabinet~=1.0
 sphinx-tabs~=3.0
