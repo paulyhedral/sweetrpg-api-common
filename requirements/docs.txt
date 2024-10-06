@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/docs.in
 #
-alabaster==0.7.16
+alabaster==1.0.0
     # via sphinx
 annotated-types==0.7.0
     # via pydantic
@@ -102,7 +102,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.4.7
+sphinx==8.0.2
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
