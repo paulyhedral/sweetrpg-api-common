@@ -83,9 +83,10 @@ pygments==2.18.0
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.10.1
+pymongo[srv]==3.13.0
     # via
     #   mongoengine
+    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 requests==2.32.3
@@ -129,9 +130,9 @@ sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
 sqlalchemy==2.0.35
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.139
+sweetrpg-db==0.0.140
     # via -r requirements/pkg.in
-sweetrpg-model-core==0.0.154
+sweetrpg-model-core==0.0.155
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
