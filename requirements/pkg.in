@@ -1,5 +1,5 @@
 # TODO: don't forget to update setup.py
-Flask~=2.0
+Flask~=3.0
 sweetrpg-db
 sweetrpg-model-core
 mongoengine~=0.27
