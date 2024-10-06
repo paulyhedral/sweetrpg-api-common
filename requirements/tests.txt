@@ -84,7 +84,6 @@ pluggy==1.5.0
 pymongo[srv]==4.10.1
     # via
     #   mongoengine
-    #   pymongo
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.8.0
@@ -107,7 +106,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.35
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.137
+sweetrpg-db==0.0.138
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.154
     # via
