@@ -9,7 +9,7 @@ on:
             - setup.cfg
             - setup.py
             - tox.ini
-            - "requirements/**"
+            - "requirements/*.txt"
             - "docs/**"
     workflow_run:
         workflows: ["Update Requirements"]
