@@ -87,7 +87,7 @@ pymongo[srv]==3.13.0
     #   sweetrpg-model-core
 pyproject-api==1.8.0
     # via tox
-pytest==7.4.4
+pytest==8.3.3
     # via
     #   -r requirements/tests.in
     #   pytest-cov
