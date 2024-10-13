@@ -26,7 +26,7 @@ certifi==2024.8.30
     # via requests
 chardet==5.2.0
     # via tox
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via
@@ -36,13 +36,13 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.6.1
+coverage[toml]==7.6.2
     # via
     #   coverage-badge
     #   pytest-cov
 coverage-badge==1.1.2
     # via -r requirements/tests.in
-distlib==0.3.8
+distlib==0.3.9
     # via virtualenv
 dnspython==2.7.0
     # via
@@ -80,7 +80,7 @@ jinja2==3.1.4
     #   sphinx
 markdown-it-py==3.0.0
     # via rich
-markupsafe==3.0.0
+markupsafe==3.0.1
     # via
     #   jinja2
     #   werkzeug
@@ -174,7 +174,7 @@ six==1.16.0
     # via flask-rest-jsonapi
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==8.0.2
+sphinx==8.1.2
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -201,7 +201,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
 sqlalchemy==2.0.35
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.142
+sweetrpg-db==0.0.143
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.155
     # via
