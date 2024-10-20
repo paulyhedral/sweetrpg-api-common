@@ -18,7 +18,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.6.2
+coverage[toml]==7.6.3
     # via
     #   coverage-badge
     #   pytest-cov
@@ -49,11 +49,11 @@ itsdangerous==2.2.0
     # via flask
 jinja2==3.1.4
     # via flask
-markupsafe==3.0.1
+markupsafe==3.0.2
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.22.0
+marshmallow==3.23.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -103,19 +103,19 @@ python-dotenv==1.0.1
     # via -r requirements/tests.in
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.35
+sqlalchemy==2.0.36
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.143
+sweetrpg-db==0.0.144
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.155
     # via
     #   -r requirements/pkg.in
     #   sweetrpg-db
-tox==4.21.2
+tox==4.23.0
     # via -r requirements/tests.in
 typing-extensions==4.12.2
     # via sqlalchemy
-virtualenv==20.26.6
+virtualenv==20.27.0
     # via tox
 werkzeug==3.0.4
     # via flask

@@ -24,11 +24,11 @@ itsdangerous==2.2.0
     # via flask
 jinja2==3.1.4
     # via flask
-markupsafe==3.0.1
+markupsafe==3.0.2
     # via
     #   jinja2
     #   werkzeug
-marshmallow==3.22.0
+marshmallow==3.23.0
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -50,9 +50,9 @@ pymongo[srv]==3.13.0
     #   sweetrpg-model-core
 six==1.16.0
     # via flask-rest-jsonapi
-sqlalchemy==2.0.35
+sqlalchemy==2.0.36
     # via flask-rest-jsonapi
-sweetrpg-db==0.0.143
+sweetrpg-db==0.0.144
     # via -r requirements/pkg.in
 sweetrpg-model-core==0.0.155
     # via
