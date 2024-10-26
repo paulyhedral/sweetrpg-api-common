@@ -5,10 +5,10 @@
 #    pip-compile requirements/tests.in
 #
 asgiref==3.8.1
-    # via -r requirements/tests.in
+    # via -r tests.in
 blinker==1.8.2
     # via
-    #   -r requirements/tests.in
+    #   -r tests.in
     #   flask
 cachetools==5.5.0
     # via tox
@@ -23,12 +23,12 @@ coverage[toml]==7.6.3
     #   coverage-badge
     #   pytest-cov
 coverage-badge==1.1.2
-    # via -r requirements/tests.in
+    # via -r tests.in
 distlib==0.3.9
     # via virtualenv
 dnspython==2.7.0
     # via
-    #   -r requirements/tests.in
+    #   -r tests.in
     #   pymongo
     #   sweetrpg-db
 filelock==3.16.1
@@ -37,10 +37,10 @@ filelock==3.16.1
     #   virtualenv
 flask==3.0.3
     # via
-    #   -r requirements/pkg.in
+    #   -r pkg.in
     #   flask-rest-jsonapi
 flask-rest-jsonapi==0.31.2
-    # via -r requirements/pkg.in
+    # via -r pkg.in
 greenlet==3.1.1
     # via sqlalchemy
 iniconfig==2.0.0
@@ -63,7 +63,7 @@ marshmallow-jsonapi==0.24.0
     # via flask-rest-jsonapi
 mongoengine==0.29.1
     # via
-    #   -r requirements/pkg.in
+    #   -r pkg.in
     #   sweetrpg-db
 packaging==24.1
     # via
@@ -89,35 +89,35 @@ pyproject-api==1.8.0
     # via tox
 pytest==8.3.3
     # via
-    #   -r requirements/tests.in
+    #   -r tests.in
     #   pytest-cov
     #   pytest-env
     #   pytest-ordering
 pytest-cov==5.0.0
-    # via -r requirements/tests.in
+    # via -r tests.in
 pytest-env==1.1.5
-    # via -r requirements/tests.in
+    # via -r tests.in
 pytest-ordering==0.6
-    # via -r requirements/tests.in
+    # via -r tests.in
 python-dotenv==1.0.1
-    # via -r requirements/tests.in
+    # via -r tests.in
 six==1.16.0
     # via flask-rest-jsonapi
 sqlalchemy==2.0.36
     # via flask-rest-jsonapi
 sweetrpg-db==0.0.144
-    # via -r requirements/pkg.in
+    # via -r pkg.in
 sweetrpg-model-core==0.0.155
     # via
-    #   -r requirements/pkg.in
+    #   -r pkg.in
     #   sweetrpg-db
 tox==4.23.0
-    # via -r requirements/tests.in
+    # via -r tests.in
 typing-extensions==4.12.2
     # via sqlalchemy
 virtualenv==20.27.0
     # via tox
-werkzeug==3.0.4
+werkzeug==3.0.6
     # via flask
 
 # The following packages are considered to be unsafe in a requirements file:
