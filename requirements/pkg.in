@@ -1,6 +1,0 @@
-# TODO: don't forget to update setup.py
-Flask~=3.0
-sweetrpg-db
-sweetrpg-model-core
-mongoengine~=0.27
-Flask-REST-JSONAPI~=0.31

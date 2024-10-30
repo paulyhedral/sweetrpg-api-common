@@ -1,0 +1,35 @@
+name: PR
+
+concurrency: pr-${{ github.ref }}
+
+on:
+    pull_request:
+        branches: [develop]
+        paths:
+            - "**/*.go"
+            - go.mod
+            - go.sum
+            - .go-version
+
+jobs:
+    tests:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - {
+                          name: Linux,
+                          os: ubuntu-latest,
+                      }
+        steps:
+            - uses: actions/checkout@v4
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                go-version-file: go.mod
+            - name: Build
+              run: go build -v ./...
+            - name: Test
+              run: go test -v ./...
