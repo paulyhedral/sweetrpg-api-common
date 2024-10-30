@@ -13,4 +13,7 @@ const (
 )
 
 // Value constants
-const ()
+const (
+    PageStartOption = "start"
+    PageLimitOption = "limit"
+)
