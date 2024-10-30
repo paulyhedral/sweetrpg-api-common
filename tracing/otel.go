@@ -15,7 +15,7 @@ func BuildSpanWithOptions(c context.Context, tracerName string, spanName string,
 
 	pageItems := make([]string, len(options.Page))
 	for k, v := range options.Page {
-		pageItems = append(pageItems, fmt.Sprintf("%s=%s", k, v))
+		pageItems = append(pageItems, fmt.Sprintf("%s=%d", k, v))
 	}
 
 	filterItems := make([]string, len(options.Filter))
