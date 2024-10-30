@@ -1,8 +1,6 @@
 # API Core
 
 [![Unit tests](https://github.com/sweetrpg/api-core/actions/workflows/go-ci.yml/badge.svg)](https://github.com/sweetrpg/api-core/actions/workflows/go-ci.yml)
-[![Coverage](https://github.com/sweetrpg/api-core/blob/develop/coverage.svg)](https://github.com/sweetrpg/api-core)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/259544218b7d81de38d1/test_coverage)](https://codeclimate.com/github/sweetrpg/api-core/test_coverage)
 [![License](https://img.shields.io/github/license/sweetrpg/api-core.svg)](https://img.shields.io/github/license/sweetrpg/api-core.svg)
 [![Issues](https://img.shields.io/github/issues/sweetrpg/api-core.svg)](https://img.shields.io/github/issues/sweetrpg/api-core.svg)
 [![PRs](https://img.shields.io/github/issues-pr/sweetrpg/api-core.svg)](https://img.shields.io/github/issues-pr/sweetrpg/api-core.svg)
