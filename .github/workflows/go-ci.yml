@@ -1,0 +1,72 @@
+name: CI
+
+concurrency: ci-${{ github.ref }}
+
+on:
+    push:
+        branches: [develop]
+        paths:
+            - "**/*.go"
+            - go.mod
+            - go.sum
+            - .go-version
+    workflow_dispatch:
+
+jobs:
+    tests:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - {
+                          name: Linux,
+                          os: ubuntu-latest,
+                      }
+        steps:
+            - uses: actions/checkout@v4
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                go-version-file: go.mod
+            - name: Build
+              run: go build -v ./...
+            - name: Test
+              run: go test -v ./...
+
+    #    docs:
+    #        needs: [tests]
+    #        runs-on: ubuntu-latest
+    #        concurrency: docs
+    #        steps:
+    #            - uses: actions/checkout@v4
+    #            - uses: actions/setup-python@v5
+    #              with:
+    #                  python-version: "3.11"
+    #            - name: install-deps
+    #              run: pip install -r requirements/docs.txt
+    #            - name: make-docs
+    #              run: cd docs && make html
+    #            - name: publish-docs
+    #              uses: peaceiris/actions-gh-pages@v3
+    #              with:
+    #                  github_token: ${{ secrets.GITHUB_TOKEN }}
+    #                  publish_dir: ./docs/_build/html
+
+    tag:
+        needs: [tests]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        concurrency: publish
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Bump version and push tag
+              uses: anothrNick/github-tag-action@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  WITH_V: true
+                  DEFAULT_BUMP: patch
