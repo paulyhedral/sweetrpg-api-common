@@ -3,15 +3,16 @@ package constants
 // Environment variable names
 const (
 	BIND_ADDRESS    = "BIND_ADDRESS"
-	PORT            = "PORT"
 	ENV             = "ENV"
+	PORT            = "PORT"
 	REDIS_DB        = "REDIS_DB"
 	REDIS_HOST      = "REDIS_HOST"
 	REDIS_PASS      = "REDIS_PASS"
 	REDIS_PORT      = "REDIS_PORT"
-	SENTRY_DSN      = "SENTRY_DSN"
 	SENTRY_DEBUG    = "SENTRY_DEBUG"
+	SENTRY_DSN      = "SENTRY_DSN"
 	TRACING_NAME    = "TRACING_NAME"
+	VERSION         = "VERSION"
 	ZIPKIN_ENDPOINT = "ZIPKIN_ENDPOINT"
 )
 
