@@ -70,3 +70,15 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   WITH_V: true
                   DEFAULT_BUMP: patch
+
+    notify:
+        needs: [tag]
+        runs-on: ubuntu-latest
+        steps:
+            - name: dispatch-event
+              uses: ph-fritsche/action-dispatch@v1
+              with:
+                token: ${{ secrets.REPO_ACCESS_TOKEN }}
+                type: repository
+                ident: api-core-published
+                payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
