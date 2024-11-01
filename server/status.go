@@ -13,11 +13,11 @@ import (
 	"go.opentelemetry.io/otel"
 )
 
-func HealthHandler(c *context.Context) vo.HealthResponseVO {
+func HealthHandler(c context.Context) vo.HealthResponseVO {
 	var messages []string
 	errorCount := 0
 
-	_, span := otel.Tracer("health").Start(*c, "list-collections")
+	_, span := otel.Tracer("health").Start(c, "list-collections")
 	collections, err := database.Db.ListCollectionNames(context.TODO(), bson.D{})
 	span.End()
 	if err != nil {
@@ -26,8 +26,8 @@ func HealthHandler(c *context.Context) vo.HealthResponseVO {
 	}
 
 	start := time.Now()
-	_, span = otel.Tracer("health").Start(*c, "ping-database")
-	err = database.Db.Client().Ping(*c, readpref.Primary())
+	_, span = otel.Tracer("health").Start(c, "ping-database")
+	err = database.Db.Client().Ping(c, readpref.Primary())
 	span.End()
 	duration := time.Since(start)
 	if err != nil {
