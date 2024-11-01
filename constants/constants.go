@@ -18,6 +18,8 @@ const (
 
 // Value constants
 const (
-	PageStartOption = "start"
-	PageLimitOption = "limit"
+	PageStartOption   = "start"
+	PageLimitOption   = "limit"
+	ErrorUnauthorized = "unauthorized"
+	ErrorForbidden    = "forbidden"
 )
