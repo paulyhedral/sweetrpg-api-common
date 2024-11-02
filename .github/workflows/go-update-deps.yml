@@ -37,6 +37,6 @@ jobs:
                     go get -u ./...
                     go mod tidy
 
-                    go add go.mod go.sum
+                    git add go.mod go.sum
                     git commit -m "Update requirements"
                     git push origin
