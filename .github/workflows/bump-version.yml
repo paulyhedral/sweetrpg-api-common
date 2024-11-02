@@ -1,0 +1,32 @@
+name: Bump version
+
+concurrency: ci-${{ github.ref }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "SemVer component to update"
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        required: true
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency: publish
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: ${{ github.event.inputs.bump || 'minor' }}
