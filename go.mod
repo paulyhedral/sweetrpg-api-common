@@ -3,8 +3,8 @@ module github.com/sweetrpg/api-core
 go 1.23.2
 
 require (
-	github.com/sweetrpg/common v0.0.4
-	github.com/sweetrpg/db v0.0.147
+	github.com/sweetrpg/common v0.0.6
+	github.com/sweetrpg/db v0.0.148
 	go.jtlabs.io/query v1.6.1
 	go.mongodb.org/mongo-driver v1.17.1
 	go.opentelemetry.io/otel v1.31.0
