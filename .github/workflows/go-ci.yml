@@ -11,6 +11,11 @@ on:
             - go.sum
             - .go-version
     workflow_dispatch:
+    repository_dispatch:
+        types:
+            - common-published
+            - model-core-published
+            - db-published
 
 jobs:
     tests:
@@ -74,11 +79,42 @@ jobs:
     notify:
         needs: [tag]
         runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - repo: api-core
+                    - repo: catalog-api
+                    - repo: catalog-data
+                    - repo: catalog-data-processor
+                    - repo: catalog-objects
+                    - repo: catalog-web
+                    - repo: client
+                    - repo: data-api
+                    - repo: data-objects
+                    - repo: db
+                    - repo: initiative-api
+                    - repo: initiative-data
+                    - repo: initiative-objects
+                    - repo: initiative-web
+                    - repo: kv-api
+                    - repo: kv-data
+                    - repo: kv-expression-processor
+                    - repo: kv-key-processor
+                    - repo: kv-objects
+                    - repo: kv-value-calculator
+                    - repo: kv-web
+                    - repo: library-api
+                    - repo: library-data
+                    - repo: library-objects
+                    - repo: library-web
+                    - repo: main-web
+                    - repo: model-core
+                    - repo: shared-web
+                    - repo: web-core
         steps:
-            - name: dispatch-event
-              uses: ph-fritsche/action-dispatch@v1
+            - uses: juztcode/repo-ditpatch-action@v1
               with:
+                event-type: api-core-published
                 token: ${{ secrets.REPO_ACCESS_TOKEN }}
-                type: repository
-                ident: api-core-published
-                payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+                repository: sweetrpg/${{ matrix.repo }}
