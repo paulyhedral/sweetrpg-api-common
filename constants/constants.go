@@ -8,6 +8,7 @@ const (
 	INGRESS_HOST      = "INGRESS_HOST"
 	INGRESS_SCHEMES   = "INGRESS_SCHEMES"
 	PORT              = "PORT"
+	RATE_LIMIT        = "RATE_LIMIT"
 	REDIS_DB          = "REDIS_DB"
 	REDIS_HOST        = "REDIS_HOST"
 	REDIS_PASS        = "REDIS_PASS"
@@ -25,4 +26,5 @@ const (
 	PageLimitOption   = "limit"
 	ErrorUnauthorized = "unauthorized"
 	ErrorForbidden    = "forbidden"
+	ErrorRateLimited  = "rate_limited"
 )
