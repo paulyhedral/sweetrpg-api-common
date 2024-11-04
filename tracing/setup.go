@@ -26,7 +26,7 @@ func newExporter(ctx context.Context) (sdktrace.SpanExporter, error) {
 	// url := os.Getenv(constants.ZIPKIN_ENDPOINT)
 	// exporter, err := zipkin.New(url)
 	if err != nil {
-		logging.Logger.Error(fmt.Sprintf("Error while setting up Zipkin exporter"), "error", err.Error())
+		logging.Logger.Error("Error while setting up Zipkin exporter", "error", err.Error())
 		return nil, err
 	}
 
