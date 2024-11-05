@@ -25,7 +25,7 @@ type Projection struct {
 }
 
 type QueryParams struct {
-	Start      int
+	Start      int64
 	Limit      int
 	Sort       []Sort
 	Filter     []Filter
