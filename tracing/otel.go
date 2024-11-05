@@ -17,18 +17,18 @@ func BuildSpanWithParams(c context.Context, tracerName string, spanName string, 
 	pageItems = append(pageItems, fmt.Sprintf("limit=%d", params.Limit))
 
 	sortItems := make([]string, len(params.Sort))
-	for k, v := range params.Sort {
-		sortItems = append(sortItems, fmt.Sprintf("%s=%v", k, v))
+	for _, v := range params.Sort {
+		sortItems = append(sortItems, fmt.Sprintf("%s=%d", v.Field, v.Order))
 	}
 
 	projItems := make([]string, len(params.Projection))
-	for k, v := range params.Projection {
-		projItems = append(projItems, fmt.Sprintf("%s=%v", k, v))
+	for _, v := range params.Projection {
+		projItems = append(projItems, fmt.Sprintf("%s=%v", v.Field, v.Inclusion))
 	}
 
 	filterItems := make([]string, len(params.Filter))
-	for k, v := range params.Filter {
-		filterItems = append(filterItems, fmt.Sprintf("%s=%s", k, v))
+	for _, v := range params.Filter {
+		filterItems = append(filterItems, fmt.Sprintf("%s=%s", v.Field, v.Operation))
 	}
 
 	_, span := otel.Tracer(tracerName).Start(c, spanName,
