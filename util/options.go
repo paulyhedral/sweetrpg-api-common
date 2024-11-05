@@ -54,7 +54,7 @@ func GetQueryParams(query string) QueryParams {
 	}
 
 	params := QueryParams{
-		Start:      int(math.Max(0, float64(opt.Page[constants.PageStartOption]))),
+		Start:      int64(math.Max(0, float64(opt.Page[constants.PageStartOption]))),
 		Limit:      int(math.Max(1, math.Min(float64(dbconstants.QueryMaxSize), float64(opt.Page[constants.PageLimitOption])))),
 		Sort:       sortFields,
 		Filter:     filters,
