@@ -45,7 +45,7 @@ func TestOnlyStart(t *testing.T) {
 
 	params := GetQueryParams(query)
 	assert.EqualValues(t, 1, params.Start)
-	assert.EqualValues(t, 1, params.Limit)
+	assert.EqualValues(t, dbconstants.QueryDefaultSize, params.Limit)
 }
 
 func TestLowLimit(t *testing.T) {
