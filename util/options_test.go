@@ -25,7 +25,7 @@ func TestNoParams(t *testing.T) {
 
 	params := GetQueryParams(query)
 	assert.EqualValues(t, 0, params.Start)
-	assert.EqualValues(t, 1, params.Limit)
+	assert.EqualValues(t, dbconstants.QueryDefaultSize, params.Limit)
 }
 
 func TestLowStart(t *testing.T) {
@@ -51,11 +51,21 @@ func TestOnlyStart(t *testing.T) {
 func TestLowLimit(t *testing.T) {
 	logging.Init()
 
-	query := "http://localhost:1234/endpoint?page[start]=1&page[limit]=0"
+	query := "http://localhost:1234/endpoint?page[start]=1&page[limit]=-1"
 
 	params := GetQueryParams(query)
 	assert.EqualValues(t, 1, params.Start)
 	assert.EqualValues(t, 1, params.Limit)
+}
+
+func TestZeroLimit(t *testing.T) {
+	logging.Init()
+
+	query := "http://localhost:1234/endpoint?page[start]=1&page[limit]=0"
+
+	params := GetQueryParams(query)
+	assert.EqualValues(t, 1, params.Start)
+	assert.EqualValues(t, dbconstants.QueryDefaultSize, params.Limit)
 }
 
 func TestHighLimit(t *testing.T) {

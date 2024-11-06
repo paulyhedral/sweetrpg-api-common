@@ -53,9 +53,14 @@ func GetQueryParams(query string) QueryParams {
 		proj = append(proj, Projection{v, true} /*bson.E{v, 1}*/)
 	}
 
+	limit := opt.Page[constants.PageLimitOption]
+	if limit == 0 {
+		limit = dbconstants.QueryDefaultSize
+	}
+
 	params := QueryParams{
 		Start:      int64(math.Max(0, float64(opt.Page[constants.PageStartOption]))),
-		Limit:      int(math.Max(dbconstants.QueryDefaultSize, math.Min(float64(dbconstants.QueryMaxSize), float64(opt.Page[constants.PageLimitOption])))),
+		Limit:      int(math.Max(1, math.Min(float64(dbconstants.QueryMaxSize), float64(limit)))),
 		Sort:       sortFields,
 		Filter:     filters,
 		Projection: proj,
