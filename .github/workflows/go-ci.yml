@@ -1,6 +1,6 @@
 name: CI
 
-concurrency: ci-${{ github.ref }}
+concurrency: ci
 
 on:
     push:
@@ -25,10 +25,8 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - {
-                          name: Linux,
-                          os: ubuntu-latest,
-                      }
+                    - name: Linux
+                      os: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - name: Set up Go
@@ -83,35 +81,35 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - repo: api-core
+                    - repo: api-core.go
                     - repo: catalog-api
-                    - repo: catalog-data
+                    - repo: catalog-data.go
                     - repo: catalog-data-processor
-                    - repo: catalog-objects
+                    - repo: catalog-objects.go
                     - repo: catalog-web
-                    - repo: client
+                    - repo: client.go
                     - repo: data-api
-                    - repo: data-objects
-                    - repo: db
+                    - repo: data-objects.go
+                    - repo: db.go
                     - repo: initiative-api
-                    - repo: initiative-data
-                    - repo: initiative-objects
+                    - repo: initiative-data.go
+                    - repo: initiative-objects.go
                     - repo: initiative-web
                     - repo: kv-api
-                    - repo: kv-data
+                    - repo: kv-data.go
                     - repo: kv-expression-processor
                     - repo: kv-key-processor
-                    - repo: kv-objects
+                    - repo: kv-objects.go
                     - repo: kv-value-calculator
                     - repo: kv-web
                     - repo: library-api
-                    - repo: library-data
-                    - repo: library-objects
+                    - repo: library-data.go
+                    - repo: library-objects.go
                     - repo: library-web
                     - repo: main-web
-                    - repo: model-core
+                    - repo: model-core.go
                     - repo: shared-web
-                    - repo: web-core
+                    - repo: web-core.go
         steps:
             - uses: juztcode/repo-ditpatch-action@v1
               continue-on-error: true

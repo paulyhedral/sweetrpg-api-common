@@ -1,6 +1,6 @@
 name: Update Dependencies
 
-concurrency: deps-${{ github.ref }}
+concurrency: deps
 
 on:
     workflow_dispatch:
@@ -19,10 +19,9 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - {
-                          name: Linux,
-                          os: ubuntu-latest,
-                      }
+                    - name: Linux
+                      os: ubuntu-latest
+
         steps:
             - uses: actions/checkout@v4
             - name: Set up Go
