@@ -3,7 +3,7 @@ module github.com/sweetrpg/api-core
 go 1.23.2
 
 require (
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/sweetrpg/common v0.0.7
 	github.com/sweetrpg/db v0.0.157
 	go.jtlabs.io/query v1.6.1
